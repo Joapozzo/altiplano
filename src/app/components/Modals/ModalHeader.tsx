@@ -1,4 +1,4 @@
-import { Map, ChevronRight } from 'lucide-react';
+import { Map } from 'lucide-react';
 
 interface ModalHeaderProps {
     onClose: any;

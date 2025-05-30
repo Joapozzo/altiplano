@@ -1,5 +1,5 @@
 import React from 'react';
-import { Leaf, BookOpen, Recycle, ChevronRight } from 'lucide-react';
+import { Leaf, BookOpen, Recycle } from 'lucide-react';
 import ValorCard from './ValorCard';
 
 // Componente principal
