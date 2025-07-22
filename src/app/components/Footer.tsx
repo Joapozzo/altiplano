@@ -37,11 +37,12 @@ const EmpresaInfo = () => {
 // Subcomponente para enlaces rápidos
 const EnlacesRapidos = () => {
     const enlaces = [
-        { texto: "Servicios", href: "#servicios" },
-        { texto: "Salidas", href: "#salidas" },
-        { texto: "Arma tu Expedición", href: "#arma-exp" },
-        { texto: "Quiénes Somos", href: "#quienes-somos" },
-        { texto: "Políticas", href: "#politicas" }
+        { title: "Calendario", href: "#calendario" },
+        { title: "Expediciones", href: "#expediciones" },
+        { title: "Trekking", href: "#trekking" },
+        { title: "Montaña", href: "#montaña" },
+        { title: "FAQs", href: "#faqs" },
+        { title: "Conocenos", href: "#quienes-somos" },
     ];
 
     return (
@@ -51,7 +52,7 @@ const EnlacesRapidos = () => {
                 {enlaces.map((enlace, index) => (
                     <li key={index}>
                         <a href={enlace.href} className="text-gray-400 hover:text-white transition">
-                            {enlace.texto}
+                            {enlace.title}
                         </a>
                     </li>
                 ))}
@@ -90,7 +91,7 @@ const DestinosPopulares = () => {
 const ContactoInfo = () => {
     const contactos = [
         { icono: MapPin, texto: "Córdoba, Argentina" },
-        { icono: Phone, texto: "+54 351 123-4567" },
+        { icono: Phone, texto: "+54 9 3837 49-8552" },
         { icono: Mail, texto: "info@altiplano.com" }
     ];
 
@@ -114,7 +115,7 @@ const ContactoInfo = () => {
 // Componente principal
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white pt-16 pb-8">
+        <footer className="bg-gray-900 text-white pt-16 pb-8" id='footer'>
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <EmpresaInfo />
@@ -123,9 +124,9 @@ const Footer = () => {
                     <ContactoInfo />
                 </div>
 
-                <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                    <p>&copy; 2025 CumbreAndina. Todos los derechos reservados.</p>
-                </div>
+            </div>
+            <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 Altiplano Experience. Todos los derechos reservados.</p>
             </div>
         </footer>
     );

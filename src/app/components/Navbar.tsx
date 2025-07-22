@@ -10,12 +10,16 @@ const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { title: "Servicios", href: "#servicios" },
-    { title: "Salidas", href: "#salidas" },
-    { title: "Arma tu Exp", href: "#arma-exp" },
-    { title: "Quiénes Somos", href: "#quienes-somos" },
-    { title: "Políticas", href: "#politicas" },
-    { title: "Inscripción", href: "#inscripcion" }
+    { title: "Calendario", href: "#calendario" },
+    { title: "Expediciones", href: "#expediciones" },
+    { title: "Trekking", href: "#trekking" },
+    { title: "Montaña", href: "#montaña" },
+    { title: "FAQs", href: "#faqs" },
+    { title: "Conocenos", href: "#quienes-somos" },
+
+    // { title: "Políticas", href: "#politicas" },
+    // { title: "Arma tu Exp", href: "#arma-exp" },
+    // { title: "Inscripción", href: "#inscripcion" }
   ];
 
   // Detectar scroll para cambiar el estilo del navbar
@@ -56,7 +60,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full flex items-center justify-between px-8 py-4 z-50 transition-all duration-300 ease-in-out ${scrolled ? 'bg-[var(--color-naranja)] shadow-lg py-3' : 'bg-transparent py-4'
+      className={`fixed top-0 left-0 w-full flex items-center justify-between px-15 py-4 z-50 transition-all duration-300 ease-in-out ${scrolled ? 'bg-[var(--color-naranja)] shadow-lg py-3' : 'bg-transparent py-4'
         }`}
     >
       {/* Logo Container */}
@@ -65,8 +69,9 @@ const Navbar: React.FC = () => {
           src="/logos/Logo-Completo-Blanco.svg"
           alt="Logo"
           width={120}
-          height={40} // Ajustá según el alto real del logo
+          height={40}
           className="object-contain"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         />
       </div>
 
@@ -102,6 +107,7 @@ const Navbar: React.FC = () => {
               'bg-white text-[var(--color-naranja)] hover:bg-[var(--color-amarillo)] hover:text-white' :
               'bg-[var(--color-naranja)] text-white hover:bg-[var(--color-naranja-200)]'
             }`}
+            onClick={() => scrollToSection('footer')}
         >
           Contáctanos
         </button>

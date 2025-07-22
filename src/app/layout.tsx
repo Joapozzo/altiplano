@@ -1,37 +1,137 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Fuentes más friendly y cálidas
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono", 
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://altiplano.com'),
+  
+  // Títulos optimizados
   title: {
-    default: "Altiplano Experience - Expediciones y Trekking en Argentina",
-    template: "%s | Altiplano Experience"
+    default: "Altiplano Experience - Expediciones y Trekking en Argentina | Montañismo",
+    template: "%s | Altiplano Experience - Trekking Argentina"
   },
-  description: "Descubrí las montañas argentinas con Altiplano Experience. Expediciones de trekking, alta montaña y aventuras únicas. Guías certificados, grupos reducidos y experiencias inolvidables desde 2015.",
+  
+  // Descripción optimizada para SEO
+  description: "🏔️ Expediciones de trekking y alta montaña en Argentina. Aconcagua, Champaquí, Vallecitos. Guías certificados, grupos reducidos. +10 años de experiencia. ¡Viví tu aventura!",
+  
+  // Keywords estratégicas
   keywords: [
     "trekking argentina",
-    "expediciones montaña", 
-    "turismo aventura",
-    "altiplano experience"
+    "expediciones montaña argentina", 
+    "aconcagua expedicion",
+    "champaqui trekking",
+    "vallecitos mendoza",
+    "turismo aventura argentina",
+    "altiplano experience",
+    "guias montaña certificados",
+    "alta montaña argentina",
+    "turismo activo cordoba",
+    "expediciones mendoza",
+    "trekking cordoba",
+    "montañismo argentina",
+    "aventura outdoor"
   ],
+  
+  // Autor y clasificación
+  authors: [{ name: "Altiplano Experience" }],
+  creator: "Altiplano Experience",
+  publisher: "Altiplano Experience",
+  category: "turismo, aventura, trekking, montañismo",
+  
+  // Configuración de robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  
+  // Open Graph optimizado
   openGraph: {
     type: 'website',
     locale: 'es_AR',
     url: 'https://altiplano.com',
     title: 'Altiplano Experience - Expediciones y Trekking en Argentina',
-    description: 'Descubrí las montañas argentinas con Altiplano Experience.',
+    description: '🏔️ Expediciones de trekking y alta montaña en Argentina. Aconcagua, Champaquí, Vallecitos. Guías certificados, grupos reducidos. ¡Viví tu aventura!',
     siteName: 'Altiplano Experience',
+    images: [
+      {
+        url: '/logos/Logo-Reducido-Naranja.png',
+        width: 1200,
+        height: 630,
+        alt: 'Altiplano Experience - Expediciones de Trekking',
+      },
+    ],
+  },
+  
+  // Twitter Cards
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Altiplano Experience - Expediciones y Trekking en Argentina',
+    description: '🏔️ Expediciones de trekking y alta montaña. Aconcagua, Champaquí, Vallecitos. Guías certificados ¡Viví tu aventura!',
+    images: ['/logos/Logo-Reducido-Naranja.png'],
+    creator: '@altiplanoxp',
+    site: '@altiplanoxp',
+  },
+  
+  // Favicons e iconos
+  icons: {
+    icon: [
+      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/logos/Logo-Reducido-Naranja.png',
+  },
+  
+  // Configuración adicional
+  manifest: '/manifest.json',
+  
+  // Verificación de sitios
+  verification: {
+    google: 'tu-codigo-google-search-console',
+    // yandex: 'tu-codigo-yandex',
+    // bing: 'tu-codigo-bing',
+  },
+  
+  // Configuración de alternates para idiomas (si planeas expandir)
+  alternates: {
+    canonical: 'https://altiplano.com',
+    languages: {
+      'es-AR': 'https://altiplano.com',
+      'es': 'https://altiplano.com/es',
+    },
+  },
+  
+  // Información adicional
+  other: {
+    'theme-color': '#f59e0b', // Color amber de tu marca
+    'color-scheme': 'light',
+    'format-detection': 'telephone=no',
   },
 };
 
@@ -41,9 +141,59 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="es-AR" className="scroll-smooth">
+      <head>
+        {/* Viewport mejorado */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        {/* Theme color para móviles */}
+        <meta name="theme-color" content="#f59e0b" />
+        <meta name="msapplication-TileColor" content="#f59e0b" />
+        
+        {/* Preconnect para optimizar fuentes */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Structured Data para SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              "name": "Altiplano Experience",
+              "description": "Expediciones de trekking y alta montaña en Argentina",
+              "url": "https://altiplano.com",
+              "logo": "https://altiplano.com/logos/Logo-Reducido-Naranja.png",
+              "telephone": "+549383749-8552",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "AR",
+                "addressRegion": "Córdoba"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "-31.4201",
+                "longitude": "-64.1888"
+              },
+              "sameAs": [
+                "https://www.instagram.com/altiplanoxp",
+                "https://www.facebook.com/altiplanoxp"
+              ],
+              "offers": {
+                "@type": "Offer",
+                "category": "Expediciones de Trekking y Montañismo",
+                "areaServed": "Argentina"
+              }
+            })
+          }}
+        />
+      </head>
+      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+        <Navbar/>
         {children}
+        <Footer/>
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -1,43 +1,42 @@
 import React from 'react';
 import SalidaCard from './SalidasCard';
+import { serviciosMock, expedicionesMock } from '../data/mockSalidas';
 
 const SalidasDestacadas = () => {
+  // Mezclamos servicio + expedición para armar la card
+  const salidas = serviciosMock.map((servicio) => {
+    const expedicion = expedicionesMock.find(e => e.id_servicio === servicio.id_servicio);
 
-  const salidas = [
-    {
-      id: 1,
-      imagen: 'imgs/aconcagua.jpg',
-      etiqueta: { texto: 'Próxima Salida', color: 'bg-amber-100 text-amber-800' },
-      fecha: '17-19 Mayo',
-      titulo: 'Cerro Champaquí',
-      descripcion: 'El punto más alto de las Sierras de Córdoba te espera con vistas panorámicas únicas.',
-      duracion: '3 días',
-      dificultad: 'Dificultad media'
-    },
-    {
-      id: 2,
-      imagen: 'imgs/champaqui.jpg',
-      etiqueta: { texto: 'Destacado', color: 'bg-amber-100 text-amber-800' },
-      fecha: '25-28 Mayo',
-      titulo: 'Laguna de los Tres',
-      descripcion: 'El mirador del imponente Fitz Roy, una de las vistas más impresionantes de la Patagonia.',
-      duracion: '4 días',
-      dificultad: 'Dificultad media-alta'
-    },
-    {
-      id: 3,
-      imagen: 'imgs/vallecitos.jpg',
-      etiqueta: { texto: 'Expedición', color: 'bg-amber-100 text-amber-800' },
-      fecha: '2-5 Junio',
-      titulo: 'Vallecitos',
-      descripcion: 'La puerta de entrada al andinismo en Mendoza, con cumbres que superan los 5000 msnm.',
-      duracion: '4 días',
-      dificultad: 'Dificultad alta'
+    // Si no hay expedición, no lo mostramos
+    if (!expedicion) return null;
+
+    // Armamos rango de fechas
+    const fechaInicio = new Date(expedicion.fecha_salida).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+    const fechaFin = new Date(expedicion.fecha_fin).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+
+    // Definimos etiqueta dinámica (opcional, podés cambiar el criterio)
+    let etiqueta = { texto: 'Destacado', color: 'bg-amber-100 text-amber-800' };
+
+    if (servicio.nombre.toLowerCase().includes('aconcagua')) {
+      etiqueta = { texto: 'Expedición', color: 'bg-amber-100 text-amber-800' };
+    } else if (servicio.nombre.toLowerCase().includes('champaquí')) {
+      etiqueta = { texto: 'Próxima Salida', color: 'bg-amber-100 text-amber-800' };
     }
-  ];
+
+    return {
+      id: servicio.id_servicio,
+      imagen: servicio.fotos[0],
+      etiqueta,
+      fecha: `${fechaInicio} - ${fechaFin}`,
+      titulo: servicio.nombre,
+      descripcion: servicio.desc,
+      duracion: `${servicio.duracion_dias} días`,
+      dificultad: servicio.altura_maxima > 5000 ? 'Dificultad alta' : servicio.altura_maxima > 3000 ? 'Dificultad media-alta' : 'Dificultad media'
+    };
+  }).filter(Boolean);
 
   return (
-    <section id="salidas" className="py-16 bg-gray-50">
+    <section id="expediciones" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-2">Salidas Destacadas</h2>
@@ -48,8 +47,8 @@ const SalidasDestacadas = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {salidas.map((salida) => (
-            <SalidaCard key={salida.id} salida={salida} />
+          {salidas.map((salida, index) => (
+            <SalidaCard key={index} salida={salida} />
           ))}
         </div>
 
