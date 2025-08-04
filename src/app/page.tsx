@@ -8,7 +8,7 @@ import Galeria from './components/Galeria';
 import ValorAgregado from './components/ValorAgregado';
 import QuienesSomos from './components/QuienesSomos';
 import CalendarioSalidas from './components/CalendarioSalidas';
-import TipsAventura from './components/TipsAventura';
+// import TipsAventura from './components/TipsAventura';
 import FAQsSection from './components/FAQsSection';
 // import DisenarExpedicion from './components/DisenarExpedicion';
 // import ProximasSalidas from './components/ProximasSalidas';
@@ -25,20 +25,8 @@ export default function TrekkingWebsite() {
       <Galeria />
       <ValorAgregado />
       <FAQsSection/>
-      <TipsAventura/>
+      {/* <TipsAventura/> */}
       <QuienesSomos />
-
-      {/* <ProximasSalidas /> */}
-      {/* <DisenarExpedicion onToggleModal={toggleModal} /> */}
-
-      {/* Modal para diseñar expedición */}
-      {/* <ModalExpedicion
-        showModal={showModal}
-        onClose={toggleModal}
-        formData={formData}
-        onFormChange={handleChange}
-        onSubmit={handleSubmit}
-      /> */}
     </div>
   );
 }

@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full flex items-center justify-between px-15 py-4 z-50 transition-all duration-300 ease-in-out ${scrolled ? 'bg-[var(--color-naranja)] shadow-lg py-3' : 'bg-transparent py-4'
+      className={`fixed top-0 left-0 w-full flex items-center justify-between px-8 sm:px-8 md:px-15 lg:px-15 py-4 z-50  transition-all duration-300 ease-in-out ${scrolled ? 'bg-[var(--color-naranja)] shadow-lg py-3' : 'bg-transparent py-4'
         }`}
     >
       {/* Logo Container */}

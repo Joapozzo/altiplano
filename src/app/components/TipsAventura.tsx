@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import {
     Calendar,
@@ -6,14 +7,17 @@ import {
     Droplets,
     Heart,
     FileText,
+    X,
+    Lightbulb,
     ChevronLeft,
     ChevronRight,
-    Clock
+    Minimize2,
 } from 'lucide-react';
 
-const TipsAventura = () => {
+const FloatingTipsWidget = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const [currentTip, setCurrentTip] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
+    const [isMinimized, setIsMinimized] = useState(false);
 
     const tips = [
         {
@@ -21,60 +25,70 @@ const TipsAventura = () => {
             icon: Calendar,
             categoria: "Planificación",
             titulo: "Días Extra = Tranquilidad",
-            contenido: "Te sugerimos disponer de 2 días extras para tu expedición. El clima en la montaña es cambiante y disponer de más tiempo te permitirá poder modificar el plan.",
-            color: "from-blue-400 to-blue-500"
+            contenido: "Disponé de 2 días extras. El clima en montaña es cambiante y más tiempo te permitirá modificar el plan.",
+            color: "from-blue-500 to-blue-600"
         },
         {
             id: 2,
             icon: MapPin,
             categoria: "Investigación",
             titulo: "Conocé tu Destino",
-            contenido: "Investigá acerca del lugar que elegiste como destino para combinar el viaje con otras experiencias, así conocer sobre costumbres y cultura del lugar.",
-            color: "from-green-400 to-green-500"
+            contenido: "Investigá el lugar para combinar el viaje con otras experiencias y conocer costumbres locales.",
+            color: "from-green-500 to-green-600"
         },
         {
             id: 3,
             icon: Thermometer,
             categoria: "Equipamiento",
             titulo: "Preparate para el Clima",
-            contenido: "Equipamiento según el clima: Invierno lleva cadenas para la nieve, mantas térmicas y líquido anticongelante. Verano: agua extra para vos y el motor, sombrero y protector solar.",
-            color: "from-orange-400 to-red-500"
+            contenido: "Invierno: cadenas, mantas térmicas. Verano: agua extra, sombrero y protector solar.",
+            color: "from-orange-500 to-red-500"
         },
         {
             id: 4,
             icon: Droplets,
             categoria: "Hidratación",
             titulo: "Hidratación Constante",
-            contenido: "En altura, tu cuerpo se deshidrata más rápido. Tomá agua pequeños sorbos cada 15-20 minutos, incluso si no tenés sed. Evitá el alcohol 48hs antes de la expedición.",
-            color: "from-cyan-400 to-blue-500"
+            contenido: "En altura, tomá agua cada 15-20 min. Evitá alcohol 48hs antes de la expedición.",
+            color: "from-cyan-500 to-blue-500"
         },
         {
             id: 5,
             icon: Heart,
-            categoria: "Preparación Física",
+            categoria: "Preparación",
             titulo: "Entrenamiento Previo",
-            contenido: "Comenzá a entrenar al menos 6 semanas antes. Enfocate en resistencia cardiovascular y fortalecimiento de piernas. Caminatas con mochila pesada son ideales.",
-            color: "from-pink-400 to-rose-500"
+            contenido: "Comenzá 6 semanas antes. Enfocate en cardio y piernas. Caminatas con mochila son ideales.",
+            color: "from-pink-500 to-rose-500"
         },
         {
             id: 6,
             icon: FileText,
             categoria: "Documentación",
             titulo: "Permisos y Seguros",
-            contenido: "Verificá que tu DNI esté vigente, contratá seguro de aventura, y consultá si necesitás permisos especiales para el área protegida que vas a visitar.",
-            color: "from-purple-400 to-indigo-500"
+            contenido: "Verificá DNI vigente, contratá seguro de aventura y consultá permisos especiales.",
+            color: "from-purple-500 to-indigo-500"
         }
     ];
 
-    // Auto-rotación cada 5 segundos
+    // Auto-rotación cada 4 segundos cuando está abierto
     useEffect(() => {
-        if (!isPaused) {
+        if (isOpen && !isMinimized) {
             const interval = setInterval(() => {
                 setCurrentTip((prev) => (prev + 1) % tips.length);
-            }, 5000);
+            }, 4000);
             return () => clearInterval(interval);
         }
-    }, [isPaused, tips.length]);
+    }, [isOpen, isMinimized, tips.length]);
+
+    // Auto-mostrar el primer tip después de 3 segundos
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!isOpen) {
+                setIsOpen(true);
+            }
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, [isOpen]);
 
     const nextTip = () => {
         setCurrentTip((prev) => (prev + 1) % tips.length);
@@ -84,148 +98,164 @@ const TipsAventura = () => {
         setCurrentTip((prev) => (prev - 1 + tips.length) % tips.length);
     };
 
-    const goToTip = (index: number) => {
-        setCurrentTip(index);
-    };
-
     const currentTipData = tips[currentTip];
     const IconComponent = currentTipData.icon;
 
-    return (
-        <section className="py-8 bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50 relative overflow-hidden">
-            {/* Patrón de fondo decorativo */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-4 left-4 w-20 h-20 rounded-full bg-amber-300"></div>
-                <div className="absolute top-12 right-8 w-12 h-12 rounded-full bg-orange-300"></div>
-                <div className="absolute bottom-6 left-1/4 w-16 h-16 rounded-full bg-yellow-300"></div>
-                <div className="absolute bottom-8 right-1/3 w-8 h-8 rounded-full bg-amber-400"></div>
-            </div>
-
-            <div className="container mx-auto px-4 relative">
-                <div className="max-w-4xl mx-auto">
-
-                    {/* Header */}
-                    <div className="text-center mb-6">
-                        <div className="inline-flex items-center bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm mb-4">
-                            <span className="text-amber-600 font-medium text-sm">💡 Tips de Aventura</span>
-                        </div>
+    if (!isOpen) {
+        return (
+            <div className="fixed bottom-6 left-6 z-50">
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="group relative bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-bounce"
+                >
+                    <Lightbulb size={24} className="group-hover:scale-110 transition-transform duration-200" />
+                    
+                    {/* Pulso animado */}
+                    <div className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75"></div>
+                    
+                    {/* Badge de notificación */}
+                    <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold animate-pulse">
+                        {tips.length}
                     </div>
+                    
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-0 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                        Tips de Aventura
+                        <div className="absolute top-full left-4 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+                    </div>
+                </button>
+            </div>
+        );
+    }
 
-                    {/* Contenido Principal */}
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
+    return (
+        <div className="fixed bottom-6 left-6 z-50">
+            <div className={`
+                bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden
+                transition-all duration-300 ease-out
+                ${isMinimized ? 'w-16 h-16' : 'w-80 max-w-sm'}
+            `}>
+                
+                {isMinimized ? (
+                    // Vista minimizada
+                    <button
+                        onClick={() => setIsMinimized(false)}
+                        className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 transition-colors duration-200"
                     >
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 md:p-10">
-
-                            {/* Tip Content */}
-                            <div className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8">
-
-                                {/* Icono animado */}
-                                <div className={`
-                                    flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br ${currentTipData.color} 
-                                    flex items-center justify-center shadow-lg transform transition-all duration-500
-                                    hover:scale-110 animate-pulse
-                                `}>
-                                    <IconComponent size={32} className="text-white" />
+                        <Lightbulb size={20} />
+                    </button>
+                ) : (
+                    // Vista expandida
+                    <>
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-amber-500 to-orange-500 p-4 text-white">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                    <Lightbulb size={18} />
+                                    <span className="font-medium text-sm">Tips de Aventura</span>
                                 </div>
+                                <div className="flex items-center space-x-1">
+                                    <button
+                                        onClick={() => setIsMinimized(true)}
+                                        className="p-1 hover:bg-white/20 rounded transition-colors duration-200"
+                                    >
+                                        <Minimize2 size={14} />
+                                    </button>
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="p-1 hover:bg-white/20 rounded transition-colors duration-200"
+                                    >
+                                        <X size={14} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                                {/* Contenido del tip */}
-                                <div className="flex-1 text-center md:text-left">
-                                    <div className="mb-2">
-                                        <span className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-3 py-1 rounded-full">
+                        {/* Contenido del tip */}
+                        <div className="p-4">
+                            <div className="flex items-start space-x-3 mb-3">
+                                <div className={`
+                                    w-10 h-10 rounded-xl bg-gradient-to-br ${currentTipData.color} 
+                                    flex items-center justify-center flex-shrink-0 shadow-md
+                                `}>
+                                    <IconComponent size={18} className="text-white" />
+                                </div>
+                                
+                                <div className="flex-1 min-w-0">
+                                    <div className="mb-1">
+                                        <span className="inline-block bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded-full">
                                             {currentTipData.categoria}
                                         </span>
                                     </div>
-
-                                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 transition-all duration-500">
+                                    <h4 className="font-bold text-gray-800 text-sm mb-1 leading-tight">
                                         {currentTipData.titulo}
-                                    </h3>
-
-                                    <p className="text-gray-600 leading-relaxed transition-all duration-500">
+                                    </h4>
+                                    <p className="text-gray-600 text-xs leading-relaxed">
                                         {currentTipData.contenido}
                                     </p>
                                 </div>
+                            </div>
 
-                                {/* Navegación */}
-                                <div className="flex-shrink-0 flex items-center space-x-2">
+                            {/* Navegación y progreso */}
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
                                     <button
                                         onClick={prevTip}
-                                        className="p-2 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-600 transition-colors duration-200"
+                                        className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors duration-200"
                                     >
-                                        <ChevronLeft size={20} />
+                                        <ChevronLeft size={14} />
                                     </button>
                                     <button
                                         onClick={nextTip}
-                                        className="p-2 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-600 transition-colors duration-200"
+                                        className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors duration-200"
                                     >
-                                        <ChevronRight size={20} />
+                                        <ChevronRight size={14} />
                                     </button>
+                                </div>
+
+                                {/* Indicadores */}
+                                <div className="flex space-x-1">
+                                    {tips.map((_, index) => (
+                                        <div
+                                            key={index}
+                                            className={`
+                                                w-1.5 h-1.5 rounded-full transition-all duration-300
+                                                ${index === currentTip ? 'bg-amber-500' : 'bg-gray-300'}
+                                            `}
+                                        />
+                                    ))}
+                                </div>
+
+                                {/* Contador */}
+                                <div className="text-xs text-gray-500 font-medium">
+                                    {currentTip + 1}/{tips.length}
                                 </div>
                             </div>
 
-                            {/* Indicadores de progreso */}
-                            <div className="flex justify-center mt-8 space-x-2">
-                                {tips.map((_, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => goToTip(index)}
-                                        className={`
-                                            w-3 h-3 rounded-full transition-all duration-300
-                                            ${index === currentTip
-                                                ? 'bg-amber-500 scale-125'
-                                                : 'bg-amber-200 hover:bg-amber-300'
-                                            }
-                                        `}
-                                    />
-                                ))}
-                            </div>
-
-                            {/* Barra de progreso automático */}
-                            <div className="mt-4 h-1 bg-amber-100 rounded-full overflow-hidden">
+                            {/* Barra de progreso */}
+                            <div className="mt-3 h-1 bg-gray-200 rounded-full overflow-hidden">
                                 <div
-                                    className={`
-                                        h-full bg-gradient-to-r ${currentTipData.color} rounded-full transition-all duration-100
-                                        ${isPaused ? 'animate-none' : 'animate-progress'}
-                                    `}
+                                    className={`h-full bg-gradient-to-r ${currentTipData.color} rounded-full transition-all duration-100`}
                                     style={{
-                                        animation: isPaused ? 'none' : 'progress 5s linear infinite'
+                                        width: '100%',
+                                        animation: 'progress 4s linear infinite'
                                     }}
                                 />
                             </div>
-
-                            {/* Indicador de pausa */}
-                            {isPaused && (
-                                <div className="absolute top-4 right-4 flex items-center text-amber-600 text-xs">
-                                    <Clock size={12} className="mr-1" />
-                                    Pausado
-                                </div>
-                            )}
                         </div>
-                    </div>
-
-                    {/* Footer discreto */}
-                    <div className="text-center mt-6">
-                        <p className="text-amber-700/60 text-xs">
-                            ✨ Consejos que marcan la diferencia en tu aventura
-                        </p>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
 
             {/* CSS para animaciones */}
             <style jsx>{`
                 @keyframes progress {
-                    from { width: 0%; }
-                    to { width: 100%; }
-                }
-                .animate-progress {
-                    animation: progress 5s linear infinite;
+                    from { transform: translateX(-100%); }
+                    to { transform: translateX(0%); }
                 }
             `}</style>
-        </section>
+        </div>
     );
 };
 
-export default TipsAventura;
+export default FloatingTipsWidget;
