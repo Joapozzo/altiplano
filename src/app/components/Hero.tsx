@@ -82,7 +82,7 @@ export default function AdventureHeroEnhanced() {
     };
 
     return (
-        <div className="relative w-full h-screen md:h-[120vh] overflow-hidden bg-gray-900 px-20">
+        <div className="relative w-full h-screen overflow-hidden bg-gray-900 px-20">
             {/* Main Background Image with Parallax */}
             <div
                 className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out"
@@ -96,7 +96,7 @@ export default function AdventureHeroEnhanced() {
             <div className="absolute inset-0 bg-black/30"></div>
 
             {/* Main Container */}
-            <div className="absolute inset-0 flex flex-col">
+            <div className="absolute inset-0 flex flex-col pt-10">
                 {/* Content Section - Responsive Layout */}
                 <div className="flex-1 flex flex-col justify-center px-6 md:px-12 text-white">
                     <div className="grid grid-cols-1 md:grid-cols-2 h-full">
@@ -131,7 +131,7 @@ export default function AdventureHeroEnhanced() {
                         </div>
 
                         {/* Right Section - Images (Desktop Only) */}
-                        <div className="hidden md:flex flex-col items-end justify-end pb-20 relative">
+                        <div className="hidden md:flex flex-col items-end justify-end pb-16 relative">
                             {/* Photo Title - Secondary */}
                             <div className="mb-2">
                                 <p className="text-white/60 text-xs font-medium">
@@ -147,8 +147,8 @@ export default function AdventureHeroEnhanced() {
                                             key={index}
                                             onClick={() => handleThumbnailClick(index)}
                                             className={`w-28 h-36 md:w-32 md:h-40 rounded-lg overflow-hidden flex-shrink-0 shadow-lg animate-fade-in relative cursor-pointer transition-all duration-300 ${index === currentMainPhoto
-                                                    ? "ring-2 ring-[var(--color-naranja)] scale-105"
-                                                    : "hover:scale-105 hover:ring-2 hover:ring-white/40"
+                                                ? "ring-2 ring-[var(--color-naranja)] scale-105"
+                                                : "hover:scale-105 hover:ring-2 hover:ring-white/40"
                                                 }`}
                                             style={{ animationDelay: `${(index + 3) * 100}ms` }}
                                         >
@@ -171,9 +171,9 @@ export default function AdventureHeroEnhanced() {
                 </div>
 
                 {/* Bottom Section - Controls and Thumbnails */}
-                <div className="pb-8 px-6 md:px-12">
+                <div className="pb-6 px-6 md:px-12">
                     {/* Mobile Thumbnails */}
-                    <div className="md:hidden mb-6">
+                    <div className="md:hidden mb-4">
                         {/* Photo Title - Secondary */}
                         <div className="mb-2">
                             <p className="text-white/60 text-xs font-medium">
@@ -188,8 +188,8 @@ export default function AdventureHeroEnhanced() {
                                         key={index}
                                         onClick={() => handleThumbnailClick(index)}
                                         className={`w-20 h-24 rounded-lg overflow-hidden flex-shrink-0 shadow-lg animate-fade-in relative cursor-pointer transition-all duration-300 ${index === currentMainPhoto
-                                                ? "ring-2 ring-white/60 scale-105"
-                                                : "hover:scale-105 hover:ring-2 hover:ring-white/40"
+                                            ? "ring-2 ring-white/60 scale-105"
+                                            : "hover:scale-105 hover:ring-2 hover:ring-white/40"
                                             }`}
                                         style={{ animationDelay: `${(index + 3) * 100}ms` }}
                                     >
@@ -216,7 +216,7 @@ export default function AdventureHeroEnhanced() {
                         <div className="h-px bg-white/20 md:hidden"></div>
 
                         {/* Controls and Page Number Container */}
-                        <div className="flex justify-between items-center pt-6 md:pt-8">
+                        <div className="flex justify-between items-center pt-4 md:pt-6">
                             {/* Slider Controls */}
                             <div className="flex space-x-3 items-center">
                                 <button

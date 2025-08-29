@@ -1,37 +1,22 @@
 import React from 'react';
 import SalidaCard from './SalidasCard';
 import { serviciosMock, expedicionesMock } from '../data/mockSalidas';
+import { Servicio } from '../types/servicio';
+import { Expedicion } from '../types/expedicion';
 
 const SalidasDestacadas = () => {
-  // Mezclamos servicio + expedición para armar la card
-  const salidas = serviciosMock.map((servicio) => {
-    const expedicion = expedicionesMock.find(e => e.id_servicio === servicio.id_servicio);
+  // Seleccionamos solo 3 expediciones destacadas
+  const expedicionesDestacadas = expedicionesMock.slice(0, 3);
 
-    // Si no hay expedición, no lo mostramos
-    if (!expedicion) return null;
-
-    // Armamos rango de fechas
-    const fechaInicio = new Date(expedicion.fecha_salida).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
-    const fechaFin = new Date(expedicion.fecha_fin).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
-
-    // Definimos etiqueta dinámica (opcional, podés cambiar el criterio)
-    let etiqueta = { texto: 'Destacado', color: 'bg-amber-100 text-amber-800' };
-
-    if (servicio.nombre.toLowerCase().includes('aconcagua')) {
-      etiqueta = { texto: 'Expedición', color: 'bg-amber-100 text-amber-800' };
-    } else if (servicio.nombre.toLowerCase().includes('champaquí')) {
-      etiqueta = { texto: 'Próxima Salida', color: 'bg-amber-100 text-amber-800' };
-    }
+  // Combinamos servicio + expedición para cada card
+  const salidasDestacadas = expedicionesDestacadas.map((expedicion) => {
+    const servicio = serviciosMock.find(s => s.id_servicio === expedicion.id_servicio);
+    
+    if (!servicio) return null;
 
     return {
-      id: servicio.id_servicio,
-      imagen: servicio.fotos[0],
-      etiqueta,
-      fecha: `${fechaInicio} - ${fechaFin}`,
-      titulo: servicio.nombre,
-      descripcion: servicio.desc,
-      duracion: `${servicio.duracion_dias} días`,
-      dificultad: servicio.altura_maxima > 5000 ? 'Dificultad alta' : servicio.altura_maxima > 3000 ? 'Dificultad media-alta' : 'Dificultad media'
+      servicio,
+      expedicion
     };
   }).filter(Boolean);
 
@@ -47,8 +32,12 @@ const SalidasDestacadas = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {salidas.map((salida, index) => (
-            <SalidaCard key={index} salida={salida} />
+          {salidasDestacadas.map(({ servicio, expedicion }) => (
+            <SalidaCard 
+              key={expedicion.id_expedicion} 
+              servicio={servicio} 
+              expedicion={expedicion} 
+            />
           ))}
         </div>
 

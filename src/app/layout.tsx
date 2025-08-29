@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -13,10 +13,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -190,7 +189,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+      <body className={`${raleway.variable} font-sans antialiased`}>
         <Navbar/>
         {children}
         <Footer/>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React, { useState } from 'react';
-import { Calendar, MapPin, Clock, Users, DollarSign, X } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, DollarSign, X, ChevronRight } from 'lucide-react';
 import { expedicionesMock, serviciosMock } from '../data/mockSalidas';
 import Image from 'next/image';
 
@@ -13,10 +13,7 @@ interface SalidaCalendario {
 }
 
 const CalendarioSalidas = () => {
-    const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedSalida, setSelectedSalida] = useState<SalidaCalendario | null>(null);
-    const [hoveredSalida, setHoveredSalida] = useState<SalidaCalendario | null>(null);
-    const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
 
     // Procesar salidas
     const salidas: SalidaCalendario[] = expedicionesMock.map(expedicion => {
@@ -27,277 +24,329 @@ const CalendarioSalidas = () => {
             fechaInicio: new Date(expedicion.fecha_salida),
             fechaFin: new Date(expedicion.fecha_fin)
         };
-    }).filter(s => s.servicio);
+    }).filter(s => s.servicio).sort((a, b) => a.fechaInicio.getTime() - b.fechaInicio.getTime());
 
-    // Obtener salidas de un día específico
-    const getSalidasDelDia = (fecha: Date) => {
-        return salidas.filter(salida => {
-            const fechaStr = fecha.toDateString();
-            return fechaStr === salida.fechaInicio.toDateString();
+    const formatDate = (date: Date) => {
+        return date.toLocaleDateString('es-AR', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
         });
     };
 
-    // Verificar si un día tiene salidas
-    const tieneReSalidas = (fecha: Date) => {
-        return getSalidasDelDia(fecha).length > 0;
+    const formatDateShort = (date: Date) => {
+        return date.toLocaleDateString('es-AR', {
+            day: 'numeric',
+            month: 'short'
+        });
     };
 
-    const generarDiasDelMes = () => {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
-        const daysInMonth = lastDay.getDate();
-        const startingDayOfWeek = firstDay.getDay();
+    const getDaysUntil = (date: Date) => {
+        const today = new Date();
+        const diffTime = date.getTime() - today.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        const days: (Date | null)[] = [];
-
-        // Días vacíos al inicio
-        for (let i = 0; i < startingDayOfWeek; i++) {
-            days.push(null);
-        }
-
-        // Días del mes
-        for (let day = 1; day <= daysInMonth; day++) {
-            days.push(new Date(year, month, day));
-        }
-
-        return days;
+        if (diffDays === 0) return "Hoy";
+        if (diffDays === 1) return "Mañana";
+        if (diffDays < 0) return "En curso";
+        return `En ${diffDays} días`;
     };
 
-    const cambiarMes = (increment: number) => {
-        const newDate = new Date(currentDate);
-        newDate.setMonth(newDate.getMonth() + increment);
-        setCurrentDate(newDate);
-        setSelectedSalida(null);
-        setHoveredSalida(null);
-    };
-
-    const meses = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-    ];
-
-    const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-
-    const handleDayClick = (fecha: Date) => {
-        const salidasDelDia = getSalidasDelDia(fecha);
-        if (salidasDelDia.length > 0) {
-            setSelectedSalida(salidasDelDia[0]);
-        }
-    };
-
-    const handleDayHover = (fecha: Date | null) => {
-        setHoveredDate(fecha);
-        if (fecha) {
-            const salidasDelDia = getSalidasDelDia(fecha);
-            if (salidasDelDia.length > 0) {
-                setHoveredSalida(salidasDelDia[0]);
-            } else {
-                setHoveredSalida(null);
-            }
-        } else {
-            setHoveredSalida(null);
-        }
+    const handleSalidaClick = (salida: SalidaCalendario) => {
+        setSelectedSalida(salida);
     };
 
     return (
-        <section className="py-16 bg-white" id='calendario'>
+        <section className="py-16 bg-white" id="calendario">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold mb-2">Calendario de Salidas</h2>
+                    <h2 className="text-4xl font-bold mb-2">Próximas Salidas</h2>
                     <div className="w-24 h-1 bg-amber-500 mx-auto my-4"></div>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Planificá tu próxima aventura consultando nuestro calendario de expediciones
+                        Elegí tu próxima aventura entre nuestras expediciones programadas
                     </p>
                 </div>
 
                 <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-                        {/* Calendario */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        {/* Lista de salidas */}
                         <div className="lg:col-span-2">
-                            <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
-
-                                {/* Header del calendario */}
-                                <div className="flex items-center justify-between mb-6">
-                                    <button
-                                        onClick={() => cambiarMes(-1)}
-                                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            <div className="space-y-4">
+                                {salidas.map((salida, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => handleSalidaClick(salida)}
+                                        className={`
+                                            group bg-[var(--color-beige)]/20 hover:bg-[var(--color-beige)]/40 
+                                            rounded-xl p-6 transition-all duration-300 hover:shadow-lg
+                                            border border-[var(--color-beige)]/30 hover:border-[var(--color-amarillo)]/50
+                                            ${selectedSalida === salida
+                                                ? "ring-2 ring-amber-400 shadow-xl"
+                                                : ""
+                                            }
+                                        `}
                                     >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </button>
-
-                                    <h3 className="text-xl font-bold text-gray-800">
-                                        {meses[currentDate.getMonth()]} {currentDate.getFullYear()}
-                                    </h3>
-
-                                    <button
-                                        onClick={() => cambiarMes(1)}
-                                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                    >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                {/* Días de la semana */}
-                                <div className="grid grid-cols-7 gap-1 mb-2">
-                                    {diasSemana.map(dia => (
-                                        <div key={dia} className="p-2 text-center text-sm font-medium text-gray-500">
-                                            {dia}
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Días del mes */}
-                                <div className="grid grid-cols-7 gap-1">
-                                    {generarDiasDelMes().map((fecha, index) => {
-                                        if (!fecha) {
-                                            return <div key={index} className="p-2 h-12"></div>;
-                                        }
-
-                                        const tieneSalidas = tieneReSalidas(fecha);
-                                        const esHoy = fecha.toDateString() === new Date().toDateString();
-
-                                        return (
-                                            <div
-                                                key={index}
-                                                className={`
-                                                    p-2 h-12 flex items-center justify-center text-sm cursor-pointer
-                                                    rounded-lg transition-all duration-200 relative
-                                                    ${tieneSalidas
-                                                        ? 'bg-amber-500 text-white hover:bg-amber-600 font-bold shadow-md'
-                                                        : 'hover:bg-gray-100'
-                                                    }
-                                                    ${esHoy && !tieneSalidas ? 'ring-2 ring-amber-300' : ''}
-                                                `}
-                                                onClick={() => handleDayClick(fecha)}
-                                                onMouseEnter={() => handleDayHover(fecha)}
-                                                onMouseLeave={() => handleDayHover(null)}
-                                            >
-                                                {fecha.getDate()}
-                                                {tieneSalidas && (
-                                                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></div>
-                                                )}
+                                        <div className="flex flex-col md:flex-row gap-4">
+                                            {/* Imagen */}
+                                            <div className="relative w-full md:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
+                                                <Image
+                                                    src={salida.servicio.fotos[0]}
+                                                    alt={salida.servicio.nombre}
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                />
+                                                <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                                    {getDaysUntil(salida.fechaInicio)}
+                                                </div>
                                             </div>
-                                        );
-                                    })}
-                                </div>
+
+                                            {/* Contenido */}
+                                            <div className="flex-1">
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-amber-600 transition-colors">
+                                                        {salida.servicio.nombre}
+                                                    </h3>
+                                                    <ChevronRight
+                                                        size={20}
+                                                        className="text-gray-400 group-hover:text-amber-500 group-hover:translate-x-1 transition-all flex-shrink-0 ml-2"
+                                                    />
+                                                </div>
+
+                                                <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                                                    {salida.servicio.desc}
+                                                </p>
+
+                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                                    <div className="flex items-center text-gray-700">
+                                                        <Calendar
+                                                            size={14}
+                                                            className="mr-1 text-amber-600"
+                                                        />
+                                                        <span className="font-medium">
+                                                            {formatDateShort(salida.fechaInicio)}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center text-gray-700">
+                                                        <Clock
+                                                            size={14}
+                                                            className="mr-1 text-amber-600"
+                                                        />
+                                                        <span>{salida.servicio.duracion_dias} días</span>
+                                                    </div>
+                                                    <div className="flex items-center text-gray-700">
+                                                        <Users
+                                                            size={14}
+                                                            className="mr-1 text-amber-600"
+                                                        />
+                                                        <span>{salida.expedicion.cupos} cupos</span>
+                                                    </div>
+                                                    <div className="flex items-center text-gray-700">
+                                                        <DollarSign
+                                                            size={14}
+                                                            className="mr-1 text-amber-600"
+                                                        />
+                                                        <span className="font-bold">
+                                                            $
+                                                            {salida.servicio.toLocaleString(
+                                                                "es-AR"
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Panel de información */}
+                        {/* Panel de detalle */}
                         <div className="lg:col-span-1">
-                            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-lg border border-amber-200 p-6">
-
-                                {selectedSalida ? (
-                                    // Información detallada de salida seleccionada
-                                    <div>
-                                        <div className="flex items-center justify-between mb-4">
-                                            <h3 className="text-lg font-bold text-gray-800">Salida Seleccionada</h3>
-                                            <button
-                                                onClick={() => setSelectedSalida(null)}
-                                                className="p-1 hover:bg-amber-200 rounded-lg transition-colors"
-                                            >
-                                                <X size={16} />
-                                            </button>
-                                        </div>
-
-                                        <div className="space-y-4">
-                                            <div className="relative h-32 rounded-lg overflow-hidden">
-                                                <Image
-                                                    src={selectedSalida.servicio.fotos[0]}
-                                                    alt={selectedSalida.servicio.nombre}
-                                                    className="w-full h-full object-cover"
-                                                    width={1200}
-                                                    height={800}
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                                            </div>
-
-                                            <div>
-                                                <h4 className="font-bold text-gray-800 mb-2">{selectedSalida.servicio.nombre}</h4>
-                                                <p className="text-sm text-gray-600 mb-3">{selectedSalida.servicio.desc}</p>
-
-                                                <div className="space-y-2 text-sm">
-                                                    <div className="flex items-center text-gray-700">
-                                                        <Calendar size={16} className="mr-2 text-amber-600" />
-                                                        {selectedSalida.fechaInicio.toLocaleDateString('es-AR')} - {selectedSalida.fechaFin.toLocaleDateString('es-AR')}
-                                                    </div>
-                                                    <div className="flex items-center text-gray-700">
-                                                        <Clock size={16} className="mr-2 text-amber-600" />
-                                                        {selectedSalida.servicio.duracion_dias} días
-                                                    </div>
-                                                    <div className="flex items-center text-gray-700">
-                                                        <MapPin size={16} className="mr-2 text-amber-600" />
-                                                        {selectedSalida.servicio.altura_maxima}m altura máxima
-                                                    </div>
-                                                    <div className="flex items-center text-gray-700">
-                                                        <Users size={16} className="mr-2 text-amber-600" />
-                                                        {selectedSalida.expedicion.cupos} cupos disponibles
-                                                    </div>
-                                                    <div className="flex items-center text-gray-700">
-                                                        <DollarSign size={16} className="mr-2 text-amber-600" />
-                                                        ${selectedSalida.expedicion.precio.toLocaleString('es-AR')}
-                                                    </div>
-                                                </div>
-
-                                                <button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded-lg transition-colors mt-4 font-medium">
-                                                    Ver Detalles
+                            <div className="sticky top-24">
+                                <div className="bg-[var(--color-negro)] rounded-xl shadow-lg border border-amber-200 p-6">
+                                    {selectedSalida ? (
+                                        <div>
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="text-lg font-bold text-[var(--color-white)]">
+                                                    Detalle de la Salida
+                                                </h3>
+                                                <button
+                                                    onClick={() => setSelectedSalida(null)}
+                                                    className="p-1 rounded-lg transition-colors text-[var(--color-white)] hover:bg-[var(--color-naranja-200)]"
+                                                >
+                                                    <X size={16} />
                                                 </button>
                                             </div>
-                                        </div>
-                                    </div>
-                                ) : hoveredSalida ? (
-                                    // Preview al hacer hover
-                                    <div>
-                                        <h3 className="text-lg font-bold text-gray-800 mb-4">Vista Previa</h3>
-                                        <div className="space-y-3">
-                                            <div className="relative h-24 rounded-lg overflow-hidden">
-                                                <Image
-                                                    src={hoveredSalida.servicio.fotos[0]}
-                                                    alt={hoveredSalida.servicio.nombre}
-                                                    className="w-full h-full object-cover"
-                                                    width={1200}
-                                                    height={800}
-                                                />
-                                            </div>
-                                            <div>
-                                                <h4 className="font-semibold text-gray-800 mb-1">{hoveredSalida.servicio.nombre}</h4>
-                                                <p className="text-xs text-gray-600 mb-2 line-clamp-2">{hoveredSalida.servicio.desc}</p>
-                                                <div className="text-xs text-amber-700">
-                                                    💰 ${hoveredSalida.expedicion.precio.toLocaleString('es-AR')} • 👥 {hoveredSalida.expedicion.cupos} cupos
-                                                </div>
-                                            </div>
-                                            <p className="text-xs text-gray-500 italic">Hacé click para ver más detalles</p>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    // Estado por defecto
-                                    <div className="text-center">
-                                        <Calendar size={48} className="mx-auto text-amber-400 mb-4" />
-                                        <h3 className="text-lg font-bold text-gray-800 mb-2">Próximas Expediciones</h3>
-                                        <p className="text-sm text-gray-600 mb-4">
-                                            Los días marcados en naranja tienen salidas programadas.
-                                            Hacé click en un día para ver los detalles.
-                                        </p>
 
-                                        <div className="space-y-2 text-left">
-                                            <div className="text-sm">
-                                                <span className="font-medium">Próximas salidas:</span>
-                                            </div>
-                                            {salidas.slice(0, 3).map((salida, index) => (
-                                                <div key={index} className="text-xs text-gray-600 flex justify-between">
-                                                    <span>{salida.fechaInicio.getDate()}/{salida.fechaInicio.getMonth() + 1}</span>
-                                                    <span className="font-medium">{salida.servicio.nombre.split(' ')[1]}</span>
+                                            <div className="space-y-4">
+                                                {/* Imagen principal */}
+                                                <div className="relative h-32 rounded-lg overflow-hidden">
+                                                    <Image
+                                                        src={selectedSalida.servicio.fotos[0]}
+                                                        alt={selectedSalida.servicio.nombre}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                                    <div className="absolute bottom-2 left-2 text-white">
+                                                        <div className="text-xs bg-amber-500 px-2 py-1 rounded-full">
+                                                            {getDaysUntil(selectedSalida.fechaInicio)}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            ))}
+
+                                                {/* Información detallada */}
+                                                <div>
+                                                    <h4 className="font-bold text-[var(--color-white)] mb-2">
+                                                        {selectedSalida.servicio.nombre}
+                                                    </h4>
+                                                    <p className="text-sm text-[var(--color-white)] mb-4 font-light">
+                                                        {selectedSalida.servicio.desc}
+                                                    </p>
+
+                                                    <div className="space-y-3 text-sm">
+                                                        <div className="rounded-lg p-3 border border-[var(--color-naranja-200)]">
+                                                            <div className="flex items-center text-[var(--color-white)] mb-2">
+                                                                <Calendar
+                                                                    size={16}
+                                                                    className="mr-2 text-[var(--color-naranja-200)]"
+                                                                />
+                                                                <span className="font-medium">Fechas</span>
+                                                            </div>
+                                                            <div className="text-[var(--color-white)] pl-6">
+                                                                Salida:{" "}
+                                                                {formatDate(selectedSalida.fechaInicio)}
+                                                                <br />
+                                                                Regreso: {formatDate(selectedSalida.fechaFin)}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <div className="bg-[var(--color-naranja-200)] rounded-lg p-3">
+                                                                <div className="flex items-center text-gray-700 mb-1">
+                                                                    <Clock
+                                                                        size={14}
+                                                                        className="mr-1 text-[var(--color-negro)]"
+                                                                    />
+                                                                    <span className="text-xs font-medium text-[var(--color-negro)]">
+                                                                        Duración
+                                                                    </span>
+                                                                </div>
+                                                                <div className="text-[var(--color-negro)] font-bold">
+                                                                    {selectedSalida.servicio.duracion_dias} días
+                                                                </div>
+                                                            </div>
+                                                            <div className=" rounded-lg p-3 border border-[var(--color-naranja-200)]">
+                                                                <div className="flex items-center text-[var(--color-naranja-200)] mb-1">
+                                                                    <MapPin
+                                                                        size={14}
+                                                                        className="mr-1 text-[var(--color-naranja-200)]"
+                                                                    />
+                                                                    <span className="text-xs font-medium text-[var(--color-naranja-200)]">
+                                                                        Altura
+                                                                    </span>
+                                                                </div>
+                                                                <div className="text-[var(--color-naranja-200)] font-bold">
+                                                                    {selectedSalida.servicio.altura_maxima}m
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <div className="rounded-lg p-3 border border-[var(--color-naranja-200)]">
+                                                                <div className="flex items-center text-[var(--color-naranja-200)] mb-1">
+                                                                    <Users
+                                                                        size={14}
+                                                                        className="mr-1 text-[var(--color-naranja-200)]"
+                                                                    />
+                                                                    <span className="text-xs font-medium text-[var(--color-naranja-200)]">
+                                                                        Cupos
+                                                                    </span>
+                                                                </div>
+                                                                <div className="text-[var(--color-naranja-200)] font-bold">
+                                                                    {selectedSalida.expedicion.cupos}{" "}
+                                                                    disponibles
+                                                                </div>
+                                                            </div>
+                                                            <div className="bg-[var(--color-naranja-200)] rounded-lg p-3">
+                                                                <div className="flex items-center text-[var(--color-negro)] mb-1">
+                                                                    <DollarSign
+                                                                        size={14}
+                                                                        className="mr-1 text-[var(--color-negro)] "
+                                                                    />
+                                                                    <span className="text-xs font-medium text-[var(--color-negro)]">
+                                                                        Precio
+                                                                    </span>
+                                                                </div>
+                                                                <div className="text-[var(--color-negro)]  font-bold">
+                                                                    $
+                                                                    {selectedSalida.expedicion.precio.toLocaleString(
+                                                                        "es-AR"
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="space-y-2 mt-4">
+                                                        <button className="w-full bg-[var(--color-naranja-200)] hover:bg-amber-700 text-white py-3 px-4 rounded-lg transition-colors font-medium">
+                                                            Reservar Cupo
+                                                        </button>
+                                                        <button className="w-full border border-[var(--color-naranja-200)] text-amber-600 hover:bg-amber-50 py-2 px-4 rounded-lg transition-colors font-medium">
+                                                            Ver Itinerario Completo
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    ) : (
+                                        <div className="text-center">
+                                            <Calendar
+                                                size={48}
+                                                className="mx-auto text-[var(--color-naranja-200)] mb-4"
+                                            />
+                                            <h3 className="text-xl font-bold text-[var(--color-white)] mb-2">
+                                                Seleccioná una Salida
+                                            </h3>
+                                            <p className="text-sm text-[var(--color-white)] mb-4 font-light">
+                                                Hacé click en cualquier expedición para ver los
+                                                detalles completos y opciones de reserva.
+                                            </p>
+
+                                            <div className="space-y-3 text-left bg-[var(--color-black-200)] rounded-lg p-4 border border-amber-100">
+                                                <div className="text-sm font-medium text-[var(--color-white)] border-b border-amber-100 pb-2">
+                                                    Resumen de Salidas
+                                                </div>
+                                                {salidas.slice(0, 3).map((salida, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex justify-between items-center text-sm"
+                                                    >
+                                                        <div>
+                                                            <div className="font-bold text-[var(--color-white)]">
+                                                                {salida.servicio.nombre
+                                                                    .split(" ")
+                                                                    .slice(1, 3)
+                                                                    .join(" ")}
+                                                            </div>
+                                                            <div className="text-xs text-[var(--color-white)] font-light">
+                                                                {formatDateShort(salida.fechaInicio)}
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <div className="text-xs text-[var(--color-naranja-200)] font-medium">
+                                                                {getDaysUntil(salida.fechaInicio)}
+                                                            </div>
+                                                            <div className="text-xs text-gray-600">
+                                                                {salida.expedicion.cupos} cupos
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

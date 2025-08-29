@@ -20,3 +20,10 @@ export interface Coordinador {
     dni: string;
     fecha_nacimiento: string;
 }
+
+export interface ContactoEmpresa {
+  whatsapp: string;
+  redes_sociales: string[];
+  email?: string;
+  telefono?: string;
+}

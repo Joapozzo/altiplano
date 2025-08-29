@@ -7,9 +7,9 @@ const EmpresaInfo = () => {
     return (
         <div>
             <Image
-                src="/logos/Logo-Completo-Blanco.svg"
+                src="/logos/Logo-Completo-Naranja.png"
                 alt="logo"
-                width={140}
+                width={170}
                 height={40}
                 className="mb-4"
             />
@@ -17,17 +17,17 @@ const EmpresaInfo = () => {
                 Expediciones y aventuras de montaña en Argentina. Conectando personas con la naturaleza desde 2015.
             </p>
             <div className="flex space-x-4">
-                <a href="#" className="bg-gray-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 transition">
+                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
                     <span className="sr-only">Facebook</span>
-                    <Facebook size={20} />
+                    <Facebook size={20} className="text-[var(--color-black)]" />
                 </a>
-                <a href="#" className="bg-gray-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 transition">
+                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
                     <span className="sr-only">Instagram</span>
-                    <Instagram size={20} />
+                    <Instagram size={20} className="text-[var(--color-black)]"/>
                 </a>
-                <a href="#" className="bg-gray-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 transition">
+                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
                     <span className="sr-only">YouTube</span>
-                    <Youtube size={20} />
+                    <Youtube size={20} className="text-[var(--color-black)]"/>
                 </a>
             </div>
         </div>
@@ -101,8 +101,8 @@ const ContactoInfo = () => {
             <ul className="space-y-4 text-gray-400">
                 {contactos.map((contacto, index) => (
                     <li key={index} className="flex items-center">
-                        <div className="bg-gray-800 p-2 rounded-full mr-4 flex items-center justify-center">
-                            {React.createElement(contacto.icono, { size: 18, className: "text-amber-500" })}
+                        <div className="bg-[var(--color-naranja)] p-2 rounded-full mr-4 flex items-center justify-center">
+                            {React.createElement(contacto.icono, { size: 18, className: "text-[var(--color-negro)]" })}
                         </div>
                         <span>{contacto.texto}</span>
                     </li>
@@ -115,7 +115,7 @@ const ContactoInfo = () => {
 // Componente principal
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white pt-16 pb-8" id='footer'>
+        <footer className="bg-[var(--color-black)] text-white pt-16 pb-8" id='footer'>
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <EmpresaInfo />

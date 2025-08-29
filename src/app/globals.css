@@ -9,6 +9,7 @@
   --color-beige: #f2dbad;
   --color-blanco: #ffffff;
   --color-negro: #121212;
+  --color-negro-200: #222121;
 }
 
 @theme inline {
@@ -28,33 +29,43 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-raleway), sans-serif;
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes expand {
-    0% { width: 0; }
-    100% { width: 6rem; }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 6rem;
+  }
 }
 
 .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 .animate-fade-in-delay {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.3s forwards;
 }
 
 .animate-fade-in-delay-2 {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.6s forwards;
 }
 
 .animate-expand {
-    animation: expand 0.8s ease-out forwards;
+  animation: expand 0.8s ease-out forwards;
 }
