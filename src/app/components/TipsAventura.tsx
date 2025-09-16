@@ -88,7 +88,7 @@ const FloatingTipsWidget = () => {
             }
         }, 3000);
         return () => clearTimeout(timer);
-    }, [isOpen]);
+    }, []);
 
     const nextTip = () => {
         setCurrentTip((prev) => (prev + 1) % tips.length);

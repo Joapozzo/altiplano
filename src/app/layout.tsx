@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Raleway } from "next/font/google";
+import { Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import FloatingTipsWidget from "./components/TipsAventura";
-
-// Fuentes más friendly y cálidas
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
+import NavigationWrapper from "./components/NavigationWrapper";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -190,11 +184,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${raleway.variable} font-sans antialiased`}>
-        <Navbar/>
-        {children}
-        <Footer/>
-        <FloatingTipsWidget/>
-        <WhatsAppButton />
+        <NavigationWrapper>
+          <Navbar/>
+          {children}
+          <Footer/>
+          <FloatingTipsWidget/>
+          <WhatsAppButton />
+        </NavigationWrapper>
       </body>
     </html>
   );

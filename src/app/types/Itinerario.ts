@@ -1,4 +1,5 @@
 export interface ItinerarioDia {
+  id_itinerario: number;
   dia: number;
   titulo: string; // ej: "Encuentro en Villa Alpina"
   descripcion: string;

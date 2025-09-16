@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Clock, Mountain, Calendar, DollarSign, Users, ChevronRight } from 'lucide-react';
 import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
@@ -6,14 +6,26 @@ import { Expedicion } from '../types/expedicion';
 interface SalidaCardProps {
   servicio: Servicio;
   expedicion: Expedicion;
+  index: number;
 }
 
-const SalidaCard = ({ servicio, expedicion }: SalidaCardProps) => {
+const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
+  const [isCardVisible, setIsCardVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsCardVisible(true);
+    }, index * 200);
+
+    return () => clearTimeout(timer);
+  }, [index]);
+
   // Formatear fechas
   const formatearFecha = (fecha: string) => {
-    return new Date(fecha).toLocaleDateString('es-AR', { 
-      day: 'numeric', 
-      month: 'short' 
+    return new Date(fecha).toLocaleDateString('es-AR', {
+      day: 'numeric',
+      month: 'short'
     });
   };
 
@@ -23,7 +35,7 @@ const SalidaCard = ({ servicio, expedicion }: SalidaCardProps) => {
 
   // Obtener precio principal (primer precio)
   const precioMinimo = expedicion.precios[0];
-  const precioPrincipal = expedicion.precios.length > 1 
+  const precioPrincipal = expedicion.precios.length > 1
     ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
     : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
 
@@ -52,67 +64,142 @@ const SalidaCard = ({ servicio, expedicion }: SalidaCardProps) => {
   };
 
   // Truncar descripción
-  const descripcionCorta = servicio.desc.length > 120 
-    ? servicio.desc.substring(0, 120) + '...' 
+  const descripcionCorta = servicio.desc.length > 120
+    ? servicio.desc.substring(0, 120) + '...'
     : servicio.desc;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden transition transform hover:scale-105">
-      <div className="relative">
+    <div
+      ref={cardRef}
+      className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-700 transform hover:scale-105 hover:shadow-xl ${isCardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      style={{
+        transitionDelay: `${index * 100}ms`,
+      }}
+    >
+      <div className="relative group">
         <div
-          className="h-64 bg-cover bg-center"
-          style={{ backgroundImage: `url('${servicio.fotos[0] || '/placeholder-mountain.jpg'}')` }}
+          className="h-64 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+          style={{
+            backgroundImage: `url(${servicio.fotos[0] || '/placeholder-mountain.jpg'})`,
+          }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 group-hover:from-black/50 transition-all duration-300"></div>
         </div>
-        <div className="absolute top-4 left-4">
-          <span className={`text-xs font-semibold px-3 py-1 rounded-full ${etiqueta.color}`}>
+
+        {/* Etiqueta animada */}
+        <div
+          className={`absolute top-4 left-4 transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 300}ms` }}
+        >
+          <span
+            className={`text-xs font-semibold px-3 py-1 rounded-full ${etiqueta.color} shadow-lg`}
+          >
             {etiqueta.texto}
           </span>
         </div>
-        <div className="absolute top-4 right-4 bg-white bg-opacity-90 rounded-lg px-2 py-1">
-          <span className="text-xs font-medium text-gray-800">{rangoFechas}</span>
+
+        {/* Fechas animadas */}
+        <div
+          className={`absolute top-4 right-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg px-2 py-1 transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 400}ms` }}
+        >
+          <span className="text-xs font-medium text-gray-800">
+            {rangoFechas}
+          </span>
         </div>
       </div>
-      
+
       <div className="p-6">
-        <div className="mb-3">
-          <h3 className="text-xl font-bold mb-1">{servicio.nombre}</h3>
-          {/* <p className="text-sm text-gray-500">{servicio.ubicacion || 'Argentina'}</p> */}
+        {/* Título animado */}
+        <div
+          className={`mb-3 transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 500}ms` }}
+        >
+          <h3 className="text-xl font-bold mb-1 text-gray-800 group-hover:text-amber-600 transition-colors duration-300">
+            {servicio.nombre}
+          </h3>
         </div>
-        
-        <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+
+        {/* Descripción animada */}
+        <p
+          className={`text-gray-600 text-sm mb-4 leading-relaxed transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 600}ms` }}
+        >
           {descripcionCorta}
         </p>
-        
-        {/* Información clave */}
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center text-sm text-gray-600">
+
+        {/* Información clave animada */}
+        <div
+          className={`space-y-2 mb-4 transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 700}ms` }}
+        >
+          <div className="flex items-center text-sm text-gray-600 hover:text-amber-600 transition-colors duration-200">
             <Clock size={16} className="mr-2 text-amber-600" />
-            <span>{servicio.duracion_dias} días / {servicio.duracion_noches} noches</span>
+            <span>
+              {servicio.duracion_dias} días / {servicio.duracion_noches} noches
+            </span>
           </div>
-          
-          <div className="flex items-center text-sm text-gray-600">
+
+          <div className="flex items-center text-sm text-gray-600 hover:text-amber-600 transition-colors duration-200">
             <Mountain size={16} className="mr-2 text-amber-600" />
-            <span>{servicio.altura_maxima.toLocaleString()}m - Dificultad {obtenerDificultad()}</span>
+            <span>
+              {servicio.altura_maxima.toLocaleString()}m - Dificultad{" "}
+              {obtenerDificultad()}
+            </span>
           </div>
-          
-          <div className="flex items-center text-sm text-gray-600">
+
+          <div className="flex items-center text-sm text-gray-600 hover:text-amber-600 transition-colors duration-200">
             <Users size={16} className="mr-2 text-amber-600" />
-            <span>Máx. {servicio.cupos_maximos} personas - {expedicion.cupos_disponibles} disponibles</span>
+            <span>
+              Máx. {servicio.cupos_maximos} personas -{" "}
+              {expedicion.cupos_disponibles} disponibles
+            </span>
           </div>
         </div>
 
-        {/* Precio y CTA */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <div>
-            <span className="text-lg font-bold text-gray-900">{precioPrincipal}</span>
+        {/* Precio y CTA animados */}
+        <div
+          className={`flex items-center justify-between pt-4 border-t border-gray-100 transition-all duration-500 ${isCardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+            }`}
+          style={{ transitionDelay: `${index * 100 + 800}ms` }}
+        >
+          {/* <div>
+            <span className="text-lg font-bold text-gray-900">
+              {precioPrincipal}
+            </span>
             {expedicion.precios.length > 1 && (
-              <p className="text-xs text-gray-500">Varios paquetes disponibles</p>
+              <p className="text-xs text-gray-500">
+                Varios paquetes disponibles
+              </p>
             )}
-          </div>
-          <button className="text-amber-600 hover:text-amber-800 font-medium flex items-center">
-            Ver detalles <ChevronRight size={16} className="ml-1" />
+          </div> */}
+          <button className="group text-amber-600 hover:text-amber-800 font-medium flex items-center transition-all duration-300 hover:bg-amber-50 px-3 py-1 rounded-lg"
+            onClick={() => {
+              window.location.href = `/salidas/${expedicion.id_expedicion}`;
+            }}>
+            Ver detalles
+            <ChevronRight
+              size={16}
+              className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+            />
           </button>
         </div>
       </div>

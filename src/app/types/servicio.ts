@@ -25,7 +25,7 @@ export interface Servicio {
   duracion_dias: number;
   duracion_noches: number;
   altura_maxima: number;
-  desnivel?: number; // para casos como Penitentes
+  desnivel?: number;
 
   // Descripción y detalles
   desc: string;
@@ -63,11 +63,19 @@ export interface Servicio {
     cenas?: string;
   };
 
+  id_itinerario?: number; // Enlace al itinerario
+
+  servicios_incluidos?: string[];
+  servicios_no_incluidos?: string[];
+  servicios_adicionales_disponibles?: string[];
+
   // Diferenciadores de la empresa
   diferenciadores?: string[];
 
   // Media
   fotos: string[];
+
+  gestion_cargas?: string[];
 
   // Metadata
   fecha_creacion: string;

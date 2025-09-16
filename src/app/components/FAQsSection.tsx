@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, Mountain, User, Award } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronDown, ChevronUp, HelpCircle, Mountain, User, Award, Sparkles } from 'lucide-react';
+import AnimatedButton from './ui/Button';
 
 const FAQsSection = () => {
     const [openAccordion, setOpenAccordion] = useState<number | null>(null);
     const [activeCategory, setActiveCategory] = useState('principiantes');
+    const [isVisible, setIsVisible] = useState(false);
+    const [visibleFAQs, setVisibleFAQs] = useState<Set<number>>(new Set());
+
+    const sectionRef = useRef<HTMLElement>(null);
+    const faqRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
     const categories = {
         principiantes: {
@@ -102,6 +108,45 @@ const FAQsSection = () => {
         }
     };
 
+    // Intersection Observer para animaciones de scroll
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        if (entry.target === sectionRef.current) {
+                            setIsVisible(true);
+                        } else {
+                            // FAQ individual
+                            const faqId = parseInt(entry.target.getAttribute('data-faq-id') || '0');
+                            if (faqId) {
+                                setVisibleFAQs(prev => new Set([...prev, faqId]));
+                            }
+                        }
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        // Observar FAQs individuales
+        Object.values(faqRefs.current).forEach(ref => {
+            if (ref) observer.observe(ref);
+        });
+
+        return () => observer.disconnect();
+    }, [activeCategory]);
+
+    // Reset visible FAQs when category changes
+    useEffect(() => {
+        setVisibleFAQs(new Set());
+        setOpenAccordion(null);
+    }, [activeCategory]);
+
     const toggleAccordion = (id: number) => {
         setOpenAccordion(openAccordion === id ? null : id);
     };
@@ -115,6 +160,7 @@ const FAQsSection = () => {
                 hover: "hover:bg-yellow-50",
                 button: "bg-yellow-600 hover:bg-yellow-700",
                 accent: "focus:ring-yellow-500",
+                gradient: "from-yellow-400/20 to-yellow-600/20",
             },
             amber: {
                 bg: "bg-amber-100",
@@ -123,6 +169,7 @@ const FAQsSection = () => {
                 hover: "hover:bg-amber-50",
                 button: "bg-amber-600 hover:bg-amber-700",
                 accent: "focus:ring-amber-500",
+                gradient: "from-amber-400/20 to-amber-600/20",
             },
             orange: {
                 bg: "bg-orange-100",
@@ -131,6 +178,7 @@ const FAQsSection = () => {
                 hover: "hover:bg-orange-50",
                 button: "bg-orange-600 hover:bg-orange-700",
                 accent: "focus:ring-orange-500",
+                gradient: "from-orange-400/20 to-orange-600/20",
             },
         };
         return colorMap[color] || colorMap.amber;
@@ -140,20 +188,35 @@ const FAQsSection = () => {
     const colors = getColorClasses(currentCategory.color);
 
     return (
-        <section className="py-16 bg-gray-50" id="faqs">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold mb-2">Preguntas Frecuentes</h2>
-                    <div className="w-24 h-1 bg-amber-500 mx-auto my-4"></div>
+        <section
+            ref={sectionRef}
+            className="py-16 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
+            id="faqs"
+        >
+            {/* Background decorations */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className={`absolute top-20 right-20 w-64 h-64 bg-gradient-to-br ${colors.gradient} rounded-full blur-3xl opacity-30 animate-pulse`}></div>
+                <div className={`absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr ${colors.gradient} rounded-full blur-3xl opacity-20 animate-pulse`} style={{ animationDelay: '2s' }}></div>
+            </div>
+
+            <div className="container mx-auto px-4 relative">
+                {/* Header con animación de entrada */}
+                <div className={`text-center mb-12 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                    }`}>
+                    <div className="flex items-center justify-center mb-4">
+                        <h2 className="text-4xl font-bold">Preguntas Frecuentes</h2>
+                    </div>
+                    <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto my-4 rounded-full"></div>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                         Organizamos las respuestas según tu nivel de experiencia en montaña
                     </p>
                 </div>
 
-                {/* Category Tabs */}
-                <div className="max-w-4xl mx-auto mb-8">
+                {/* Category Tabs con animación mejorada */}
+                <div className={`max-w-4xl mx-auto mb-8 transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                    }`}>
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-                        {Object.entries(categories).map(([key, category]) => {
+                        {Object.entries(categories).map(([key, category], index) => {
                             const Icon = category.icon;
                             const isActive = activeCategory === key;
                             const tabColors = getColorClasses(category.color);
@@ -163,23 +226,29 @@ const FAQsSection = () => {
                                     key={key}
                                     onClick={() => setActiveCategory(key)}
                                     className={`
-                                        flex items-center gap-3 px-6 py-4 rounded-xl font-semibold transition-all duration-200 
-                                        border-2 min-w-[200px] justify-center
+                                        flex items-center gap-3 px-6 py-4 rounded-xl font-semibold 
+                                        transition-all duration-500 transform hover:scale-105
+                                        border-2 min-w-[200px] justify-center group
                                         ${isActive
-                                            ? `${tabColors.button} text-white border-transparent shadow-lg`
-                                            : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:shadow-md'
+                                            ? `${tabColors.button} text-white border-transparent shadow-xl scale-105`
+                                            : 'bg-white/80 backdrop-blur-sm text-gray-600 border-gray-200 hover:border-gray-300 hover:shadow-lg'
                                         }
                                     `}
+                                    style={{
+                                        transitionDelay: `${index * 100}ms`,
+                                        animation: isVisible ? `slideInUp 0.8s ease-out ${index * 100}ms both` : undefined
+                                    }}
                                 >
-                                    <Icon size={20} />
+                                    <Icon size={20} className={isActive ? 'animate-bounce' : 'group-hover:scale-110 transition-transform'} />
                                     <span>{category.title}</span>
                                 </button>
                             );
                         })}
                     </div>
 
-                    {/* Category Description */}
-                    <div className="text-center mb-8">
+                    {/* Category Description con efecto de escritura */}
+                    <div className={`text-center mb-8 transition-all duration-700 delay-500 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                        }`}>
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">
                             {currentCategory.title}
                         </h3>
@@ -189,82 +258,119 @@ const FAQsSection = () => {
                     </div>
                 </div>
 
-                {/* FAQs */}
+                {/* FAQs con animaciones escalonadas */}
                 <div className="max-w-4xl mx-auto">
                     <div className="space-y-4">
-                        {currentCategory.faqs.map((faq) => (
-                            <div
-                                key={faq.id}
-                                className={`bg-white rounded-xl shadow-md border ${colors.border} overflow-hidden transition-all duration-300 hover:shadow-lg`}
-                            >
-                                <button
-                                    onClick={() => toggleAccordion(faq.id)}
-                                    className={`w-full px-6 py-5 text-left flex items-center justify-between ${colors.hover} transition-colors duration-200 focus:outline-none focus:ring-2 ${colors.accent} focus:ring-opacity-50`}
-                                >
-                                    <div className="flex items-center">
-                                        <div className={`w-8 h-8 ${colors.bg} rounded-full flex items-center justify-center mr-4 flex-shrink-0`}>
-                                            <HelpCircle size={16} className={colors.text} />
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-gray-800 pr-4">
-                                            {faq.pregunta}
-                                        </h3>
-                                    </div>
+                        {currentCategory.faqs.map((faq, index) => {
+                            const isOpen = openAccordion === faq.id;
+                            const isVisible = visibleFAQs.has(faq.id);
 
-                                    <div className="flex-shrink-0 ml-4">
-                                        {openAccordion === faq.id ? (
-                                            <ChevronUp
-                                                size={20}
-                                                className={`${colors.text} transform transition-transform duration-200`}
-                                            />
-                                        ) : (
-                                            <ChevronDown
-                                                size={20}
-                                                className="text-gray-400 transform transition-transform duration-200"
-                                            />
-                                        )}
-                                    </div>
-                                </button>
-
+                            return (
                                 <div
+                                    key={faq.id}
+                                    ref={el => faqRefs.current[faq.id] = el}
+                                    data-faq-id={faq.id}
                                     className={`
-                                        transition-all duration-300 ease-in-out overflow-hidden
-                                        ${openAccordion === faq.id
-                                            ? "max-h-96 opacity-100"
-                                            : "max-h-0 opacity-0"
-                                        }
+                                        bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border ${colors.border} 
+                                        overflow-hidden transition-all duration-700 transform
+                                        hover:shadow-xl hover:scale-[1.02] group
+                                        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
                                     `}
+                                    style={{
+                                        transitionDelay: `${index * 150}ms`,
+                                    }}
                                 >
-                                    <div className="px-6 pb-5">
-                                        <div className="pl-12">
-                                            <div className={`w-full h-px ${colors.accent} opacity-30 mb-4`}></div>
-                                            <p className="text-gray-600 leading-relaxed">
-                                                {faq.respuesta}
-                                            </p>
+                                    <button
+                                        onClick={() => toggleAccordion(faq.id)}
+                                        className={`w-full px-6 py-5 text-left flex items-center justify-between ${colors.hover} transition-all duration-300 focus:outline-none focus:ring-2 ${colors.accent} focus:ring-opacity-50 group-hover:bg-gray-50/50`}
+                                    >
+                                        <div className="flex items-center">
+                                            <div className={`w-10 h-10 ${colors.bg} rounded-full flex items-center justify-center mr-4 flex-shrink-0 transition-all duration-300 group-hover:scale-110 ${isOpen ? 'rotate-12 scale-110' : ''}`}>
+                                                <HelpCircle size={18} className={`${colors.text} transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-800 pr-4">
+                                                {faq.pregunta}
+                                            </h3>
+                                        </div>
+
+                                        <div className="flex-shrink-0 ml-4">
+                                            <div className={`transform transition-all duration-500 ${isOpen ? 'rotate-180 scale-110' : 'group-hover:scale-110'}`}>
+                                                {isOpen ? (
+                                                    <ChevronUp
+                                                        size={20}
+                                                        className={`${colors.text}`}
+                                                    />
+                                                ) : (
+                                                    <ChevronDown
+                                                        size={20}
+                                                        className="text-gray-400"
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </button>
+
+                                    <div
+                                        className={`
+                                            transition-all duration-500 ease-in-out overflow-hidden
+                                            ${isOpen
+                                                ? "max-h-96 opacity-100"
+                                                : "max-h-0 opacity-0"
+                                            }
+                                        `}
+                                    >
+                                        <div className="px-6 pb-5">
+                                            <div className="pl-14">
+                                                <div className={`w-full h-px bg-gradient-to-r ${colors.gradient} mb-4 transition-all duration-500 ${isOpen ? 'scale-x-100' : 'scale-x-0'} origin-left`}></div>
+                                                <p className={`text-gray-600 leading-relaxed transition-all duration-700 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                                                    {faq.respuesta}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
-                    {/* Call to Action */}
-                    <div className={`text-center mt-12 bg-white rounded-xl shadow-md border ${colors.border} p-8`}>
-                        <div className="max-w-2xl mx-auto">
-                            <div className={`w-16 h-16 ${colors.bg} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                                <HelpCircle size={24} className={colors.text} />
-                            </div>
-                            <h3 className="text-xl font-medium text-gray-800 mb-4">
-                                Si tu pregunta no está en la lista, contactanos
-                            </h3>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button className={`${colors.button} text-white px-6 py-3 rounded-lg transition-colors duration-200 font-bold w-full sm:w-auto`}>
-                                    ¿Tenés otra duda?
-                                </button>
+                    {/* Call to Action con efectos especiales */}
+                    <div className={`text-center mt-12 transition-all duration-1000 delay-700 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                        }`}>
+                        <div className={`bg-white/90 backdrop-blur-sm rounded-xl shadow-xl border ${colors.border} p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500`}>
+                            {/* Background animation */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+
+                            <div className="max-w-2xl mx-auto relative z-10">
+                                <div className={`w-16 h-16 ${colors.bg} rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12`}>
+                                    <HelpCircle size={24} className={`${colors.text} transition-transform duration-500 group-hover:animate-pulse`} />
+                                </div>
+                                <h3 className="text-xl font-medium text-gray-800 mb-4 group-hover:text-gray-900 transition-colors">
+                                    Si tu pregunta no está en la lista, contactanos
+                                </h3>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <AnimatedButton className={`${colors.button} text-white px-8 py-3 rounded-xl transition-all duration-300 font-bold w-full sm:w-auto transform hover:scale-105 hover:shadow-lg group/btn`}>
+                                        <span className="group-hover/btn:animate-pulse">¿Tenés otra duda?</span>
+                                    </AnimatedButton>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* CSS personalizado para animaciones */}
+            <style jsx>{`
+                @keyframes slideInUp {
+                    from {
+                        transform: translateY(30px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
