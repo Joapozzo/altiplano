@@ -14,7 +14,7 @@ const Consideraciones = ({ servicio }: ConsideracionesProps) => {
                 Consideraciones Especiales
             </h2>
             <ul className="space-y-2">
-                {servicio.consideraciones_especiales.map((consideracion, index) => (
+                {servicio.consideraciones_especiales?.map((consideracion, index) => (
                     <li key={index} className="flex items-start">
                         <Info className="mr-2 mt-0.5 text-yellow-600 flex-shrink-0" size={16} />
                         <span className="text-gray-700">{consideracion}</span>

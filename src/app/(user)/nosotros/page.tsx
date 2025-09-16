@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ArrowLeft, Mountain, Award, MapPin, Users, Star, ChevronRight } from 'lucide-react';
+import { Mountain, Award, MapPin, Users, Star, ChevronRight } from 'lucide-react';
 import BackButton from '@/app/components/ui/ButtonBack';
 import { useWhatsApp } from '@/app/hooks/useWhatsApp';
 import AnimatedButton from '@/app/components/ui/Button';

@@ -179,9 +179,7 @@ const ContenidoPrincipal = ({ isVisible }) => {
                 </div>
 
                 <AnimatedButton
-                    className={`flex items-center gap-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                        }`}
-                    style={{ transitionDelay: '1200ms' }}
+                    className={`flex items-center gap-2 transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
                     variant='primary'
                     onClick={goToTeamPage}
                 >

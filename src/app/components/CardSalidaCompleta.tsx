@@ -29,9 +29,9 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
 
     const precioMinimo = expedicion.precios[0];
     const tieneMultiplesPaquetes = expedicion.precios.length > 1;
-    const precioPrincipal = tieneMultiplesPaquetes
-        ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
-        : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
+    // const precioPrincipal = tieneMultiplesPaquetes
+    //     ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
+    //     : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
 
     const obtenerDificultad = () => {
         if (servicio.altura_maxima >= 5000) return { texto: 'Muy Alta', color: 'text-red-600' };

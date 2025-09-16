@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, Mountain, User, Award, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronUp, HelpCircle, Mountain, User, Award } from 'lucide-react';
 import AnimatedButton from './ui/Button';
 
 const FAQsSection = () => {
@@ -268,7 +268,7 @@ const FAQsSection = () => {
                             return (
                                 <div
                                     key={faq.id}
-                                    ref={el => faqRefs.current[faq.id] = el}
+                                    ref={el => { faqRefs.current[faq.id] = el; }}
                                     data-faq-id={faq.id}
                                     className={`
                                         bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border ${colors.border} 

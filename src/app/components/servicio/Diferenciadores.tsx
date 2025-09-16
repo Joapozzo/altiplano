@@ -14,7 +14,7 @@ const Diferenciadores = ({ servicio }: DiferenciadoresProps) => {
                 ¿Por qué elegir Altiplano Experience?
             </h2>
             <ul className="space-y-2">
-                {servicio.diferenciadores.map((diferenciador, index) => (
+                {servicio.diferenciadores?.map((diferenciador, index) => (
                     <li key={index} className="flex items-start">
                         <Star className="mr-2 mt-0.5 text-amber-600 flex-shrink-0" size={16} />
                         <span className="text-gray-700">{diferenciador}</span>

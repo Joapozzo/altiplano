@@ -16,7 +16,7 @@ interface SalidaCompleta {
 const TodasLasSalidas = () => {
     const [filtroTexto, setFiltroTexto] = useState('');
     const [filtroDificultad, setFiltroDificultad] = useState('todas');
-    const [filtroMoneda, setFiltroMoneda] = useState('todas');
+    // const [filtroMoneda, setFiltroMoneda] = useState('todas');
     const [ordenarPor, setOrdenarPor] = useState('fecha'); // fecha, precio, dificultad
 
     // Combinar servicios y expediciones
@@ -55,11 +55,11 @@ const TodasLasSalidas = () => {
         }
 
         // Filtro por moneda
-        if (filtroMoneda !== 'todas') {
-            salidas = salidas.filter(({ expedicion }) =>
-                expedicion.precios.some(p => p.moneda === filtroMoneda)
-            );
-        }
+        // if (filtroMoneda !== 'todas') {
+        //     salidas = salidas.filter(({ expedicion }) =>
+        //         expedicion.precios.some(p => p.moneda === filtroMoneda)
+        //     );
+        // }
 
         // Ordenamiento
         salidas.sort((a, b) => {
@@ -75,7 +75,7 @@ const TodasLasSalidas = () => {
         });
 
         return salidas;
-    }, [todasLasSalidas, filtroTexto, filtroDificultad, filtroMoneda, ordenarPor]);
+    }, [todasLasSalidas, filtroTexto, filtroDificultad, ordenarPor]);
 
     return (
         <div className="min-h-screen bg-gray-50">

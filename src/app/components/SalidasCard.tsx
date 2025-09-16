@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Clock, Mountain, Calendar, DollarSign, Users, ChevronRight } from 'lucide-react';
+import { Clock, Mountain, Users, ChevronRight } from 'lucide-react';
 import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
 
@@ -34,10 +34,10 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
   const rangoFechas = `${fechaInicio} - ${fechaFin}`;
 
   // Obtener precio principal (primer precio)
-  const precioMinimo = expedicion.precios[0];
-  const precioPrincipal = expedicion.precios.length > 1
-    ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
-    : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
+  // const precioMinimo = expedicion.precios[0];
+  // const precioPrincipal = expedicion.precios.length > 1
+  //   ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
+  //   : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
 
   // Determinar etiqueta dinámica basada en los datos
   const obtenerEtiqueta = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageCircle, Shield, Users, Utensils, MapPin, Backpack, HeartHandshake, Phone, Camera, ClipboardCheck, UserCheck } from 'lucide-react';
+import { Shield, Camera, UserCheck } from 'lucide-react';
 
 const BeneficiosIncluidos = () => {
     const [visibleItems, setVisibleItems] = useState<number[]>([]);

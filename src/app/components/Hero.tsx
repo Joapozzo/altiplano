@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { serviciosMock } from '../data/mockSalidas';
 import AnimatedButton from './ui/Button';
@@ -16,7 +16,7 @@ export default function AdventureHeroEnhanced() {
 
     const heroRef = useRef(null);
     const textContentRef = useRef(null);
-    const servicio = serviciosMock.slice(0, 3);
+    // const servicio = serviciosMock.slice(0, 3);
     const currentServiceData = serviciosMock[currentService];
 
     // Intersection Observer para detectar cuando el hero es visible
