@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { serviciosMock } from '../data/mockSalidas';
 import AnimatedButton from './ui/Button';
+import { useWhatsApp } from '../hooks/useWhatsApp';
 
 export default function AdventureHeroEnhanced() {
     const [currentService, setCurrentService] = useState(0);
@@ -16,8 +17,8 @@ export default function AdventureHeroEnhanced() {
 
     const heroRef = useRef(null);
     const textContentRef = useRef(null);
-    // const servicio = serviciosMock.slice(0, 3);
-    const currentServiceData = serviciosMock[currentService];
+    const serviceDestacados = useMemo(() => serviciosMock.filter(s => s.destacado), []);
+    const currentServiceData = serviceDestacados[currentService];
 
     // Intersection Observer para detectar cuando el hero es visible
     useEffect(() => {
@@ -121,6 +122,8 @@ export default function AdventureHeroEnhanced() {
         return `${serviceName} ${index + 1}`;
     };
 
+    const { openWhatsApp } = useWhatsApp();
+
     return (
         <div
             ref={heroRef}
@@ -146,7 +149,7 @@ export default function AdventureHeroEnhanced() {
                 style={{
                     background: `linear-gradient(135deg, 
                         rgba(0,0,0,${0.3 + scrollY * 0.0005}) 0%, 
-                        rgba(196,68,0,${0.15 + scrollY * 0.0003}) 50%, 
+                        rgba(196,68,0,${0.15 + scrollY * 0.0003}) 60%, 
                         rgba(0,0,0,${0.4 + scrollY * 0.0006}) 100%)`
                 }}
             />
@@ -185,7 +188,14 @@ export default function AdventureHeroEnhanced() {
 
                                 {/* Main Title with enhanced gradient and animation */}
                                 <h1
-                                    className="text-5xl md:text-7xl font-bold mb-2 md:mb-4 leading-tight uppercase"
+                                    className="text-5xl md:text-7xl font-bold mb-2 md:mb-4 leading-tight uppercase text-white transform transition-all duration-1000 ease-out"
+                                    style={{
+                                        opacity: isVisible ? 1 : 0,
+                                        transform: isVisible
+                                            ? 'translateY(0px) translateX(0px)'
+                                            : 'translateY(30px) translateX(-20px)',
+                                        transitionDelay: '400ms'
+                                    }}
                                 >
                                     Conectá con la montaña
                                 </h1>
@@ -205,11 +215,11 @@ export default function AdventureHeroEnhanced() {
                                         {currentServiceData.nombre}
                                     </p>
                                     <p className="text-sm md:text-base mb-6 text-white/85 max-w-md leading-relaxed">
-                                        {currentServiceData.desc.substring(0, 150)}...
+                                        {currentServiceData.desc_resumen}
                                     </p>
                                 </div>
 
-                                <AnimatedButton onClick={() => console.log('Click!')}>
+                                <AnimatedButton onClick={() => openWhatsApp('')}>
                                     COMENZÁ TU AVENTURA
                                 </AnimatedButton>
 
@@ -235,7 +245,7 @@ export default function AdventureHeroEnhanced() {
                                 }}
                             >
                                 <p className="text-white/70 text-xs font-medium uppercase tracking-wider">
-                                    {getPhotoTitle(currentMainPhoto)}
+                                    {/* {getPhotoTitle(currentMainPhoto)} */}
                                 </p>
                             </div>
 
@@ -255,8 +265,8 @@ export default function AdventureHeroEnhanced() {
                                             key={index}
                                             onClick={() => handleThumbnailClick(index)}
                                             className={`w-28 h-36 md:w-32 md:h-40 rounded-xl overflow-hidden flex-shrink-0 shadow-2xl relative cursor-pointer transition-all duration-500 backdrop-blur-sm ${index === currentMainPhoto
-                                                    ? "ring-3 ring-orange-500 scale-105 shadow-orange-500/30"
-                                                    : "hover:scale-105 hover:ring-2 hover:ring-white/40 hover:shadow-white/20"
+                                                ? "ring-3 ring-orange-500 scale-105 shadow-orange-500/30"
+                                                : "hover:scale-105 hover:ring-2 hover:ring-white/40 hover:shadow-white/20"
                                                 }`}
                                             style={{
                                                 animationDelay: `${(index + 3) * 150}ms`,
@@ -310,8 +320,8 @@ export default function AdventureHeroEnhanced() {
                                         key={index}
                                         onClick={() => handleThumbnailClick(index)}
                                         className={`w-20 h-24 rounded-lg overflow-hidden flex-shrink-0 shadow-lg relative cursor-pointer transition-all duration-300 ${index === currentMainPhoto
-                                                ? "ring-2 ring-orange-500 scale-105"
-                                                : "hover:scale-105 hover:ring-2 hover:ring-white/40"
+                                            ? "ring-2 ring-orange-500 scale-105"
+                                            : "hover:scale-105 hover:ring-2 hover:ring-white/40"
                                             }`}
                                     >
                                         <Image

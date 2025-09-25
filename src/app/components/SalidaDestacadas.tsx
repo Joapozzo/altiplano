@@ -17,7 +17,8 @@ const SalidasDestacadas = () => {
   const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const expedicionesDestacadas = expedicionesMock.slice(0, 3);
+  const serviciosDestacados = serviciosMock.filter(s => s.destacado);
+  const expedicionesDestacadas = expedicionesMock.filter(e => serviciosDestacados.some(s => s.id_servicio === e.id_servicio));
 
   const salidasDestacadas: SalidaDestacada[] = expedicionesDestacadas
     .map((expedicion) => {

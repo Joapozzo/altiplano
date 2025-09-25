@@ -14,7 +14,7 @@ const guias = [
         apellido: "Pozzo",
         img: "/us/pau.jpg",
         titulo: "GUÍA DE MONTAÑA Y EDUCADORA",
-        especialidad: "Trekking y Educación",
+        especialidad: "Montaña y educación",
         años_experiencia: 8,
         expediciones_guiadas: 150,
         origen: "Córdoba",
@@ -95,7 +95,7 @@ const GuiasPage = () => {
                                 </span>
                             </div>
                             <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
-                                Conocé a Nuestros Guías
+                                Conocé a nuestros guías
                             </h1>
                             <p className="text-xl md:text-2xl text-gray-200 mb-6 animate-fade-in-delay mx-auto">
                                 Profesionales apasionados que te acompañarán en cada paso de tu aventura,
@@ -117,44 +117,50 @@ const GuiasPage = () => {
                                 Seleccionar Guía
                             </h3>
 
-                            <div className="space-y-4">
-                                {guias.map((guia) => (
-                                    <button
-                                        key={guia.id}
-                                        onClick={() => setGuiaSeleccionado(guia)}
-                                        className={`
-                                            w-full p-4 rounded-xl transition-all duration-300 text-left
-                                            ${guiaSeleccionado.id === guia.id
-                                                ? 'bg-[var(--color-naranja)] text-white shadow-lg scale-105'
-                                                : 'bg-gray-100 hover:bg-gray-200 text-[var(--color-negro)]'
-                                            }
-                                        `}
-                                    >
-                                        <div className="flex items-center space-x-4">
-                                            {/* Placeholder para foto */}
-                                            <div className={`
-                                                w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg
-                                                ${guiaSeleccionado.id === guia.id
-                                                    ? 'bg-white text-[var(--color-naranja)]'
-                                                    : 'bg-[var(--color-naranja)] text-white'
-                                                }
-                                            `}>
-                                                {guia.nombre.charAt(0)}
-                                            </div>
-                                            <div className="flex-1">
-                                                <h4 className="font-bold">{guia.nombre} {guia.apellido}</h4>
-                                                <p className={`text-sm ${guiaSeleccionado.id === guia.id ? 'text-white/80' : 'text-gray-600'}`}>
-                                                    {guia.especialidad}
-                                                </p>
-                                            </div>
-                                            <ChevronRight size={20} className={`
-                                                transform transition-transform duration-300
-                                                ${guiaSeleccionado.id === guia.id ? 'rotate-90' : ''}
-                                            `} />
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
+<div className="space-y-4">
+    {guias.map((guia) => (
+        <button
+            key={guia.id}
+            onClick={() => setGuiaSeleccionado(guia)}
+            className={`
+                w-full p-4 rounded-xl transition-all duration-300 text-left
+                ${guiaSeleccionado.id === guia.id
+                    ? 'bg-[var(--color-naranja)] text-white shadow-lg scale-105'
+                    : 'bg-gray-100 hover:bg-gray-200 text-[var(--color-negro)]'
+                }
+            `}
+        >
+            <div className="flex items-center space-x-4">
+                {/* Imagen del guía en lugar de inicial */}
+                <div className={`
+                    w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300
+                    ${guiaSeleccionado.id === guia.id
+                        ? 'border-white shadow-md'
+                        : 'border-[var(--color-naranja)]'
+                    }
+                `}>
+                    <Image
+                        src={guia.img || '/imgs/default-avatar.jpg'}
+                        alt={`${guia.nombre} ${guia.apellido}`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+                <div className="flex-1">
+                    <h4 className="font-bold">{guia.nombre} {guia.apellido}</h4>
+                    <p className={`text-sm ${guiaSeleccionado.id === guia.id ? 'text-white/80' : 'text-gray-600'}`}>
+                        {guia.especialidad}
+                    </p>
+                </div>
+                <ChevronRight size={20} className={`
+                    transform transition-transform duration-300
+                    ${guiaSeleccionado.id === guia.id ? 'rotate-90' : ''}
+                `} />
+            </div>
+        </button>
+    ))}
+</div>
 
                             {/* Stats del equipo */}
                             <div className="mt-8 pt-6 border-t border-gray-200">
@@ -303,7 +309,7 @@ const GuiasPage = () => {
                 <div className="mt-16 text-center">
                     <div className="bg-gradient-to-r from-[var(--color-negro)] to-gray-800 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
                         <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                            ¿Listo para tu próxima aventura?
+                            ¿Listo para tu próxima experiencia?
                         </h3>
                         <p className="text-gray-200 text-lg mb-8 max-w-2xl mx-auto">
                             Nuestros guías están preparados para acompañarte en una experiencia única e inolvidable.

@@ -21,6 +21,8 @@ export interface Servicio {
   id_actividad: number;
   id_dificultad: number;
 
+  destacado?: boolean;
+
   // Características físicas
   duracion_dias: number;
   duracion_noches: number;
@@ -29,6 +31,7 @@ export interface Servicio {
 
   // Descripción y detalles
   desc: string;
+  desc_resumen?: string;
   descripcion_recorrido?: string;
   sobre_lugar?: string;
 

@@ -1,6 +1,8 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 // Subcomponente para la información de la empresa
 const EmpresaInfo = () => {
@@ -14,20 +16,41 @@ const EmpresaInfo = () => {
                 className="mb-4"
             />
             <p className="text-gray-400 mb-4">
-                Expediciones y aventuras de montaña en Argentina. Conectando personas con la naturaleza desde 2015.
+                Expediciones y aventuras de montaña en Argentina, Bolivia y Perú. Conectando personas con la naturaleza desde 2015.
             </p>
             <div className="flex space-x-4">
-                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
+                <a
+                    href="https://www.facebook.com/altiplanoexperience"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.open('https://www.facebook.com/altiplanoexperience', '_blank');
+                    }}
+                    className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition"
+                >
                     <span className="sr-only">Facebook</span>
                     <Facebook size={20} className="text-[var(--color-black)]" />
                 </a>
-                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
+                <a
+                    href="https://www.instagram.com/altiplanoexperience"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.open('https://www.instagram.com/altiplanoexperience', '_blank');
+                    }}
+                    className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition"
+                >
                     <span className="sr-only">Instagram</span>
-                    <Instagram size={20} className="text-[var(--color-black)]"/>
+                    <Instagram size={20} className="text-[var(--color-black)]" />
                 </a>
-                <a href="#" className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition">
+                <a
+                    href="https://www.youtube.com/@altiplanoexperience"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.open('https://www.youtube.com/@altiplanoexperience', '_blank');
+                    }}
+                    className="bg-[var(--color-naranja)] p-2 rounded-full text-gray-400 hover:bg-[var(--color-amarillo)] transition"
+                >
                     <span className="sr-only">YouTube</span>
-                    <Youtube size={20} className="text-[var(--color-black)]"/>
+                    <Youtube size={20} className="text-[var(--color-black)]" />
                 </a>
             </div>
         </div>
@@ -39,8 +62,6 @@ const EnlacesRapidos = () => {
     const enlaces = [
         { title: "Calendario", href: "#calendario" },
         { title: "Expediciones", href: "#expediciones" },
-        { title: "Trekking", href: "#trekking" },
-        { title: "Montaña", href: "#montaña" },
         { title: "FAQs", href: "#faqs" },
         { title: "Conocenos", href: "#quienes-somos" },
     ];
@@ -61,14 +82,11 @@ const EnlacesRapidos = () => {
     );
 };
 
-// Subcomponente para destinos populares
 const DestinosPopulares = () => {
     const destinos = [
-        "Cerro Champaquí",
-        "El Chaltén",
-        "Vallecitos",
-        "Quebrada del Condorito",
-        "Tafí del Valle"
+        { nombre: "Quewar", slug: "volcan-quewar" },
+        { nombre: "Tuzgle", slug: "volcan-tuzgle" },
+        { nombre: "Vallecitos", slug: "vallecitos" },
     ];
 
     return (
@@ -77,9 +95,12 @@ const DestinosPopulares = () => {
             <ul className="space-y-2">
                 {destinos.map((destino, index) => (
                     <li key={index}>
-                        <a href="#" className="text-gray-400 hover:text-white transition">
-                            {destino}
-                        </a>
+                        <Link
+                            href={`/salidas/${destino.slug}`}
+                            className="text-gray-400 hover:text-white transition"
+                        >
+                            {destino.nombre}
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -90,7 +111,7 @@ const DestinosPopulares = () => {
 // Subcomponente para información de contacto
 const ContactoInfo = () => {
     const contactos = [
-        { icono: MapPin, texto: "Córdoba, Argentina" },
+        { icono: MapPin, texto: "Mendoza, Argentina" },
         { icono: Phone, texto: "+54 9 3837 49-8552" },
         { icono: Mail, texto: "info@altiplano.com" }
     ];

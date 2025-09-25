@@ -24,7 +24,7 @@ interface SideBarReservaProps {
 
 const SideBarReserva = ({ expedicion, setShowReservaModal, setPaqueteSeleccionado, paqueteSeleccionado, servicio }: SideBarReservaProps) => {
     const { openWhatsApp } = useWhatsApp()
-    const message = `Hola! Quiero reservar la expedición "${servicio.nombre}" para ${formatearFecha(expedicion.fecha_salida)}.`;
+    const message = `Hola! Quiero reservar la expedición "${servicio.nombre}" para ${formatearFecha(expedicion.fecha_salida || '')}.`;
 
     return (
         <div className="lg:col-span-1">
@@ -134,7 +134,7 @@ const SideBarReserva = ({ expedicion, setShowReservaModal, setPaqueteSeleccionad
                 </div>
 
                 {/* Garantías */}
-                <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                {/* <div className="mt-6 p-4 bg-green-50 rounded-lg">
                     <h4 className="font-semibold mb-2 text-green-800 flex items-center">
                         <Shield size={16} className="mr-2" />
                         Garantías Incluidas
@@ -145,7 +145,7 @@ const SideBarReserva = ({ expedicion, setShowReservaModal, setPaqueteSeleccionad
                         <li>• Cancelación hasta 48hs antes</li>
                         <li>• Equipamiento de seguridad</li>
                     </ul>
-                </div>
+                </div> */}
             </div>
         </div>
     )

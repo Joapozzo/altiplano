@@ -41,14 +41,13 @@ const TodasLasSalidas = () => {
             );
         }
 
-        // Filtro por dificultad
         if (filtroDificultad !== 'todas') {
             salidas = salidas.filter(({ servicio }) => {
                 const altura = servicio.altura_maxima;
                 switch (filtroDificultad) {
-                    case 'media': return altura < 3000;
-                    case 'media-alta': return altura >= 3000 && altura < 4500;
-                    case 'alta': return altura >= 4500;
+                    case 'inicial': return altura <= 4500;
+                    case 'medio': return altura > 4500 && altura <= 5500;
+                    case 'avanzado': return altura > 6000;
                     default: return true;
                 }
             });
@@ -70,7 +69,7 @@ const TodasLasSalidas = () => {
                     return b.servicio.altura_maxima - a.servicio.altura_maxima;
                 case 'fecha':
                 default:
-                    return new Date(a.expedicion.fecha_salida).getTime() - new Date(b.expedicion.fecha_salida).getTime();
+                    return new Date(a.expedicion.fecha_salida || '').getTime() - new Date(b.expedicion.fecha_salida || '').getTime();
             }
         });
 
@@ -78,18 +77,18 @@ const TodasLasSalidas = () => {
     }, [todasLasSalidas, filtroTexto, filtroDificultad, ordenarPor]);
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 w-full">
             {/* Header */}
-            <div className="bg-gradient-to-r from-amber-600 to-amber-700 text-white">
-                <div className="container mx-auto px-4 pt-32 pb-30 flex flex-col items-start">
+            <div className="bg-gradient-to-r from-amber-600 to-amber-700 text-white w-full">
+                <div className="container mx-auto px-4 pt-32 pb-30 flex flex-col items-start max-w-[1400px] lg:px-8">
                     <div className="text-center flex flex-col items-start text-left gap-4">
                         <div className='mb-10'>
                             <BackButton />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                            Todas Nuestras Expediciones
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 max-w-2xl">
+                            Descrubre toas experiencias que tenemos preparadas
                         </h1>
-                        <p className="text-xl text-amber-100 max-w-2xl mx-auto">
+                        <p className="text-xl text-amber-100 max-w-2xl">
                             Descubre todas las aventuras que tenemos preparadas para ti en
                             las montañas de Argentina
                         </p>
@@ -102,7 +101,7 @@ const TodasLasSalidas = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 py-8 max-w-[1400px] lg:px-8">
                 {/* Filtros y búsqueda */}
                 <div className="bg-white rounded-lg shadow-md p-6 mb-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -122,10 +121,11 @@ const TodasLasSalidas = () => {
                             onChange={setFiltroDificultad}
                             options={[
                                 { value: "todas", label: "Todas las dificultades" },
-                                { value: "media", label: "Media (<3000m)" },
-                                { value: "media-alta", label: "Media-Alta (3000-4500m)" },
-                                { value: "alta", label: "Alta (>4500m)" },
+                                { value: "inicial", label: "Inicial (hasta 4500msnm)" },
+                                { value: "medio", label: "Medio (hasta 5500msnm)" },
+                                { value: "avanzado", label: "Avanzado (+6000msnm)" },
                             ]}
+
                             placeholder="Seleccionar dificultad"
                         />
 

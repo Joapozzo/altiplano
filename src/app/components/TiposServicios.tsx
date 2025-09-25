@@ -89,26 +89,26 @@ const BeneficiosIncluidos = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {/* Panel izquierdo */}
-<div className="lg:col-span-1">
-    <div className="lg:sticky lg:top-24">
-        <div className={`
-            bg-[var(--color-negro)] rounded-2xl p-8 flex flex-col justify-center text-white min-h-screen lg:min-h-[80vh]
+                    <div className="lg:col-span-1">
+                        <div className="lg:sticky lg:top-24">
+                            <div className={`
+bg-[var(--color-negro)] rounded-2xl p-8 flex flex-col justify-center text-white min-h-[35vh] lg:min-h-[80vh]
             transform transition-all duration-1000 ease-out
             ${visibleItems.includes(-1) || visibleItems.length > 0
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-8 opacity-0'
-            }
+                                    ? 'translate-y-0 opacity-100'
+                                    : 'translate-y-8 opacity-0'
+                                }
         `}>
-            <h2 className="text-3xl md:text-5xl font-black mb-6">
-                BENEFICIOS <span className='text-[var(--color-negro)] bg-[var(--color-naranja-200)] px-2'>INCLUÍDOS</span>
-            </h2>
-            <p className="text-white/90 leading-relaxed text-lg">
-                Nos ocupamos de todos los detalles para que tu experiencia sea cómoda y transformadora.
-                Sabemos lo que hacemos, más de 25 años de experiencia nos respaldan.
-            </p>
-        </div>
-    </div>
-</div>
+                                <h2 className="text-3xl md:text-5xl font-black mb-6">
+                                    BENEFICIOS <span className='text-[var(--color-negro)] bg-[var(--color-naranja-200)] px-2'>INCLUÍDOS</span>
+                                </h2>
+                                <p className="text-white/90 leading-relaxed text-lg">
+                                    Nos ocupamos de todos los detalles para que tu experiencia sea cómoda y transformadora.
+                                    Sabemos lo que hacemos, más de 10 años de experiencia nos respaldan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Grid de beneficios */}
                     <div className="lg:col-span-2">
@@ -180,13 +180,7 @@ const BeneficiosIncluidos = () => {
                                                         transitionDelay: `${(index * 200) + (detalleIndex * 100) + 400}ms`
                                                     }}
                                                 >
-                                                    <span className="w-1.5 h-1.5 bg-[var(--color-naranja-200)] rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                                    <span className="font-medium">{detalle.split(':')[0]}</span>
-                                                    {detalle.includes(':') && (
-                                                        <span className="text-[var(--color-negro)]/60">
-                                                            :{detalle.split(':').slice(1).join(':')}
-                                                        </span>
-                                                    )}
+                                                    {detalle}
                                                 </li>
                                             ))}
                                         </ul>
@@ -197,39 +191,6 @@ const BeneficiosIncluidos = () => {
                     </div>
                 </div>
             </div>
-
-            {/* CSS para animaciones adicionales */}
-            {/* <style jsx>{`
-                @keyframes slideInFromLeft {
-                    from {
-                        transform: translateX(-30px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                }
-
-                @keyframes slideInFromBottom {
-                    from {
-                        transform: translateY(30px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-
-                .animate-slide-in-left {
-                    animation: slideInFromLeft 0.6s ease-out forwards;
-                }
-
-                .animate-slide-in-bottom {
-                    animation: slideInFromBottom 0.6s ease-out forwards;
-                }
-            `}</style> */}
         </section>
     );
 };

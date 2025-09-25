@@ -7,15 +7,14 @@ import { X, ArrowLeft, ArrowRight, ZoomIn, Camera, Mountain } from 'lucide-react
 import AnimatedButton from './ui/Button';
 
 const Galeria = () => {
-    // Unificamos todas las fotos en un array plano con referencias
-    const fotos = serviciosMock.flatMap(servicio =>
+
+    const fotos = serviciosMock.slice(0, 4).flatMap(servicio =>
         servicio.fotos.map((foto, index) => ({
             src: foto,
             alt: `${servicio.nombre} - Foto ${index + 1}`,
             servicio: servicio.nombre
         }))
     );
-
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -220,7 +219,7 @@ const Galeria = () => {
                 </div>
 
                 {/* Call to action inferior */}
-                <div className="container mx-auto px-4 mt-16">
+                {/* <div className="container mx-auto px-4 mt-16">
                     <div className="text-center">
                         <div className="bg-gradient-to-r from-[var(--color-naranja)] to-[var(--color-naranja-200)] rounded-2xl p-8 max-w-2xl mx-auto backdrop-blur-sm border border-white/10">
                             <h3 className="text-2xl font-bold text-white mb-4">
@@ -234,7 +233,7 @@ const Galeria = () => {
                             </AnimatedButton>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Lightbox mantiene el mismo diseño anterior */}

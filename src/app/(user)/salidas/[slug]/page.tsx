@@ -1,10 +1,7 @@
 "use client";
-import React, { useState, useMemo } from 'react';
-import {
-    X,
-} from 'lucide-react';
-import { serviciosMock, expedicionesMock } from '@/app/data/mockSalidas';
-import { useParams } from 'next/navigation';
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
+import { useExpedicion } from '@/app/hooks/useExpedicion';
 import Button from '@/app/components/ui/Button';
 import HeroServicio from '@/app/components/servicio/HeroServicio';
 import InfoGeneral from '@/app/components/servicio/InfoGeneral';
@@ -20,43 +17,24 @@ import Itinerario from '@/app/components/servicio/Itinerario';
 import GaleriaSlider from '@/app/components/servicio/GaleriaSlider';
 
 const ExpedicionDetail = () => {
-    const params = useParams();
-    const expedicionId = params.id;
+    const { expedicion, servicio, error } = useExpedicion();
     const [paqueteSeleccionado, setPaqueteSeleccionado] = useState(0);
     const [showReservaModal, setShowReservaModal] = useState(false);
 
-    if (!expedicionId) {
+    // Manejar estados de error
+    if (error || !expedicion || !servicio) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4">Expedición no encontrada</h1>
-                    <BackButton />
-                </div>
-            </div>
-        );
-    }
-
-    // Obtener datos reales
-    const expedicion = useMemo(() =>
-        expedicionesMock.find(e => e.id_expedicion === parseInt(expedicionId as string))
-        , [expedicionId]);
-
-    const servicio = useMemo(() =>
-        expedicion ? serviciosMock.find(s => s.id_servicio === expedicion.id_servicio) : null
-        , [expedicion]);
-
-    if (!expedicion || !servicio) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4">Expedición no encontrada</h1>
-                    <p className="text-gray-600 mb-4">La expedición que buscas no existe o ha sido removida.</p>
-                    <button
-                        onClick={() => window.history.back()}
-                        className="text-amber-600 hover:text-amber-700 font-medium"
-                    >
-                        ← Volver
-                    </button>
+                    <h1 className="text-2xl font-bold text-gray-800 mb-4">
+                        {error || 'Expedición no encontrada'}
+                    </h1>
+                    <p className="text-gray-600 mb-4">
+                        La expedición que buscas no existe o ha sido removida.
+                    </p>
+                    <div className="flex items-center justify-center">
+                        <BackButton />
+                    </div>
                 </div>
             </div>
         );
@@ -65,14 +43,15 @@ const ExpedicionDetail = () => {
     const precioSeleccionado = expedicion.precios[paqueteSeleccionado];
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 w-full">
             {/* Hero Section */}
             <HeroServicio servicio={servicio} expedicion={expedicion} />
 
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 py-8 max-w-[1400px] lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
                         <InfoGeneral servicio={servicio} expedicion={expedicion} />
+
                         <GaleriaSlider
                             fotos={servicio.fotos}
                             servicioNombre={servicio.nombre}
@@ -81,12 +60,12 @@ const ExpedicionDetail = () => {
                             showThumbnails={true}
                             showControls={true}
                         />
+
                         <DescripcionDetallada servicio={servicio} />
 
                         {(servicio.punto_encuentro || servicio.comodidades || servicio.alimentacion_detalle) && (
                             <Logistica servicio={servicio} />
                         )}
-
 
                         {(servicio.servicios_incluidos || servicio.servicios_no_incluidos) && (
                             <ServiciosIncluidos servicio={servicio} />
@@ -106,7 +85,14 @@ const ExpedicionDetail = () => {
                     </div>
 
                     {/* Sidebar de Reserva */}
-                    <SideBarReserva expedicion={expedicion} setShowReservaModal={setShowReservaModal} setPaqueteSeleccionado={setPaqueteSeleccionado} paqueteSeleccionado={paqueteSeleccionado} precioSeleccionado={precioSeleccionado} servicio={servicio} />
+                    <SideBarReserva
+                        expedicion={expedicion}
+                        setShowReservaModal={setShowReservaModal}
+                        setPaqueteSeleccionado={setPaqueteSeleccionado}
+                        paqueteSeleccionado={paqueteSeleccionado}
+                        precioSeleccionado={precioSeleccionado}
+                        servicio={servicio}
+                    />
                 </div>
             </div>
 
@@ -125,7 +111,7 @@ const ExpedicionDetail = () => {
                             <div className="p-4 bg-gray-50 rounded-lg">
                                 <div className="font-medium text-gray-800">{servicio.nombre}</div>
                                 <div className="text-sm text-gray-600">
-                                    {formatearFecha(expedicion.fecha_salida)}
+                                    {formatearFecha(expedicion.fecha_salida || '')}
                                 </div>
                                 <div className="text-lg font-bold text-amber-600 mt-2">
                                     {precioSeleccionado.moneda} {precioSeleccionado.precio.toLocaleString()}
@@ -150,7 +136,7 @@ const ExpedicionDetail = () => {
                                     size="md"
                                     className="flex-1"
                                     onClick={() => {
-                                        const mensaje = `Hola! Quiero reservar la expedición "${servicio.nombre}" para ${formatearFecha(expedicion.fecha_salida)}. Precio: ${precioSeleccionado.moneda} ${precioSeleccionado.precio.toLocaleString()}`;
+                                        const mensaje = `Hola! Quiero reservar la expedición "${servicio.nombre}" para ${formatearFecha(expedicion.fecha_salida || '')}. Precio: ${precioSeleccionado.moneda} ${precioSeleccionado.precio.toLocaleString()}`;
                                         window.open(
                                             `https://wa.me/5493837498552?text=${encodeURIComponent(mensaje)}`,
                                             "_blank"

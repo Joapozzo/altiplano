@@ -1,13 +1,13 @@
 import { ItinerarioDia } from "./Itinerario";
-import { ServicioAdicional } from "./servicio";
+import { Servicio, ServicioAdicional } from "./servicio";
 
 export interface Expedicion {
   id_expedicion: number;
   id_servicio: number;
   
   // Fechas
-  fecha_salida: string; // formato ISO
-  fecha_fin: string;
+  fecha_salida?: string; // formato ISO
+  fecha_fin?: string;
   
   // Cupos y estado
   cupos_disponibles: number;

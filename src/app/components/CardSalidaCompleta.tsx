@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { Expedicion } from "../types/expedicion";
 import { Servicio } from "../types/servicio";
 import { Calendar, Mountain, Users, Clock, MapPin, ChevronRight } from 'lucide-react';
+import { generateExpedicionLink } from "../hooks/useExpedicion";
 
 // Componente de card más completa para esta página
 interface SalidaCardCompletaProps {
@@ -12,11 +13,14 @@ interface SalidaCardCompletaProps {
 const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) => {
     const router = useRouter();
 
+    const expedicionLink = generateExpedicionLink(expedicion, servicio);
+
     const goToSalida = (idSalida: number) => {
         router.push("/salidas/" + idSalida);
     };
 
     const formatearFecha = (fecha: string) => {
+        if (fecha === 'TBD') return '';
         return new Date(fecha).toLocaleDateString('es-AR', {
             day: 'numeric',
             month: 'short',
@@ -24,8 +28,8 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
         });
     };
 
-    const fechaInicio = formatearFecha(expedicion.fecha_salida);
-    const fechaFin = formatearFecha(expedicion.fecha_fin);
+    const fechaInicio = formatearFecha(expedicion.fecha_salida || '');
+    const fechaFin = formatearFecha(expedicion.fecha_fin || '');
 
     const precioMinimo = expedicion.precios[0];
     const tieneMultiplesPaquetes = expedicion.precios.length > 1;
@@ -43,7 +47,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
     const dificultad = obtenerDificultad();
 
     const obtenerEstadoExpedicion = () => {
-        const diasParaSalida = Math.ceil((new Date(expedicion.fecha_salida).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+        const diasParaSalida = Math.ceil((new Date(expedicion.fecha_salida || '').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 
         if (expedicion.cupos_disponibles === 0) {
             return { texto: 'Completa', color: 'bg-red-100 text-red-800' };
@@ -133,7 +137,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
                                 </div>
                             )}
                         </div> */}
-                        <button className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition flex items-center text-sm font-medium" onClick={() => goToSalida(expedicion.id_expedicion)}>
+                        <button className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition flex items-center text-sm font-medium" onClick={() => { window.location.href = expedicionLink; }}>
                             Ver más <ChevronRight size={16} className="ml-1" />
                         </button>
                     </div>

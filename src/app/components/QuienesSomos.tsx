@@ -238,7 +238,7 @@ const QuienesSomos = () => {
                             }`}
                         style={{ transitionDelay: '200ms' }}
                     >
-                        Quiénes Somos
+                        Quiénes somos
                     </h2>
                     <div
                         className={`w-24 h-1 bg-amber-500 mx-auto my-4 transition-all duration-800 transform origin-center ${isHeaderVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'

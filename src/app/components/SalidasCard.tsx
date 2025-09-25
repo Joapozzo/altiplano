@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Clock, Mountain, Users, ChevronRight } from 'lucide-react';
 import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
+import { generateExpedicionLink } from '../hooks/useExpedicion';
 
 interface SalidaCardProps {
   servicio: Servicio;
@@ -12,6 +13,7 @@ interface SalidaCardProps {
 const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const expedicionLink = generateExpedicionLink(expedicion, servicio);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,14 +25,15 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
 
   // Formatear fechas
   const formatearFecha = (fecha: string) => {
+    if (fecha === 'TBD') return 'Sin fecha';
     return new Date(fecha).toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'short'
     });
   };
 
-  const fechaInicio = formatearFecha(expedicion.fecha_salida);
-  const fechaFin = formatearFecha(expedicion.fecha_fin);
+  const fechaInicio = formatearFecha(expedicion.fecha_salida || '');
+  const fechaFin = formatearFecha(expedicion.fecha_fin || '');
   const rangoFechas = `${fechaInicio} - ${fechaFin}`;
 
   // Obtener precio principal (primer precio)
@@ -90,8 +93,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Etiqueta animada */}
         <div
           className={`absolute top-4 left-4 transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 -translate-x-4"
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 -translate-x-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 300}ms` }}
         >
@@ -105,8 +108,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Fechas animadas */}
         <div
           className={`absolute top-4 right-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg px-2 py-1 transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 translate-x-4"
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 translate-x-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 400}ms` }}
         >
@@ -120,8 +123,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Título animado */}
         <div
           className={`mb-3 transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 500}ms` }}
         >
@@ -133,8 +136,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Descripción animada */}
         <p
           className={`text-gray-600 text-sm mb-4 leading-relaxed transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 600}ms` }}
         >
@@ -144,8 +147,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Información clave animada */}
         <div
           className={`space-y-2 mb-4 transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 700}ms` }}
         >
@@ -176,8 +179,8 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
         {/* Precio y CTA animados */}
         <div
           className={`flex items-center justify-between pt-4 border-t border-gray-100 transition-all duration-500 ${isCardVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
             }`}
           style={{ transitionDelay: `${index * 100 + 800}ms` }}
         >
@@ -192,9 +195,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
             )}
           </div> */}
           <button className="group text-amber-600 hover:text-amber-800 font-medium flex items-center transition-all duration-300 hover:bg-amber-50 px-3 py-1 rounded-lg"
-            onClick={() => {
-              window.location.href = `/salidas/${expedicion.id_expedicion}`;
-            }}>
+            onClick={() => { window.location.href = expedicionLink; }}>
             Ver detalles
             <ChevronRight
               size={16}

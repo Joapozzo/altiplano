@@ -7,12 +7,14 @@ export const serviciosMock: Servicio[] = [
         id_servicio: 1,
         nombre: "Cerro Champaquí",
         id_lugar: 1,
-        id_actividad: 1, // Trekking
-        id_dificultad: 1, // Media
+        id_actividad: 1,
+        id_dificultad: 1,
         duracion_dias: 3,
         duracion_noches: 2,
         altura_maxima: 2790,
         desc: "La expedición al Cerro Champaquí es una experiencia inolvidable en las Sierras Grandes de Córdoba, ideal para quienes buscan un desafío físico y una inmersión en la naturaleza. Durante tres días, recorreremos senderos de montaña, cruzaremos arroyos y nos adentraremos en un entorno de gran belleza, hasta alcanzar la cumbre del techo de Córdoba, a 2.790 metros sobre el nivel del mar.",
+
+        desc_resumen: "Tres días de pura montaña en las Sierras Grandes: alcanzá los 2.790 m del imponente Champaquí.",
 
         sobre_lugar: "Ubicado en el corazón de las Sierras Grandes, el Cerro Champaquí es la cumbre más alta de la provincia de Córdoba y un destino clásico para los amantes del trekking. A lo largo de la travesía, pasaremos por puestos serranos, disfrutaremos de la hospitalidad de los lugareños y seremos testigos de un paisaje cambiante que combina bosque serrano, pastizales de altura y formaciones rocosas imponentes.",
 
@@ -55,13 +57,14 @@ export const serviciosMock: Servicio[] = [
         id_servicio: 2,
         nombre: "Penitentes",
         id_lugar: 2,
-        id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 3, // Media-alta  
+        id_actividad: 2,
+        id_dificultad: 3,
         duracion_dias: 4,
         duracion_noches: 3,
         altura_maxima: 4350,
         desnivel: 1050,
         desc: "El ascenso al Cerro Penitentes es una expedición de alta montaña en la Cordillera Frontal de Mendoza, ideal (pero no excluyente) para quienes ya tienen experiencia en trekking y desean dar el salto a los 4.000 metros. En esta propuesta de cuatro días, combinamos caminatas en altura, prácticas formativas, campamento en terreno andino y la posibilidad de alcanzar una cumbre imponente a 4.350 msnm. Una experiencia diseñada para transicionar con seguridad al montañismo de mayor exigencia, en un entorno técnico moderado y de gran valor educativo.",
+        desc_resumen: "Un salto al montañismo: 4 días de aventura y aprendizaje rumbo a los 4.350 m del Penitentes.",
         sobre_lugar: "El Cerro Penitentes se encuentra frente al imponente macizo del Aconcagua, su cumbre es el mirador por excelencia de la pared sur. Su entorno ofrece un paisaje típico de la cordillera frontal: valles amplios, laderas pedregosas, penitentes de hielo y vistas abiertas hacia la alta montaña. Es un lugar estratégico para entrenar en altitud, con accesos logísticos accesibles desde la ciudad de Mendoza y refugios históricos utilizados por generaciones de montañistas.",
         clima_recomendado: "La mejor temporada para ascender el Penitentes es entre octubre y marzo, cuando las temperaturas son más estables y hay menor probabilidad de nevadas. Durante el día, las temperaturas pueden oscilar entre 0°C y 20°C, aunque en altura y durante la noche pueden descender hasta -10°C. El viento puede ser intenso, especialmente en la cumbre y zonas expuestas.",
         experiencia_requerida: "Esta expedición está clasificada como de dificultad media-alta. Se requiere buen estado físico, experiencia previa en trekking de varios días (no excluyente) y disposición a caminar con mochila en terreno irregular y de altura. No es necesario tener conocimientos técnicos, pero sí capacidad para adaptarse a condiciones de clima cambiante y altitud elevada.",
@@ -121,17 +124,18 @@ export const serviciosMock: Servicio[] = [
         activo: true
     },
     {
+        destacado: true,
         id_servicio: 4,
         nombre: "Vallecitos",
         id_lugar: 4,
-        id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 4, // Media-alta
+        id_actividad: 2,
+        id_dificultad: 2,
         duracion_dias: 6,
         duracion_noches: 5,
         altura_maxima: 5470,
         desnivel: 1170,
         desc: "La expedición a Cerro Vallecitos es una experiencia de alta montaña diseñada para quienes buscan superar sus límites y ganar experiencia en terrenos de gran altitud. En seis días, recorreremos senderos exigentes, atravesaremos filos rocosos y ascenderemos hasta la cumbre del Vallecitos (5.470 m), todo mientras trabajamos en nuestra resistencia, aclimatación y técnicas de montañismo.",
-
+        desc_resumen: "Alta montaña en Mendoza: superá tus límites en la travesía al imponente Vallecitos.",
         sobre_lugar: "Ubicado en la Cordillera Frontal de Mendoza, Vallecitos es uno de los destinos más emblemáticos para la práctica del montañismo en Argentina. Su entorno privilegiado, con múltiples cumbres accesibles y variados terrenos de ascenso, lo convierte en un escenario ideal para la progresión en altura. Durante la expedición, atravesaremos paisajes espectaculares y experimentaremos la vida en campamentos de montaña a más de 4.000 metros de altitud.",
 
         clima_recomendado: "La mejor época para ascender el Cerro Vallecitos es de noviembre hasta abril, cuando las condiciones climáticas son más estables. Durante el día, las temperaturas pueden oscilar entre -5°C y 15°C, mientras que en la noche pueden descender hasta -15°C en los campamentos de altura. A partir de allí, avanzaremos de manera progresiva, estableciendo los campamentos de altura en función del proceso de aclimatación bajo el principio de 'camina alto, duerme bajo'.",
@@ -193,16 +197,17 @@ export const serviciosMock: Servicio[] = [
         activo: true
     },
     {
+        destacado: true,
         id_servicio: 5,
         nombre: "Volcán Tuzgle",
         id_lugar: 5,
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 4, // Media-alta
+        id_dificultad: 2, // Media-alta
         duracion_dias: 5,
         duracion_noches: 5,
         altura_maxima: 5530,
         desc: "El ascenso al volcán Tuzgle es una expedición de alta montaña en plena Puna de Atacama, ideal para quienes buscan desafiar sus límites en altitud y explorar paisajes de belleza extrema.",
-
+        desc_resumen: "Un ascenso inolvidable: naturaleza, altura y aventura en el imponente Tuzgle",
         // Información del lugar extraída del PDF
         sobre_lugar: "Ubicado en la provincia de Salta, el volcán Tuzgle es un estratovolcán inactivo que se alza imponente en el altiplano andino. Su entorno ofrece vistas panorámicas de los salares y formaciones geológicas milenarias, con un paisaje de contrastes entre la aridez del desierto de altura y la diversidad de suelos volcánicos. San Antonio de los Cobres, punto de partida de la expedición, es una de las localidades más altas de Argentina y un centro clave para la cultura andina.",
 
@@ -286,15 +291,14 @@ export const serviciosMock: Servicio[] = [
         nombre: "Punta Negra",
         id_lugar: 3,
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 2, // Moderada
+        id_dificultad: 1, // Moderada
         duracion_dias: 3,
         duracion_noches: 2,
         altura_maxima: 4340,
         desnivel: 1170,
         desc: "El ascenso al Cerro Punta Negra es una experiencia de montaña de 3 días que combina caminatas sostenidas, acampe en plena cordillera y un entorno agreste ideal para quienes buscan alejarse de los circuitos más concurridos. Ubicado en el corazón de la zona de Arenales, esta salida permite vivir la montaña en estado puro, en contacto directo con la geografía cordillerana. Una excelente oportunidad para quienes desean adentrarse en la montaña con mochila, dormir en carpa y coronar una cumbre sin dificultad técnica.",
-
+        desc_resumen: "Viví la montaña en estado puro: caminatas, carpa y la cima del Punta Negra.",
         sobre_lugar: "El cerro Punta Negra se encuentra en las inmediaciones del valle de Arenales, una región de belleza escénica impactante, conocida por sus paredones de granito y su ambiente silvestre. Esta zona forma parte del Cordón del Portillo, en el sector alto del Manzano Histórico, a unas 3 horas de Mendoza capital. El acceso se realiza por caminos de montaña, que nos conducen hasta el inicio del sendero. El entorno ofrece vistas a otros clásicos de la zona como el Cerro Keops y el Punta Blanca.",
-
         clima_recomendado: "La temporada ideal para ascender al Cerro Punta Negra es de octubre a abril, cuando las condiciones de nieve y temperaturas permiten el acceso seguro y la permanencia en altura. Durante el día, las temperaturas suelen variar entre 5°C y 20°C, mientras que por la noche pueden descender hasta 0°C o menos en el campamento. El clima puede ser variable y es frecuente la presencia de viento fuerte por la tarde.",
 
         experiencia_requerida: "Expedición de dificultad media, ideal para personas con buena condición física y experiencia en trekking. No es necesario contar con conocimientos técnicos, pero sí estar preparadas/os para caminar con mochila, dormir en carpa y realizar una jornada de ascenso prolongada en altura.",
@@ -338,7 +342,7 @@ export const serviciosMock: Servicio[] = [
         // Enlace al itinerario
         id_itinerario: 3,
 
-        fotos: ["/punta-negra/1.jpg", "/punta-negra/2.jpg", "/punta-negra/3.jpg"],
+        fotos: ["/punta-negra/1.jpg", "/punta-negra/2.jpg", "/punta-negra/3.png"],
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
         activo: true
@@ -353,7 +357,7 @@ export const serviciosMock: Servicio[] = [
         duracion_noches: 14,
         altura_maxima: 6969,
         desc: "El Aconcagua es el cerro más alto de América y uno de los seismiles más icónicos del mundo. Su ascenso por la ruta normal no presenta dificultades técnicas, pero es un verdadero desafío físico y mental por la altitud, el clima extremo y la duración de la expedición. Esta propuesta está pensada para montañistas con experiencia previa en altura, que busquen una expedición seria, segura y con una logística sólida.",
-
+        desc_resumen: "Viví la cumbre más alta del continente: aventura, altura y montañismo en el Aconcagua.",
         sobre_lugar: "Ubicado dentro del Parque Provincial Aconcagua, en la provincia de Mendoza (Argentina), este coloso se alza en el corazón de los Andes. Sus paisajes, la magnitud de sus glaciares y su entorno agreste lo convierten en un destino de ensueño para los amantes de la alta montaña.",
 
         clima_recomendado: "La temporada de ascensos se extiende de diciembre a marzo. En esos meses, aunque es el periodo más estable, el clima puede ser extremadamente riguroso, con vientos fuertes, nevadas y temperaturas que descienden por debajo de los -20°C en altura. El itinerario incluye días extra para adaptarnos a estas posibles contingencias.",
@@ -431,22 +435,23 @@ export const serviciosMock: Servicio[] = [
         // Enlace al itinerario
         id_itinerario: 6,
 
-        fotos: ["/aconcagua/1.jpg", "/aconcagua/2.jpg", "/aconcagua/3.jpg"],
+        fotos: ["/aconcagua/2.jpg", "/aconcagua/1.jpg", "/aconcagua/3.jpg"],
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
         activo: true
     },
     {
+        destacado: true,
         id_servicio: 7,
         nombre: "Volcán Quewar",
         id_lugar: 6,
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 5, // Exigente
+        id_dificultad: 3, // Exigente
         duracion_dias: 10,
         duracion_noches: 10,
         altura_maxima: 6140,
         desc: "El ascenso al Volcán Quewar es una expedición de alta montaña en plena Puna de Atacama, ideal para montañistas con experiencia previa que deseen desafiar sus límites en altitud y vivir la inmensidad de un paisaje remoto y sobrecogedor. Con sus 6.140 metros sobre el nivel del mar, el Quewar es un gigante solitario que nos invita a una aventura exigente y profundamente transformadora.",
-
+        desc_resumen: "Alta montaña y desafío extremo en la inmensidad del Volcán Quewar.",
         // Información del lugar extraída del PDF
         sobre_lugar: "El Volcán Quewar se ubica en el sector sur de la Puna salteña, dentro de un entorno de salares, lagunas altoandinas y pequeños poblados que resguardan una rica historia vinculada a las culturas originarias. El paisaje se caracteriza por su aridez, la amplitud de sus horizontes y la sensación de aislamiento absoluto. San Antonio de los Cobres, base logística de la expedición, es una de las localidades más altas de Argentina y un centro clave para la cultura andina.",
 
@@ -525,6 +530,241 @@ export const serviciosMock: Servicio[] = [
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
         activo: true
+    },
+    {
+        id_servicio: 8,
+        nombre: "Cerro Franke",
+        id_lugar: 6, // Parque Provincial Cordón del Plata
+        id_actividad: 2, // Ascenso de alta montaña
+        id_dificultad: 4, // Media-Alta
+        duracion_dias: 4,
+        duracion_noches: 3,
+        altura_maxima: 4820,
+        desnivel: 1420, // aproximado desde CB hasta cumbre
+        desc: "La expedición al Cerro Franke es una experiencia desafiante de alta montaña, ideal para quienes buscan fortalecer su resistencia y ganar experiencia en ascensos de gran altitud. Durante cuatro días, recorreremos senderos exigentes, atravesaremos filos montañosos y alcanzaremos la cumbre del Franke (4.820 m), mejorando nuestra aclimatación y habilidades en terrenos de montaña.",
+        desc_resumen: "Una experiencia desafiante de alta montaña: 4 días para alcanzar los 4.820 m del imponente Franke.",
+        sobre_lugar: "Ubicado en la Cordillera Frontal de Mendoza, el Cerro Franke es un destino clásico para quienes buscan un ascenso exigente. Su entorno de altura ofrece imponentes paisajes, campamentos estratégicamente ubicados y una gran oportunidad para el aprendizaje en montañismo. A lo largo de la expedición, experimentaremos la vida en campamentos de altura, con vistas espectaculares a la cordillera mendocina.",
+        clima_recomendado: "La mejor temporada para ascender el Cerro Franke es de noviembre a marzo, cuando las condiciones meteorológicas son más predecibles. Durante el día, las temperaturas pueden oscilar entre -5°C y 15°C, mientras que por la noche pueden descender hasta -15°C en los campamentos de altura.",
+        descripcion_recorrido: "El ascenso se realiza por la ruta normal en el filo sureste, atravesando terrenos de alta montaña con desniveles exigentes. Desde el campamento base en Vallecitos, progresaremos hacia campamentos de aclimatación en altura, para finalmente realizar el ascenso a cumbre y descender por un gran acarreo que finaliza cerca del campamento Piedra Grande.",
+        experiencia_requerida: "Esta expedición es de dificultad media-alta, recomendada para personas con experiencia en trekking de altura y buen estado físico. No se requieren conocimientos técnicos avanzados, pero es necesario estar preparado para caminatas prolongadas en altura, desniveles exigentes y condiciones climáticas adversas.",
+        modalidad: "grupo reducido",
+        cupos_maximos: 4, // ratio 1-2
+        ratio_guia_pasajero: "1-2",
+        conocimientos_tecnicos_requeridos: false,
+        horas_caminata_diarias: "14-16 horas (día de cumbre)",
+        peso_mochila: "Equipo personal y comunitario",
+        temporada_recomendada: ["noviembre", "diciembre", "enero", "febrero", "marzo"],
+        temperatura_dia_min: -5,
+        temperatura_dia_max: 15,
+        temperatura_noche_min: -15,
+        punto_encuentro: "Mendoza a las 9:00 hs",
+        comodidades: "3 noches en tiendas de montaña de alta calidad especializadas para condiciones extremas. Los campamentos se establecen en zonas estratégicas para optimizar la aclimatación y el acceso a la cumbre.",
+        briefing_info: "Cada día realizaremos una reunión para revisar el plan de ascenso, organizar el equipo y brindar recomendaciones sobre aclimatación, técnicas de marcha y gestión del esfuerzo en altura.",
+        alimentacion_detalle: {
+            desayunos: "Huevos, palta, panificaciones",
+            raciones_marcha: "Empanadas, sándwiches con fiambres al vacío de calidad, huevo, fruta",
+            cenas: "Platos frescos y proteicos en campamentos bajos; opciones ligeras y altamente nutritivas en campamentos de altura"
+        },
+        diferenciadores: [
+            "Enfoque educativo: autonomía en la montaña",
+            "Grupos reducidos",
+            "Ritmo ajustado y conexión con la montaña",
+            "Compromiso con el medio ambiente"
+        ],
+        servicios_incluidos: [
+            "Traslados ida y vuelta Mendoza-Vallecitos",
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-2 (1 guía cada 2 pasajeros)",
+            "Pensión completa en montaña",
+            "Alojamiento 3 noches en tiendas de montaña",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF",
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+        ],
+        servicios_no_incluidos: [
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas",
+            "Snacks de marcha personal",
+            "Transporte hasta Mendoza"
+        ],
+        servicios_adicionales_disponibles: [
+            "Porteo: Hasta 20k de equipo porteados en todos o algún tramo del ascenso",
+            "Almuerzo de despedida en bodega familiar, Potrerillos",
+            "Día extra: Adiciona un día para aclimatación o cuestiones climáticas",
+            "Combina con otras actividades: Termas, rafting, kayak, escalada/rapel, cabalgatas, bodegas"
+        ],
+        consideraciones_especiales: [
+            "Expedición de alta montaña con condiciones climáticas adversas",
+            "Jornada de cumbre muy exigente de 14-16 horas",
+            "Aclimatación previa recomendada",
+            "Experiencia en trekking de altura necesaria"
+        ],
+        id_itinerario: 6,
+        fotos: ["/franke/1.jpg", "/franke/2.jpg", "/franke/3.jpg"],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01",
+        activo: true
+    },
+    {
+        id_servicio: 9,
+        nombre: "Volcán San Francisco",
+        id_lugar: 7, // Ruta de los Seismiles, Catamarca
+        id_actividad: 2, // Ascenso de alta montaña
+        id_dificultad: 5, // Exigente
+        duracion_dias: 7,
+        duracion_noches: 6,
+        altura_maxima: 6016,
+        desnivel: 918, // desde CB hasta cumbre (día de cumbre)
+        desc: "El ascenso al Volcán San Francisco es una expedición de alta montaña en la Puna de Catamarca, ideal para quienes desean alcanzar un seismil y vivir una experiencia transformadora en paisajes de extrema belleza. Durante siete días realizamos un proceso de aclimatación progresivo, ascendiendo cerros cercanos como el Coquena (4.035 m), el Falso Morocho (4.500 m) y el Bertrand (5.250 m), lo que nos permite ganar altura de forma segura antes de intentar la cumbre del San Francisco (6.016 m). Esta travesía combina trekking en altura, refugios rústicos de adobe y campamentos, y un recorrido por el corazón de la Puna catamarqueña.",
+        desc_resumen: "Tu primer seismil: 7 días de aclimatación progresiva hasta alcanzar los 6.016 m del imponente San Francisco.",
+        sobre_lugar: "El Volcán San Francisco, de 6.016 metros, se ubica en el límite entre Argentina y Chile, dentro de un corredor de volcanes de más de seis mil metros que dominan la región. La zona se caracteriza por su aislamiento, su belleza extrema y su rica historia geológica. Durante el viaje, atravesaremos paisajes únicos: salares, campos de lava, y refugios de montaña enclavados en la inmensidad de la Puna. El pueblo de Fiambalá, punto de partida de nuestra expedición, ofrece aguas termales y una cálida bienvenida cultural y gastronómica.",
+        clima_recomendado: "La mejor temporada para ascender al Volcán San Francisco es entre noviembre y marzo, cuando las temperaturas son más estables y el clima menos hostil. Aún así, estamos en alta montaña: durante el día, las temperaturas pueden variar entre 5°C y 18°C, y por la noche pueden descender hasta -15°C. La zona es ventosa y seca, con alta exposición solar.",
+        descripcion_recorrido: "El ascenso sigue un plan de aclimatación progresivo de 7 días, comenzando en Fiambalá (1.550 m) y ascendiendo gradualmente cerros de aclimatación: Coquena (4.035 m), Falso Morocho (4.500 m) y Bertrand (5.250 m). Culminamos con el ascenso al Volcán San Francisco desde el campamento base a 5.100 m, una jornada de 12-14 horas muy exigente.",
+        experiencia_requerida: "Esta expedición tiene una dificultad exigente, recomendada para personas con buena condición física, estado de salud y experiencia en montañas de 4.000 m o actividades de resistencia. No es necesario tener conocimientos técnicos, pero sí es importante contar con voluntad, entrenamiento previo, tolerancia a la altitud y equipo adecuado. El ascenso a 6.000 metros implica largas jornadas de caminata en altura, frío intenso y clima cambiante.",
+        modalidad: "grupo reducido",
+        cupos_maximos: 4, // ratio 1-2
+        ratio_guia_pasajero: "1-2",
+        conocimientos_tecnicos_requeridos: false,
+        horas_caminata_diarias: "12-14 horas (día de cumbre)",
+        peso_mochila: "15-17 kg",
+        temporada_recomendada: ["noviembre", "diciembre", "enero", "febrero", "marzo"],
+        temperatura_dia_min: 5,
+        temperatura_dia_max: 18,
+        temperatura_noche_min: -15,
+        punto_encuentro: "Fiambalá a las 9:00 hs",
+        comodidades: "6 noches en tiendas de montaña de alta calidad. Refugios rústicos de adobe en algunos campamentos. Los campamentos se establecen en zonas estratégicas siguiendo el plan de aclimatación progresivo.",
+        briefing_info: "Cada día realizaremos encuentros para revisar el itinerario, evaluar la aclimatación y compartir recomendaciones para enfrentar la altura con seguridad. Hablaremos sobre el ritmo, la hidratación, la gestión de la energía en altura, y los síntomas comunes de hipoxia para poder responder a tiempo. También revisaremos el equipo personal antes del ascenso final.",
+        alimentacion_detalle: {
+            desayunos: "Huevos, palta, panificaciones",
+            raciones_marcha: "Empanadas, sándwiches con fiambres al vacío, huevo, fruta",
+            cenas: "Platos regionales en Fiambalá; opciones ligeras y altamente nutritivas en campamentos de altura"
+        },
+        diferenciadores: [
+            "Enfoque educativo: autonomía en la montaña",
+            "Grupos reducidos",
+            "Ritmo ajustado y conexión con la montaña",
+            "Compromiso con el medio ambiente"
+        ],
+        consideraciones_especiales: [
+            "Expedición en zona remota con condiciones de aislamiento propias de la alta montaña",
+            "Durante varios días no habrá acceso a señal de celular ni asistencia médica cercana",
+            "Región limítrofe con Chile - documentación vigente obligatoria",
+            "Formularios específicos para paso internacional (provistos por Altiplano)",
+            "Ascenso a 6.000 metros con largas jornadas, frío intenso y clima cambiante"
+        ],
+        id_itinerario: 7,
+        fotos: ["/sanfrancisco/1.jpg", "/sanfrancisco/2.jpg", "/sanfrancisco/3.jpg"],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01",
+        activo: true
+    },
+    {
+        id_servicio: 10,
+        nombre: "Volcán San Francisco",
+        id_lugar: 7, // Ruta de los Seismiles, Catamarca
+        id_actividad: 2, // Ascenso de alta montaña
+        id_dificultad: 5, // Exigente
+        duracion_dias: 7,
+        duracion_noches: 6,
+        altura_maxima: 6016,
+        desnivel: 918, // desde CB hasta cumbre (día de cumbre)
+        desc: "El ascenso al Volcán San Francisco es una expedición de alta montaña en la Puna de Catamarca, ideal para quienes desean alcanzar un seismil y vivir una experiencia transformadora en paisajes de extrema belleza. Durante siete días realizamos un proceso de aclimatación progresivo, ascendiendo cerros cercanos como el Coquena (4.035 m), el Falso Morocho (4.500 m) y el Bertrand (5.250 m), lo que nos permite ganar altura de forma segura antes de intentar la cumbre del San Francisco (6.016 m). Esta travesía combina trekking en altura, refugios rústicos de adobe y campamentos, y un recorrido por el corazón de la Puna catamarqueña.",
+        desc_resumen: "Tu primer seismil: 7 días de aclimatación progresiva hasta alcanzar los 6.016 m del imponente San Francisco.",
+        sobre_lugar: "El Volcán San Francisco, de 6.016 metros, se ubica en el límite entre Argentina y Chile, dentro de un corredor de volcanes de más de seis mil metros que dominan la región. La zona se caracteriza por su aislamiento, su belleza extrema y su rica historia geológica. Durante el viaje, atravesaremos paisajes únicos: salares, campos de lava, y refugios de montaña enclavados en la inmensidad de la Puna. El pueblo de Fiambalá, punto de partida de nuestra expedición, ofrece aguas termales y una cálida bienvenida cultural y gastronómica.",
+        clima_recomendado: "La mejor temporada para ascender al Volcán San Francisco es entre noviembre y marzo, cuando las temperaturas son más estables y el clima menos hostil. Aún así, estamos en alta montaña: durante el día, las temperaturas pueden variar entre 5°C y 18°C, y por la noche pueden descender hasta -15°C. La zona es ventosa y seca, con alta exposición solar.",
+        descripcion_recorrido: "El ascenso sigue un plan de aclimatación progresivo de 7 días, comenzando en Fiambalá (1.550 m) y ascendiendo gradualmente cerros de aclimatación: Coquena (4.035 m), Falso Morocho (4.500 m) y Bertrand (5.250 m). Culminamos con el ascenso al Volcán San Francisco desde el campamento base a 5.100 m, una jornada de 12-14 horas muy exigente.",
+        experiencia_requerida: "Esta expedición tiene una dificultad exigente, recomendada para personas con buena condición física, estado de salud y experiencia en montañas de 4.000 m o actividades de resistencia. No es necesario tener conocimientos técnicos, pero sí es importante contar con voluntad, entrenamiento previo, tolerancia a la altitud y equipo adecuado. El ascenso a 6.000 metros implica largas jornadas de caminata en altura, frío intenso y clima cambiante.",
+        modalidad: "grupo reducido",
+        cupos_maximos: 4, // ratio 1-2
+        ratio_guia_pasajero: "1-2",
+        conocimientos_tecnicos_requeridos: false,
+        horas_caminata_diarias: "12-14 horas (día de cumbre)",
+        peso_mochila: "15-17 kg",
+        temporada_recomendada: ["noviembre", "diciembre", "enero", "febrero", "marzo"],
+        temperatura_dia_min: 5,
+        temperatura_dia_max: 18,
+        temperatura_noche_min: -15,
+        punto_encuentro: "Fiambalá a las 9:00 hs",
+        comodidades: "6 noches en tiendas de montaña de alta calidad. Refugios rústicos de adobe en algunos campamentos. Los campamentos se establecen en zonas estratégicas siguiendo el plan de aclimatación progresivo.",
+        briefing_info: "Cada día realizaremos encuentros para revisar el itinerario, evaluar la aclimatación y compartir recomendaciones para enfrentar la altura con seguridad. Hablaremos sobre el ritmo, la hidratación, la gestión de la energía en altura, y los síntomas comunes de hipoxia para poder responder a tiempo. También revisaremos el equipo personal antes del ascenso final.",
+        alimentacion_detalle: {
+            desayunos: "Huevos, palta, panificaciones",
+            raciones_marcha: "Empanadas, sándwiches con fiambres al vacío, huevo, fruta",
+            cenas: "Platos regionales en Fiambalá; opciones ligeras y altamente nutritivas en campamentos de altura"
+        },
+        diferenciadores: [
+            "Enfoque educativo: autonomía en la montaña",
+            "Grupos reducidos",
+            "Ritmo ajustado y conexión con la montaña",
+            "Compromiso con el medio ambiente"
+        ],
+        consideraciones_especiales: [
+            "Expedición en zona remota con condiciones de aislamiento propias de la alta montaña",
+            "Durante varios días no habrá acceso a señal de celular ni asistencia médica cercana",
+            "Región limítrofe con Chile - documentación vigente obligatoria",
+            "Formularios específicos para paso internacional (provistos por Altiplano)",
+            "Ascenso a 6.000 metros con largas jornadas, frío intenso y clima cambiante"
+        ],
+        id_itinerario: 7,
+        fotos: ["/san-francisco/1.jpg", "/san-francisco/2.jpg", "/san-francisco/3.jpg"],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01",
+        activo: true
+    },
+    {
+        id_servicio: 11,
+        nombre: "Volcán Llullaillaco",
+        id_lugar: 8, // Puna de Atacama, Salta
+        id_actividad: 2, // Ascenso de alta montaña
+        id_dificultad: 5, // Exigente
+        duracion_dias: 14,
+        duracion_noches: 13,
+        altura_maxima: 6739,
+        desnivel: 839, // desde C1 hasta cumbre
+        desc: "El ascenso al Volcán Llullaillaco es una de las grandes aventuras de alta montaña en la Puna de Atacama. Con sus imponentes 6.739 metros, es un volcán cargado de historia y misticismo, conocido por albergar en su cumbre el santuario inca más alto del mundo. Esta expedición está pensada para montañistas con experiencia previa en altura que buscan un verdadero desafío físico y emocional, combinando un proceso progresivo de aclimatación con un entorno natural de incomparable belleza y aislamiento.",
+        desc_resumen: "Una épica expedición de 14 días hacia el santuario inca más alto del mundo, en los imponentes 6.739 metros del Llullaillaco.",
+        sobre_lugar: "El Llullaillaco se encuentra en la frontera entre Argentina y Chile, en un sector remoto y poco transitado de la Puna salteña. El paisaje es de una aridez extrema, dominado por salares, volcanes y cielos inmensos. La historia arqueológica del volcán y de la región suma un valor cultural único a esta expedición.",
+        clima_recomendado: "La mejor época para realizar el ascenso al volcán es de abril a noviembre, cuando el clima es más seco y las condiciones de estabilidad atmosférica favorecen la aclimatación y el ascenso. Durante el día, las temperaturas pueden oscilar entre -5°C y 15°C, mientras que por la noche pueden descender hasta -15°C, especialmente en los campamentos de altura.",
+        descripcion_recorrido: "La expedición incluye un proceso de aclimatación progresivo de 14 días, comenzando con el ascenso del Cerro Pompeya (4.050 m) y el Volcán Tuzgle (5.530 m), para luego establecer campamento base del Llullaillaco a 4.900 m y realizar el intento de cumbre desde el C1 a 5.900 m.",
+        experiencia_requerida: "La expedición requiere experiencia previa en alta montaña, ascensos por encima de los 5.000 m, excelente estado físico y capacidad de adaptación a condiciones extremas. Las jornadas son largas y el entorno es muy aislado, por lo que se recomienda preparación específica y trabajo previo en aclimatación y resistencia.",
+        modalidad: "grupo reducido",
+        cupos_maximos: 4, // ratio 1-2
+        ratio_guia_pasajero: "1-2",
+        conocimientos_tecnicos_requeridos: false,
+        horas_caminata_diarias: "8-12 horas",
+        peso_mochila: "15-18 kg",
+        temporada_recomendada: ["abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre"],
+        temperatura_dia_min: -5,
+        temperatura_dia_max: 15,
+        temperatura_noche_min: -15,
+        punto_encuentro: "Salta a las 9:00 hs",
+        comodidades: "4 noches en hosterías y 10 noches en tiendas de montaña de alta calidad. Los campamentos se establecen en zonas estratégicas siguiendo el plan de aclimatación progresivo.",
+        briefing_info: "Cada día realizaremos una reunión para revisar el plan de ascenso, organizar el equipo y brindar recomendaciones sobre aclimatación, técnicas de marcha y gestión del esfuerzo en altura.",
+        alimentacion_detalle: {
+            desayunos: "Huevos, palta, panificaciones",
+            raciones_marcha: "Empanadas, sándwiches con fiambres, huevo, fruta",
+            cenas: "Platos regionales en San Antonio de los Cobres; opciones ligeras y altamente nutritivas en campamentos de altura"
+        },
+        diferenciadores: [
+            "Enfoque educativo: autonomía en la montaña",
+            "Grupos reducidos",
+            "Ritmo ajustado y conexión con la montaña",
+            "Compromiso con el medio ambiente"
+        ],
+        consideraciones_especiales: [
+            "Expedición en zona extremadamente remota con condiciones de aislamiento",
+            "Durante varios días no habrá acceso a señal de celular ni asistencia médica cercana",
+            "Región limítrofe con Chile - documentación vigente obligatoria",
+            "Volcán con alto valor arqueológico - santuario inca más alto del mundo",
+            "Ascenso a casi 7.000 metros con largas jornadas y clima extremo"
+        ],
+        fotos: ["/llullaillaco/1.jpg", "/llullaillaco/2.jpg", "/llullaillaco/3.jpg"],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01",
+        activo: true
     }
 ];
 
@@ -598,7 +838,6 @@ export const expedicionesMock: Expedicion[] = [
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01"
     },
-
     // Vallecitos - Noviembre 2025
     {
         id_expedicion: 4,
@@ -634,7 +873,6 @@ export const expedicionesMock: Expedicion[] = [
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01"
     },
-
     // Volcán Tuzgle - Noviembre 2025
     {
         id_expedicion: 5,
@@ -669,7 +907,6 @@ export const expedicionesMock: Expedicion[] = [
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01"
     },
-
     // Volcán Quewar - Noviembre 2025
     {
         id_expedicion: 6,
@@ -699,7 +936,6 @@ export const expedicionesMock: Expedicion[] = [
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01"
     },
-
     // Aconcagua - Febrero 2025-2026
     {
         id_expedicion: 7,
@@ -723,6 +959,114 @@ export const expedicionesMock: Expedicion[] = [
             {
                 id_servicio_adicional: 12,
                 nombre: "Seguro de evacuación (obligatorio)",
+                disponible: true
+            }
+        ],
+        itinerario: [],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01"
+    },
+    {
+        id_expedicion: 8,
+        id_servicio: 8, // Cerro Franke
+        fecha_salida: "TBD", // To Be Determined
+        fecha_fin: "TBD",
+        cupos_disponibles: 4,
+        cupos_ocupados: 0,
+        estado: 'Activa',
+        precios: [
+            { precio: 750, moneda: 'USD' }
+        ],
+        presupuesto_valido_hasta: "2025-12-01",
+        servicios_adicionales: [
+            {
+                id_servicio_adicional: 13,
+                nombre: "Porteo: Hasta 20k de equipo porteados",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 14,
+                nombre: "Almuerzo de despedida en bodega familiar, Potrerillos",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 15,
+                nombre: "Día extra: Adiciona un día para aclimatación o cuestiones climáticas",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 16,
+                nombre: "Combina con otras actividades: Termas, rafting, kayak, escalada/rapel, cabalgatas, bodegas",
+                disponible: true
+            }
+        ],
+        itinerario: [],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01"
+    },
+    // Volcán San Francisco
+    {
+        id_expedicion: 9,
+        id_servicio: 9, // Volcán San Francisco
+        fecha_salida: "TBD",
+        fecha_fin: "TBD",
+        cupos_disponibles: 4,
+        cupos_ocupados: 0,
+        estado: 'Activa',
+        precios: [
+            { precio: 1850, moneda: 'USD' }
+        ],
+        reserva_porcentaje: 40,
+        presupuesto_valido_hasta: "2025-12-01",
+        servicios_adicionales: [
+            {
+                id_servicio_adicional: 17,
+                nombre: "Día extra para aclimatación o cuestiones climáticas",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 18,
+                nombre: "Traslados desde/hacia Catamarca Capital",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 19,
+                nombre: "Noche adicional en Fiambalá con termas incluidas",
+                disponible: true
+            }
+        ],
+        itinerario: [],
+        fecha_creacion: "2025-01-01",
+        fecha_actualizacion: "2025-01-01"
+    },
+    // Volcán Llullaillaco
+    {
+        id_expedicion: 10,
+        id_servicio: 11, // Volcán Llullaillaco
+        fecha_salida: "TBD",
+        fecha_fin: "TBD",
+        cupos_disponibles: 4,
+        cupos_ocupados: 0,
+        estado: 'Activa',
+        precios: [
+            { precio: 2450, moneda: 'USD' }
+        ],
+        reserva_porcentaje: 50,
+        presupuesto_valido_hasta: "2025-12-01",
+        servicios_adicionales: [
+            {
+                id_servicio_adicional: 20,
+                nombre: "Día extra para aclimatación o cuestiones climáticas",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 21,
+                nombre: "Seguro de evacuación en alta montaña (recomendado)",
+                disponible: true
+            },
+            {
+                id_servicio_adicional: 22,
+                nombre: "Traslados desde/hacia Salta Capital",
                 disponible: true
             }
         ],
@@ -1263,4 +1607,347 @@ export const itinerarioQuewar: ItinerarioDia[] = [
         descripcion: "Regreso a la ciudad de Salta. Fin del programa de expedición al Volcán Quewar en la Puna de Atacama.",
         actividades_especiales: ["Traslado de regreso", "Fin del programa", "Finalización expedición Quewar"]
     }
+];
+
+export const itinerarioFranke: ItinerarioDia[] = [
+    {
+        id_itinerario: 6,
+        dia: 1,
+        titulo: "Encuentro en Mendoza y traslado a Vallecitos",
+        descripcion: "Encuentro en ciudad de Mendoza a las 9:00 hs. Revisión de equipo y traslado a Vallecitos. Inicio del trekking a Veguitas superior (CB-3400 msnm), porteando el equipo personal y comunitario. Armado de campamento y pernocte en tiendas de montaña.",
+        hora_inicio: "09:00",
+        distancia_km: 2.5,
+        desnivel_metros: 500,
+        duracion_horas: "2-3hs",
+        altitud: 3400,
+        alojamiento: "tiendas de montaña",
+        comidas: ["cena", "pernocte"],
+        intensidad: "moderada-exigente",
+        actividades_especiales: ["Revisión de equipo", "Armado de campamento"]
+    },
+    {
+        id_itinerario: 6,
+        dia: 2,
+        titulo: "Trekking de aclimatación a campamentos de altura",
+        descripcion: "Trekking de aclimatación a campamentos de altura (3800/4000 msnm). Jornada dedicada a la adaptación progresiva a la altitud y reconocimiento del terreno. Pernocte en tiendas de montaña.",
+        altitud: 4000,
+        alojamiento: "tiendas de montaña",
+        comidas: ["desayuno", "almuerzo", "cena", "pernocte"],
+        intensidad: "moderada",
+        actividades_especiales: ["Aclimatación", "Reconocimiento de terreno"]
+    },
+    {
+        id_itinerario: 6,
+        dia: 3,
+        titulo: "Ascenso al Cerro Franke",
+        descripcion: "Ascenso al cerro Franke por su ruta normal en el filo sureste y descenso por un gran acarreo que finaliza a metros del campamento Piedra Grande. Jornada muy exigente de alta montaña. Pernocte en tiendas de montaña.",
+        distancia_km: 11,
+        desnivel_metros: 1542,
+        duracion_horas: "14-16hs",
+        altitud: 4820,
+        alojamiento: "tiendas de montaña",
+        comidas: ["desayuno temprano", "raciones de marcha", "cena", "pernocte"],
+        intensidad: "exigente",
+        actividades_especiales: ["Cumbre", "Filo sureste", "Gran acarreo"]
+    },
+    {
+        id_itinerario: 6,
+        dia: 4,
+        titulo: "Regreso a Mendoza",
+        descripcion: "Desarme de campamento y regreso a Mendoza. Fin de la expedición a las 15:00 hs aproximadamente. Tiempo para almuerzo opcional en Potrerillos antes del regreso.",
+        hora_fin: "15:00",
+        comidas: ["desayuno", "almuerzo opcional"],
+        actividades_especiales: ["Desarme de campamento", "Cierre de expedición"]
+    }
+];
+
+export const itinerarioSanFrancisco: ItinerarioDia[] = [
+    {
+        id_itinerario: 7,
+        dia: 1,
+        titulo: "Encuentro en Fiambalá y traslado a Pastos Largos",
+        descripcion: "Encuentro a las 9:00 hs en Fiambalá (1.550 msnm). Bienvenida, briefing, permisos aduaneros y traslado en vehículos a Pastos Largos (3.300 msnm). Noche en tiendas de montaña.",
+        hora_inicio: "09:00",
+        altitud: 3300,
+        alojamiento: "tiendas de montaña",
+        comidas: ["almuerzo", "cena", "pernocte"],
+        actividades_especiales: ["Bienvenida", "Briefing", "Permisos aduaneros"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 2,
+        titulo: "Ascenso al Cerro Coquena",
+        descripcion: "Ascenso al cerro Coquena (4.035 msnm). Pernocte en Pastos Largos (3.300 msnm). Jornada moderada de aclimatación.",
+        duracion_horas: "7hs aprox",
+        desnivel_metros: 735,
+        altitud: 4035,
+        alojamiento: "tiendas de montaña",
+        comidas: ["desayuno", "almuerzo de marcha", "cena", "pernocte"],
+        intensidad: "moderada",
+        actividades_especiales: ["Aclimatación", "Cumbre Coquena"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 3,
+        titulo: "Traslado y ascenso al Cerro Falso Morocho",
+        descripcion: "Traslado en vehículo hacia La Gruta (4.000 m), paso aduanero. Ascenso al cerro Falso Morocho (4.500 msnm). Descanso en agua termal. Noche en tiendas de alta montaña.",
+        duracion_horas: "4hs aprox",
+        desnivel_metros: 500,
+        altitud: 4500,
+        alojamiento: "tiendas de alta montaña",
+        comidas: ["desayuno", "almuerzo de marcha", "cena", "pernocte"],
+        intensidad: "moderada",
+        actividades_especiales: ["Paso aduanero", "Cumbre Falso Morocho", "Aguas termales"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 4,
+        titulo: "Ascenso al Volcán Bertrand",
+        descripcion: "Aproximación en vehículo a 4.400 msnm. Ascenso a Volcán Bertrand (5.250 msnm) y regreso al campamento. Jornada intensa de aclimatación.",
+        duracion_horas: "9hs aprox",
+        desnivel_metros: 850,
+        altitud: 5250,
+        alojamiento: "tiendas de montaña",
+        comidas: ["desayuno", "raciones de marcha", "cena", "pernocte"],
+        intensidad: "intensa",
+        actividades_especiales: ["Cumbre Bertrand", "Aclimatación alta montaña"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 5,
+        titulo: "Descanso activo y traslado al campamento base",
+        descripcion: "Descanso activo. Traslado al campamento base del Volcán San Francisco a 5.100 msnm. Preparación para el día de cumbre. Noche en tiendas de montaña. Trekking con mochila de 15-17 kg.",
+        duracion_horas: "2-3hs aprox",
+        desnivel_metros: 400,
+        peso_mochila: "15-17 kg",
+        altitud: 5100,
+        alojamiento: "tiendas de montaña",
+        comidas: ["desayuno", "almuerzo", "cena", "pernocte"],
+        intensidad: "moderada",
+        actividades_especiales: ["Descanso activo", "Preparación para cumbre"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 6,
+        titulo: "Ascenso al Volcán San Francisco",
+        descripcion: "Ascenso al Volcán San Francisco (6.016 msnm). Regreso al campamento base. Noche en tiendas de alta montaña. Jornada muy exigente de seismil.",
+        duracion_horas: "12-14hs",
+        desnivel_metros: 918,
+        altitud: 6016,
+        alojamiento: "tiendas de alta montaña",
+        comidas: ["desayuno temprano", "raciones de marcha", "cena", "pernocte"],
+        intensidad: "muy exigente",
+        actividades_especiales: ["Cumbre San Francisco", "Seismil"]
+    },
+    {
+        id_itinerario: 7,
+        dia: 7,
+        titulo: "Regreso a Fiambalá",
+        descripcion: "Desarmado de campamento y regreso a Fiambalá. Almuerzo de despedida, visita a termas y fin del programa.",
+        altitud: 1550,
+        comidas: ["desayuno", "almuerzo de despedida"],
+        actividades_especiales: ["Visita a termas", "Cierre del programa"]
+    }
+];
+
+export const itinerarioLlullaillaco: ItinerarioDia[] = [
+    {
+        id_itinerario: 8,
+        dia: 1,
+        titulo: "Encuentro en Salta",
+        descripcion: "Encuentro en Salta (9:00 h) Bienvenida, briefing y revisión de equipo. Traslado a San Antonio de los Cobres (3.775 m). Cena y pernocte en hostería.",
+        hora_inicio: "09:00",
+        altitud: 3775,
+        alojamiento: "hostería",
+        comidas: ["cena", "pernocte"],
+        actividades_especiales: ["Bienvenida", "Briefing", "Revisión de equipo"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 2,
+        titulo: "Ascenso de aclimatación al Cerro Pompeya",
+        descripcion: "Ascenso de aclimatación al Cerro Pompeya (4.050 m). Regreso, cena y pernocte en hostería en San Antonio de los Cobres.",
+        altitud: 4050,
+        alojamiento: "hostería",
+        comidas: ["cena", "pernocte"],
+        actividades_especiales: ["Aclimatación", "Cerro Pompeya"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 3,
+        titulo: "Traslado al campamento base del Volcán Tuzgle",
+        descripcion: "Traslado en vehículo hasta el campamento base del Volcán Tuzgle (4.500 m). Armado de campamento y pernocte en tiendas de montaña.",
+        altitud: 4500,
+        alojamiento: "tiendas de montaña",
+        actividades_especiales: ["Armado de campamento"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 4,
+        titulo: "Día de aclimatación en Tuzgle",
+        descripcion: "Día de aclimatación y descanso en campamento base, o posibilidad de mover al C1 según clima y condiciones del grupo. Pernocte en tiendas de montaña.",
+        altitud: 4500,
+        alojamiento: "tiendas de montaña",
+        actividades_especiales: ["Aclimatación", "Descanso"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 5,
+        titulo: "Ascenso a la cumbre del Volcán Tuzgle",
+        descripcion: "Ascenso a la cumbre del Volcán Tuzgle (5.530 m) y regreso a San Antonio de los Cobres. Cena y pernocte en hostería.",
+        altitud: 5530,
+        alojamiento: "hostería",
+        comidas: ["cena", "pernocte"],
+        intensidad: "exigente",
+        actividades_especiales: ["Cumbre Tuzgle"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 6,
+        titulo: "Jornada de descanso",
+        descripcion: "Jornada de descanso en San Antonio de los Cobres.",
+        altitud: 3775,
+        alojamiento: "hostería",
+        actividades_especiales: ["Descanso", "Recuperación"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 7,
+        titulo: "Traslado a Tolar Grande",
+        descripcion: "Traslado a Tolar Grande (3.500 m). Cena y pernocte en hostería (según disponibilidad).",
+        altitud: 3500,
+        alojamiento: "hostería",
+        comidas: ["cena", "pernocte"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 8,
+        titulo: "Traslado al campamento base del Volcán Llullaillaco",
+        descripcion: "Traslado al campamento base del Volcán Llullaillaco (4900 m). Armado de campamento y pernocte en tiendas de montaña.",
+        altitud: 4900,
+        alojamiento: "tiendas de montaña",
+        actividades_especiales: ["Armado de campamento base Llullaillaco"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 9,
+        titulo: "Porteo de equipo al C1",
+        descripcion: "Porteo de equipo al C1 (5.900 m) y regreso al campamento base.",
+        altitud: 5900,
+        alojamiento: "campamento base",
+        intensidad: "moderada-exigente",
+        actividades_especiales: ["Porteo al C1"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 10,
+        titulo: "Día de descanso y recuperación",
+        descripcion: "Día de descanso y recuperación en el campamento base.",
+        altitud: 4900,
+        alojamiento: "campamento base",
+        actividades_especiales: ["Descanso", "Recuperación", "Aclimatación"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 11,
+        titulo: "Ascenso al C1",
+        descripcion: "Ascenso al C1 (5.900 m). Pernocte en tiendas de montaña.",
+        altitud: 5900,
+        alojamiento: "tiendas de montaña",
+        intensidad: "exigente"
+    },
+    {
+        id_itinerario: 8,
+        dia: 12,
+        titulo: "Intento de cumbre del Volcán Llullaillaco",
+        descripcion: "Intento de cumbre del Volcán Llullaillaco (6.739 m) y regreso al C1.",
+        duracion_horas: "12-15hs",
+        desnivel_metros: 839,
+        altitud: 6739,
+        alojamiento: "C1",
+        intensidad: "muy exigente",
+        actividades_especiales: ["Cumbre Llullaillaco", "Santuario inca más alto del mundo"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 13,
+        titulo: "Descenso al campamento base",
+        descripcion: "Descenso al campamento base y traslado a San Antonio de los Cobres. Cena de despedida y pernocte en hostería.",
+        altitud: 3775,
+        alojamiento: "hostería",
+        comidas: ["cena de despedida", "pernocte"]
+    },
+    {
+        id_itinerario: 8,
+        dia: 14,
+        titulo: "Regreso a Salta",
+        descripcion: "Regreso a la ciudad de Salta. Fin de los servicios.",
+        comidas: ["fin de servicios"]
+    }
+];
+
+// Paquetes disponibles para San Francisco
+export const paquetesSanFrancisco = [
+    {
+        id_paquete: 1,
+        nombre: "Paquete Full",
+        precio: 1485,
+        moneda: "USD",
+        incluye: [
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-2 (1 guía cada 2 pasajeros)",
+            "Traslados desde y hasta Fiambalá",
+            "Pensión completa en montaña",
+            "Alojamiento 6 noches en carpas de alta montaña",
+            "Almuerzo de despedida",
+            "Visita a termas",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF y satelital para emergencias",
+            "Oxígeno medicinal para evacuación",
+            "Listado de elementos y asesoramiento previo (vía WhatsApp)"
+        ],
+        no_incluye: [
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas",
+            "Snacks de marcha"
+        ]
+    },
+    {
+        id_paquete: 2,
+        nombre: "Paquete Básico",
+        precio: 1130,
+        moneda: "USD",
+        incluye: [
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-2 (1 guía cada 2 pasajeros)",
+            "Pensión completa en montaña",
+            "Alojamiento 6 noches en carpas de alta montaña",
+            "Visita a termas",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF y satelital para emergencias",
+            "Oxígeno medicinal para evacuación",
+            "Listado de elementos y asesoramiento previo (vía WhatsApp)"
+        ],
+        no_incluye: [
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas",
+            "Snacks de marcha",
+            "Transporte",
+            "Almuerzo de despedida"
+        ]
+    }
+];
+
+// Servicios adicionales disponibles
+export const serviciosAdicionalesSanFrancisco = [
+    "Porteo de equipo",
+    "Día extra: Adiciona un día para aclimatación o cuestiones climáticas",
+    "Alojamiento: Cambia 3 noches en carpa por 3 noches en hostería",
+    "Ascenso al Balcón del Pissis, mirador a 4.550 msnm"
 ];

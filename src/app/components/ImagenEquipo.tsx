@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Instagram, Facebook, } from 'lucide-react';
 
-// Subcomponente para la imagen del equipo
 const ImagenEquipo = () => {
     return (
         <div className="lg:col-span-5 relative">
@@ -9,8 +8,8 @@ const ImagenEquipo = () => {
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-100 rounded-lg -z-10"></div>
             <div className="relative overflow-hidden rounded-xl shadow-xl h-96 md:h-[500px]">
                 <Image
-                    src="/imgs/champaqui.jpg"
-                    alt="Equipo CumbreAndina"
+                    src="/imgs/aconcagua/aconcagua.jpg"
+                    alt="Equipo Altiplano"
                     fill
                     className="object-cover"
                 />
