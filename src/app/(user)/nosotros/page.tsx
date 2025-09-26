@@ -5,61 +5,7 @@ import { Mountain, Award, MapPin, Users, Star, ChevronRight } from 'lucide-react
 import BackButton from '@/app/components/ui/ButtonBack';
 import { useWhatsApp } from '@/app/hooks/useWhatsApp';
 import AnimatedButton from '@/app/components/ui/Button';
-
-// Data de los guías
-const guias = [
-    {
-        id: 1,
-        nombre: "Paula",
-        apellido: "Pozzo",
-        img: "/us/pau.jpg",
-        titulo: "GUÍA DE MONTAÑA Y EDUCADORA",
-        especialidad: "Montaña y educación",
-        años_experiencia: 8,
-        expediciones_guiadas: 150,
-        origen: "Córdoba",
-        formacion: "Mendoza",
-        bio: "Nací en Córdoba, donde el deporte siempre fue parte de mi vida. Sin embargo, fue durante mi formación como docente de educación física cuando descubrí mi pasión por la montaña. Decidí profesionalizarme en Mendoza, donde me formé como guía de trekking y, más adelante, obtuve la titulación de guía de montaña. Acompañar a otros en su crecimiento personal y ayudarlos a descubrir sus capacidades en la naturaleza es una de mis mayores motivaciones. Mi objetivo es que cada experiencia en la montaña sea segura, transformadora y una oportunidad para conectar con uno mismo y el entorno.",
-        certificaciones: [
-            "Guía de Trekking Certificada",
-            "Guía de Montaña Titulada",
-            "Profesora de Educación Física",
-            "Primeros Auxilios en Montaña"
-        ],
-        destinos_favoritos: [
-            "Cerro Champaquí",
-            "Vallecitos",
-            "Quebrada del Condorito"
-        ],
-        filosofia: "Cada montaña es una maestra, cada sendero una lección de vida."
-    },
-    {
-        id: 2,
-        nombre: "Pablo",
-        apellido: "Chanuar",
-        img: "/us/pablo.JPG",
-        titulo: "INSTRUCTOR Y MONTAÑISTA",
-        especialidad: "Alta Montaña y Rescate",
-        años_experiencia: 12,
-        expediciones_guiadas: 200,
-        origen: "Buenos Aires",
-        formacion: "Buenos Aires y Mendoza",
-        bio: "Nací en Buenos Aires, pero fue la pasión por la montaña lo que me llevó a elegir Mendoza como mi hogar y el lugar para seguir desarrollándome como montañista. Mi formación en rescate, primeros auxilios y socorrismo la adquirí como bombero, y complementé mi camino en las escuelas de guía de Buenos Aires y Mendoza. Además, disfruto compartiendo mis conocimientos, y es por eso que formo parte del equipo docente en la Escuela de Guías de Buenos Aires. Mi misión es brindar una experiencia segura, educativa y enriquecedora en cada expedición, ayudando a otros a descubrir su propio potencial en la montaña.",
-        certificaciones: [
-            "Instructor de Montañismo",
-            "Técnico en Rescate y Socorrismo",
-            "Guía Profesional Certificado",
-            "Bombero Voluntario",
-            "Docente Escuela de Guías"
-        ],
-        destinos_favoritos: [
-            "Aconcagua",
-            "Penitentes",
-            "Volcán Tuzgle"
-        ],
-        filosofia: "La montaña enseña humildad, paciencia y la importancia de cada paso."
-    }
-];
+import { guias } from '@/app/data/guias';
 
 const GuiasPage = () => {
     const [guiaSeleccionado, setGuiaSeleccionado] = useState(guias[0]);
@@ -117,50 +63,50 @@ const GuiasPage = () => {
                                 Seleccionar Guía
                             </h3>
 
-<div className="space-y-4">
-    {guias.map((guia) => (
-        <button
-            key={guia.id}
-            onClick={() => setGuiaSeleccionado(guia)}
-            className={`
+                            <div className="space-y-4">
+                                {guias.map((guia) => (
+                                    <button
+                                        key={guia.id}
+                                        onClick={() => setGuiaSeleccionado(guia)}
+                                        className={`
                 w-full p-4 rounded-xl transition-all duration-300 text-left
                 ${guiaSeleccionado.id === guia.id
-                    ? 'bg-[var(--color-naranja)] text-white shadow-lg scale-105'
-                    : 'bg-gray-100 hover:bg-gray-200 text-[var(--color-negro)]'
-                }
+                                                ? 'bg-[var(--color-naranja)] text-white shadow-lg scale-105'
+                                                : 'bg-gray-100 hover:bg-gray-200 text-[var(--color-negro)]'
+                                            }
             `}
-        >
-            <div className="flex items-center space-x-4">
-                {/* Imagen del guía en lugar de inicial */}
-                <div className={`
+                                    >
+                                        <div className="flex items-center space-x-4">
+                                            {/* Imagen del guía en lugar de inicial */}
+                                            <div className={`
                     w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300
                     ${guiaSeleccionado.id === guia.id
-                        ? 'border-white shadow-md'
-                        : 'border-[var(--color-naranja)]'
-                    }
+                                                    ? 'border-white shadow-md'
+                                                    : 'border-[var(--color-naranja)]'
+                                                }
                 `}>
-                    <Image
-                        src={guia.img || '/imgs/default-avatar.jpg'}
-                        alt={`${guia.nombre} ${guia.apellido}`}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-                <div className="flex-1">
-                    <h4 className="font-bold">{guia.nombre} {guia.apellido}</h4>
-                    <p className={`text-sm ${guiaSeleccionado.id === guia.id ? 'text-white/80' : 'text-gray-600'}`}>
-                        {guia.especialidad}
-                    </p>
-                </div>
-                <ChevronRight size={20} className={`
+                                                <Image
+                                                    src={guia.img || '/imgs/default-avatar.jpg'}
+                                                    alt={`${guia.nombre} ${guia.apellido}`}
+                                                    width={48}
+                                                    height={48}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <div className="flex-1">
+                                                <h4 className="font-bold">{guia.nombre} {guia.apellido}</h4>
+                                                <p className={`text-sm ${guiaSeleccionado.id === guia.id ? 'text-white/80' : 'text-gray-600'}`}>
+                                                    {guia.especialidad}
+                                                </p>
+                                            </div>
+                                            <ChevronRight size={20} className={`
                     transform transition-transform duration-300
                     ${guiaSeleccionado.id === guia.id ? 'rotate-90' : ''}
                 `} />
-            </div>
-        </button>
-    ))}
-</div>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
 
                             {/* Stats del equipo */}
                             <div className="mt-8 pt-6 border-t border-gray-200">
@@ -284,7 +230,7 @@ const GuiasPage = () => {
                                 </div>
 
                                 {/* Destinos Favoritos */}
-                                <div className="mt-8">
+                                {/* <div className="mt-8">
                                     <h4 className="text-xl font-bold text-[var(--color-negro)] mb-4 flex items-center">
                                         <Mountain size={20} className="mr-2 text-[var(--color-naranja)]" />
                                         Destinos Favoritos
@@ -299,7 +245,7 @@ const GuiasPage = () => {
                                             </span>
                                         ))}
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

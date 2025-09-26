@@ -1,3 +1,4 @@
+import { obtenerCuposDisponiblesSlash } from "@/app/lib/salidas.utils";
 import { Expedicion } from "@/app/types/expedicion"
 import { Servicio } from "@/app/types/servicio"
 import {
@@ -13,6 +14,7 @@ interface InfoGeneralProps {
 }
 
 const InfoGeneral = ({ servicio, expedicion }: InfoGeneralProps) => {
+    const cuposDisponibles = obtenerCuposDisponiblesSlash(expedicion);
     return (
         <div className="bg-white rounded-xl shadow-md p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Información General</h2>
@@ -29,7 +31,7 @@ const InfoGeneral = ({ servicio, expedicion }: InfoGeneralProps) => {
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <Users className="mx-auto mb-2 text-amber-600" size={24} />
-                    <div className="font-semibold text-gray-800">{expedicion.cupos_disponibles}/{servicio.cupos_maximos}</div>
+                    <div className="font-semibold text-gray-800">{cuposDisponibles}/{expedicion.cupos_disponibles}</div>
                     <div className="text-sm text-gray-600">Cupos disponibles</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">

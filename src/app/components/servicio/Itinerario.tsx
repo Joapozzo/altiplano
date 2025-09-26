@@ -15,7 +15,10 @@ import {
     itinerarioPuntaNegra, 
     itinerarioAconcagua, 
     itinerarioTuzgle, 
-    itinerarioQuewar 
+    itinerarioQuewar ,
+    itinerarioFranke,
+    itinerarioSanFrancisco,
+    itinerarioLlullaillaco
 } from '@/app/data/mockSalidas';
 import { ItinerarioDia } from '@/app/types/Itinerario';
 
@@ -28,30 +31,34 @@ interface ItinerarioProps {
 
 const Itinerario = ({ servicio }: ItinerarioProps) => {
     const [expandedDay, setExpandedDay] = useState<number | null>(null);
-
-    // Función para obtener el itinerario basado en el id_itinerario del servicio
-    const getItinerario = (): ItinerarioDia[] => {
-        const itinerarioId = servicio.id_itinerario;
-        
-        switch (itinerarioId) {
-            case 1:
-                return itinerarioChampaqui;
-            case 2:
-                return itinerarioPenitentes;
-            case 3:
-                return itinerarioPuntaNegra;
-            case 4:
-                return itinerarioVallecitos;
-            case 6:
-                return itinerarioAconcagua;
-            case 7:
-                return itinerarioTuzgle;
-            case 8:
-                return itinerarioQuewar;
-            default:
-                return [];
-        }
-    };
+const getItinerario = (): ItinerarioDia[] => {
+    const itinerarioId = servicio.id_itinerario;
+    
+    switch (itinerarioId) {
+        case 1:
+            return itinerarioChampaqui;
+        case 2:
+            return itinerarioPenitentes;
+        case 3:
+            return itinerarioPuntaNegra;
+        case 4:
+            return itinerarioVallecitos;
+        case 6:
+            return itinerarioAconcagua;
+        case 7:
+            return itinerarioTuzgle;
+        case 8:
+            return itinerarioQuewar;
+        case 9:
+            return itinerarioFranke;
+        case 11:
+            return itinerarioSanFrancisco;
+        case 12:
+            return itinerarioLlullaillaco;  // <-- Este case faltaba
+        default:
+            return [];
+    }
+};
 
     const itinerario = getItinerario();
 

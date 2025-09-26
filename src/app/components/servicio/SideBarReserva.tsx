@@ -32,7 +32,7 @@ const SideBarReserva = ({ expedicion, setShowReservaModal, setPaqueteSeleccionad
                 <h3 className="text-xl font-bold mb-4 text-gray-800">Reserva tu Expedición</h3>
 
                 {/* Selección de Paquete */}
-                {expedicion.precios.length > 1 && (
+                {/* {expedicion.precios.length > 1 && (
                     <div className="mb-6">
                         <h4 className="font-semibold mb-3 text-gray-800">Selecciona tu paquete:</h4>
                         <div className="space-y-2">
@@ -60,7 +60,7 @@ const SideBarReserva = ({ expedicion, setShowReservaModal, setPaqueteSeleccionad
                             ))}
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {/* Precio Principal */}
                 {/* <div className="mb-6 p-4 bg-amber-50 rounded-lg">

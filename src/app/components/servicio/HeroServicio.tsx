@@ -10,6 +10,7 @@ import { useState } from "react";
 import BackButton from "../ui/ButtonBack";
 import { Expedicion } from "@/app/types/expedicion";
 import { formatearFechaCorta } from "@/app/lib/utils";
+import { obtenerCuposDisponibles, obtenerDificultad, obtenerEstadoExpedicion } from "@/app/lib/salidas.utils";
 
 interface HeroServicioProps {
     servicio: Servicio
@@ -19,29 +20,9 @@ interface HeroServicioProps {
 const HeroServicio = ({ servicio, expedicion }: HeroServicioProps) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const obtenerEstadoExpedicion = () => {
-        const diasParaSalida = Math.ceil((new Date(expedicion.fecha_salida || '').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-
-        if (expedicion.cupos_disponibles === 0) {
-            return { texto: 'Completa', color: 'bg-red-100 text-red-800' };
-        }
-        if (diasParaSalida <= 30) {
-            return { texto: 'Próxima Salida', color: 'bg-orange-100 text-orange-800' };
-        }
-        if (expedicion.cupos_disponibles <= 3) {
-            return { texto: 'Últimos Cupos', color: 'bg-yellow-100 text-yellow-800' };
-        }
-        return { texto: 'Disponible', color: 'bg-green-100 text-green-800' };
-    };
-
-    const obtenerDificultad = () => {
-        if (servicio.id_dificultad === 3) return { texto: 'Avanzado', color: 'text-red-600', bg: 'bg-red-100' };
-        if (servicio.id_dificultad === 2) return { texto: 'Medio', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-        return { texto: 'Inicial', color: 'text-green-600', bg: 'bg-green-100' };
-    };
-
-    const estadoExpedicion = obtenerEstadoExpedicion();
-    const dificultad = obtenerDificultad();
+    const estadoExpedicion = obtenerEstadoExpedicion(expedicion);
+    const dificultad = obtenerDificultad(servicio);
+    const cuposDisponibles = obtenerCuposDisponibles(expedicion);
 
     return (
         <div className="relative min-h-screen bg-cover bg-center">
@@ -86,7 +67,7 @@ const HeroServicio = ({ servicio, expedicion }: HeroServicioProps) => {
                             </div>
                             <div className="flex items-center bg-[var(--color-naranja)] bg-opacity-20 px-4 py-2 rounded-full">
                                 <Users className="mr-2" size={16} />
-                                <span className="text-sm">{expedicion.cupos_disponibles} cupos disponibles</span>
+                                <span className="text-sm">{cuposDisponibles}</span>
                             </div>
                         </div>
 

@@ -3,6 +3,7 @@ import { Expedicion } from "../types/expedicion";
 import { Servicio } from "../types/servicio";
 import { Calendar, Mountain, Users, Clock, MapPin, ChevronRight } from 'lucide-react';
 import { generateExpedicionLink } from "../hooks/useExpedicion";
+import { obtenerCuposDisponiblesSlash, obtenerDificultad, obtenerEstadoExpedicion } from "../lib/salidas.utils";
 
 // Componente de card más completa para esta página
 interface SalidaCardCompletaProps {
@@ -37,31 +38,9 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
     //     ? `Desde ${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`
     //     : `${precioMinimo.moneda} ${precioMinimo.precio.toLocaleString()}`;
 
-    const obtenerDificultad = () => {
-        if (servicio.altura_maxima >= 5000) return { texto: 'Muy Alta', color: 'text-red-600' };
-        if (servicio.altura_maxima >= 4000) return { texto: 'Alta', color: 'text-orange-600' };
-        if (servicio.altura_maxima >= 3000) return { texto: 'Media-Alta', color: 'text-yellow-600' };
-        return { texto: 'Media', color: 'text-green-600' };
-    };
-
-    const dificultad = obtenerDificultad();
-
-    const obtenerEstadoExpedicion = () => {
-        const diasParaSalida = Math.ceil((new Date(expedicion.fecha_salida || '').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-
-        if (expedicion.cupos_disponibles === 0) {
-            return { texto: 'Completa', color: 'bg-red-100 text-red-800' };
-        }
-        if (diasParaSalida <= 30) {
-            return { texto: 'Próxima Salida', color: 'bg-orange-100 text-orange-800' };
-        }
-        if (expedicion.cupos_disponibles <= 3) {
-            return { texto: 'Últimos Cupos', color: 'bg-yellow-100 text-yellow-800' };
-        }
-        return { texto: 'Disponible', color: 'bg-green-100 text-green-800' };
-    };
-
-    const estadoExpedicion = obtenerEstadoExpedicion();
+    const dificultad = obtenerDificultad(servicio);
+    const estadoExpedicion = obtenerEstadoExpedicion(expedicion);
+    const cuposDisponibles = obtenerCuposDisponiblesSlash(expedicion);
 
     return (
         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -110,7 +89,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
                     </div>
                     <div className="flex items-center text-gray-600">
                         <Users size={14} className="mr-1 text-amber-600" />
-                        <span>{expedicion.cupos_disponibles}/{servicio.cupos_maximos}</span>
+                        <span>{cuposDisponibles}/{expedicion.cupos_disponibles}</span>
                     </div>
                 </div>
 

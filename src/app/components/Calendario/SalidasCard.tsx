@@ -18,15 +18,20 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
 
     const getDaysUntil = (date: Date) => {
         const today = new Date();
-        const diffTime = date.getTime() - today.getTime();
+        today.setHours(0, 0, 0, 0);
+
+        const targetDate = new Date(date);
+        targetDate.setHours(0, 0, 0, 0);
+
+        const diffTime = targetDate.getTime() - today.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+        if (diffDays < 0) return "Finalizada";
         if (diffDays === 0) return "Hoy";
         if (diffDays === 1) return "Mañana";
-        if (diffDays < 0) return "En curso";
         return `En ${diffDays} días`;
     };
-
+    
     return (
         <div
             className="border border-[var(--color-naranja-200)] rounded-lg p-4 transition-all duration-300 hover:shadow-lg transform hover:scale-102"
@@ -56,7 +61,7 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
             <h4 className="font-bold text-[var(--color-white)] mb-2 text-sm">
                 {salida.servicio.nombre}
             </h4>
-            
+
             <div className="space-y-2 text-xs">
                 <div className="flex items-center justify-between text-[var(--color-white)]">
                     <div className="flex items-center">
@@ -67,7 +72,7 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                         {formatDateShort(salida.fechaInicio)} - {formatDateShort(salida.fechaFin)}
                     </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between text-[var(--color-white)]">
                     <div className="flex items-center">
                         <Clock size={12} className="mr-1 text-[var(--color-naranja-200)]" />
@@ -77,7 +82,7 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                         {salida.servicio.duracion_dias} días
                     </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between text-[var(--color-white)]">
                     <div className="flex items-center">
                         <MapPin size={12} className="mr-1 text-[var(--color-naranja-200)]" />
@@ -87,7 +92,7 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                         {salida.servicio.altura_maxima}m
                     </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between text-[var(--color-white)]">
                     <div className="flex items-center">
                         <Users size={12} className="mr-1 text-[var(--color-naranja-200)]" />
@@ -97,8 +102,8 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                         {salida.expedicion.cupos_disponibles} disponibles
                     </span>
                 </div>
-                
-                <div className="flex items-center justify-between text-[var(--color-white)]">
+
+                {/* <div className="flex items-center justify-between text-[var(--color-white)]">
                     <div className="flex items-center">
                         <DollarSign size={12} className="mr-1 text-[var(--color-naranja-200)]" />
                         <span>Precio</span>
@@ -106,10 +111,10 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                     <span className="font-bold text-[var(--color-naranja-200)]">
                         {salida.expedicion.precios[0].moneda} {salida.expedicion.precios[0].precio.toLocaleString()}
                     </span>
-                </div>
+                </div> */}
             </div>
-            
-            <button 
+
+            <button
                 className="w-full mt-3 bg-[var(--color-naranja-200)] hover:bg-amber-700 text-white py-2 px-3 rounded-lg transition-all duration-300 font-medium text-xs transform hover:scale-105"
                 onClick={() => { window.location.href = `/salidas/${salida.expedicion.id_expedicion}`; }}
             >

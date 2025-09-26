@@ -60,7 +60,7 @@ const TodasLasSalidas = () => {
         //     );
         // }
 
-        // Ordenamiento
+        // Ordenamiento actualizado
         salidas.sort((a, b) => {
             switch (ordenarPor) {
                 case 'precio':
@@ -69,7 +69,25 @@ const TodasLasSalidas = () => {
                     return b.servicio.altura_maxima - a.servicio.altura_maxima;
                 case 'fecha':
                 default:
-                    return new Date(a.expedicion.fecha_salida || '').getTime() - new Date(b.expedicion.fecha_salida || '').getTime();
+                    const hoy = new Date();
+                    hoy.setHours(0, 0, 0, 0);
+
+                    const fechaA = new Date(a.expedicion.fecha_salida || '');
+                    fechaA.setHours(0, 0, 0, 0);
+
+                    const fechaB = new Date(b.expedicion.fecha_salida || '');
+                    fechaB.setHours(0, 0, 0, 0);
+
+                    const aExpirada = fechaA < hoy;
+                    const bExpirada = fechaB < hoy;
+
+                    // Si una está expirada y la otra no, la expirada va al final
+                    if (aExpirada && !bExpirada) return 1;
+                    if (!aExpirada && bExpirada) return -1;
+
+                    // Si ambas están en el mismo estado (ambas expiradas o ambas vigentes)
+                    // ordenar normalmente por fecha
+                    return fechaA.getTime() - fechaB.getTime();
             }
         });
 

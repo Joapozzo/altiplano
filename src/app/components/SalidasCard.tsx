@@ -3,6 +3,7 @@ import { Clock, Mountain, Users, ChevronRight } from 'lucide-react';
 import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
 import { generateExpedicionLink } from '../hooks/useExpedicion';
+import { obtenerDificultad } from '../lib/salidas.utils';
 
 interface SalidaCardProps {
   servicio: Servicio;
@@ -57,15 +58,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
   };
 
   const etiqueta = obtenerEtiqueta();
-
-  // Obtener nivel de dificultad
-  const obtenerDificultad = () => {
-    if (servicio.altura_maxima >= 5000) return 'Muy Alta';
-    if (servicio.altura_maxima >= 4000) return 'Alta';
-    if (servicio.altura_maxima >= 3000) return 'Media-Alta';
-    return 'Media';
-  };
-
+  const dificultad = obtenerDificultad(servicio);
   // Truncar descripción
   const descripcionCorta = servicio.desc.length > 120
     ? servicio.desc.substring(0, 120) + '...'
@@ -163,7 +156,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
             <Mountain size={16} className="mr-2 text-amber-600" />
             <span>
               {servicio.altura_maxima.toLocaleString()}m - Dificultad{" "}
-              {obtenerDificultad()}
+              {dificultad.texto}
             </span>
           </div>
 

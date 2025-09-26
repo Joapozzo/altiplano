@@ -26,7 +26,7 @@ export interface Expedicion {
   reserva_porcentaje?: number; // ej: 30 para Vallecitos
   
   // Itinerario detallado
-  itinerario: ItinerarioDia[];
+  itinerario?: ItinerarioDia[];
   
   // Validez del presupuesto
   presupuesto_valido_hasta?: string;

@@ -12,7 +12,6 @@ const CalendarioSalidas = () => {
     const [visibleElements, setVisibleElements] = useState<Set<string>>(new Set());
     const observerRef = useRef<IntersectionObserver | null>(null);
 
-    // Procesar salidas
     const salidas: SalidaCalendario[] = expedicionesMock.map(expedicion => {
         const servicio = serviciosMock.find(s => s.id_servicio === expedicion.id_servicio);
         return {
@@ -21,7 +20,18 @@ const CalendarioSalidas = () => {
             fechaInicio: new Date(expedicion.fecha_salida || ''),
             fechaFin: new Date(expedicion.fecha_fin || '')
         };
-    }).filter(s => s.servicio);
+    }).filter(s => {
+        if (!s.servicio) return false;
+
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+
+        const fechaSalida = new Date(s.fechaInicio);
+        fechaSalida.setHours(0, 0, 0, 0);
+
+        // Solo mostrar expediciones futuras
+        return fechaSalida >= hoy;
+    }).sort((a, b) => a.fechaInicio.getTime() - b.fechaInicio.getTime());
 
     // Obtener años disponibles - solo de fechas válidas
     const añosDisponibles = [...new Set(

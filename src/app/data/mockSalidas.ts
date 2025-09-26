@@ -58,7 +58,7 @@ export const serviciosMock: Servicio[] = [
         nombre: "Penitentes",
         id_lugar: 2,
         id_actividad: 2,
-        id_dificultad: 3,
+        id_dificultad: 1,
         duracion_dias: 4,
         duracion_noches: 3,
         altura_maxima: 4350,
@@ -213,8 +213,8 @@ export const serviciosMock: Servicio[] = [
 
         // Condiciones climáticas
         clima_recomendado: "La mejor época para realizar el ascenso al volcán Tuzgle es de mayo a octubre, cuando el clima es más seco y las condiciones de estabilidad atmosférica favorecen la aclimatación y el ascenso.",
-        temperatura_dia_min: -5,
-        temperatura_dia_max: 15,
+        temperatura_dia_min: -10,
+        temperatura_dia_max: 18,
         temperatura_noche_min: -15,
         temporada_recomendada: ["mayo", "junio", "julio", "agosto", "septiembre", "octubre"],
 
@@ -280,6 +280,9 @@ export const serviciosMock: Servicio[] = [
 
         // Media
         fotos: ["/tuzgle/1.jpg", "/tuzgle/2.jpg", "/tuzgle/3.jpg"],
+
+        // Enlace al itinerario
+        id_itinerario: 11,
 
         // Metadata
         fecha_creacion: "2025-01-01",
@@ -351,9 +354,9 @@ export const serviciosMock: Servicio[] = [
         id_servicio: 6,
         nombre: "Aconcagua",
         id_lugar: 6,
-        id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 5, // Exigente
-        duracion_dias: 15, // 13 días de programa + 2 días extra
+        id_actividad: 2,
+        id_dificultad: 3,
+        duracion_dias: 15,
         duracion_noches: 14,
         altura_maxima: 6969,
         desc: "El Aconcagua es el cerro más alto de América y uno de los seismiles más icónicos del mundo. Su ascenso por la ruta normal no presenta dificultades técnicas, pero es un verdadero desafío físico y mental por la altitud, el clima extremo y la duración de la expedición. Esta propuesta está pensada para montañistas con experiencia previa en altura, que busquen una expedición seria, segura y con una logística sólida.",
@@ -369,6 +372,8 @@ export const serviciosMock: Servicio[] = [
         ratio_guia_pasajero: "1-2",
         conocimientos_tecnicos_requeridos: false,
         temporada_recomendada: ["diciembre", "enero", "febrero", "marzo"],
+        temperatura_dia_min: -30,
+        temperatura_dia_max: 15,
         temperatura_noche_min: -20,
         punto_encuentro: "Mendoza (760 msnm)",
 
@@ -476,6 +481,8 @@ export const serviciosMock: Servicio[] = [
         cupos_maximos: 4, // ratio 1-2
         ratio_guia_pasajero: "1-2",
 
+        id_itinerario: 8,
+
         // Alimentación detallada
         alimentacion_detalle: {
             desayunos: "Huevos, palta, panificaciones",
@@ -536,7 +543,7 @@ export const serviciosMock: Servicio[] = [
         nombre: "Cerro Franke",
         id_lugar: 6, // Parque Provincial Cordón del Plata
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 4, // Media-Alta
+        id_dificultad: 2, // Media-Alta
         duracion_dias: 4,
         duracion_noches: 3,
         altura_maxima: 4820,
@@ -602,7 +609,7 @@ export const serviciosMock: Servicio[] = [
             "Aclimatación previa recomendada",
             "Experiencia en trekking de altura necesaria"
         ],
-        id_itinerario: 6,
+        id_itinerario: 9,
         fotos: ["/franke/1.jpg", "/franke/2.jpg", "/franke/3.jpg"],
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
@@ -613,7 +620,7 @@ export const serviciosMock: Servicio[] = [
         nombre: "Volcán San Francisco",
         id_lugar: 7, // Ruta de los Seismiles, Catamarca
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 5, // Exigente
+        id_dificultad: 2, // Exigente
         duracion_dias: 7,
         duracion_noches: 6,
         altura_maxima: 6016,
@@ -642,6 +649,31 @@ export const serviciosMock: Servicio[] = [
             raciones_marcha: "Empanadas, sándwiches con fiambres al vacío, huevo, fruta",
             cenas: "Platos regionales en Fiambalá; opciones ligeras y altamente nutritivas en campamentos de altura"
         },
+
+        // Servicios incluidos y no incluidos
+        servicios_incluidos: [
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-2 (1 guía cada 2 pasajeros)",
+            "Traslados desde y hasta Fiambalá",
+            "Pensión completa en montaña",
+            "Alojamiento 6 noches en carpas de alta montaña",
+            "Almuerzo de despedida",
+            "Visita a termas",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF y satelital para emergencias",
+            "Oxígeno medicinal para evacuación",
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+        ],
+
+        servicios_no_incluidos: [
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas personales",
+            "Snacks de marcha",
+            "Transporte desde ciudad de origen a Fiambalá"
+        ],
         diferenciadores: [
             "Enfoque educativo: autonomía en la montaña",
             "Grupos reducidos",
@@ -655,61 +687,8 @@ export const serviciosMock: Servicio[] = [
             "Formularios específicos para paso internacional (provistos por Altiplano)",
             "Ascenso a 6.000 metros con largas jornadas, frío intenso y clima cambiante"
         ],
-        id_itinerario: 7,
+        id_itinerario: 11,
         fotos: ["/sanfrancisco/1.jpg", "/sanfrancisco/2.jpg", "/sanfrancisco/3.jpg"],
-        fecha_creacion: "2025-01-01",
-        fecha_actualizacion: "2025-01-01",
-        activo: true
-    },
-    {
-        id_servicio: 10,
-        nombre: "Volcán San Francisco",
-        id_lugar: 7, // Ruta de los Seismiles, Catamarca
-        id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 5, // Exigente
-        duracion_dias: 7,
-        duracion_noches: 6,
-        altura_maxima: 6016,
-        desnivel: 918, // desde CB hasta cumbre (día de cumbre)
-        desc: "El ascenso al Volcán San Francisco es una expedición de alta montaña en la Puna de Catamarca, ideal para quienes desean alcanzar un seismil y vivir una experiencia transformadora en paisajes de extrema belleza. Durante siete días realizamos un proceso de aclimatación progresivo, ascendiendo cerros cercanos como el Coquena (4.035 m), el Falso Morocho (4.500 m) y el Bertrand (5.250 m), lo que nos permite ganar altura de forma segura antes de intentar la cumbre del San Francisco (6.016 m). Esta travesía combina trekking en altura, refugios rústicos de adobe y campamentos, y un recorrido por el corazón de la Puna catamarqueña.",
-        desc_resumen: "Tu primer seismil: 7 días de aclimatación progresiva hasta alcanzar los 6.016 m del imponente San Francisco.",
-        sobre_lugar: "El Volcán San Francisco, de 6.016 metros, se ubica en el límite entre Argentina y Chile, dentro de un corredor de volcanes de más de seis mil metros que dominan la región. La zona se caracteriza por su aislamiento, su belleza extrema y su rica historia geológica. Durante el viaje, atravesaremos paisajes únicos: salares, campos de lava, y refugios de montaña enclavados en la inmensidad de la Puna. El pueblo de Fiambalá, punto de partida de nuestra expedición, ofrece aguas termales y una cálida bienvenida cultural y gastronómica.",
-        clima_recomendado: "La mejor temporada para ascender al Volcán San Francisco es entre noviembre y marzo, cuando las temperaturas son más estables y el clima menos hostil. Aún así, estamos en alta montaña: durante el día, las temperaturas pueden variar entre 5°C y 18°C, y por la noche pueden descender hasta -15°C. La zona es ventosa y seca, con alta exposición solar.",
-        descripcion_recorrido: "El ascenso sigue un plan de aclimatación progresivo de 7 días, comenzando en Fiambalá (1.550 m) y ascendiendo gradualmente cerros de aclimatación: Coquena (4.035 m), Falso Morocho (4.500 m) y Bertrand (5.250 m). Culminamos con el ascenso al Volcán San Francisco desde el campamento base a 5.100 m, una jornada de 12-14 horas muy exigente.",
-        experiencia_requerida: "Esta expedición tiene una dificultad exigente, recomendada para personas con buena condición física, estado de salud y experiencia en montañas de 4.000 m o actividades de resistencia. No es necesario tener conocimientos técnicos, pero sí es importante contar con voluntad, entrenamiento previo, tolerancia a la altitud y equipo adecuado. El ascenso a 6.000 metros implica largas jornadas de caminata en altura, frío intenso y clima cambiante.",
-        modalidad: "grupo reducido",
-        cupos_maximos: 4, // ratio 1-2
-        ratio_guia_pasajero: "1-2",
-        conocimientos_tecnicos_requeridos: false,
-        horas_caminata_diarias: "12-14 horas (día de cumbre)",
-        peso_mochila: "15-17 kg",
-        temporada_recomendada: ["noviembre", "diciembre", "enero", "febrero", "marzo"],
-        temperatura_dia_min: 5,
-        temperatura_dia_max: 18,
-        temperatura_noche_min: -15,
-        punto_encuentro: "Fiambalá a las 9:00 hs",
-        comodidades: "6 noches en tiendas de montaña de alta calidad. Refugios rústicos de adobe en algunos campamentos. Los campamentos se establecen en zonas estratégicas siguiendo el plan de aclimatación progresivo.",
-        briefing_info: "Cada día realizaremos encuentros para revisar el itinerario, evaluar la aclimatación y compartir recomendaciones para enfrentar la altura con seguridad. Hablaremos sobre el ritmo, la hidratación, la gestión de la energía en altura, y los síntomas comunes de hipoxia para poder responder a tiempo. También revisaremos el equipo personal antes del ascenso final.",
-        alimentacion_detalle: {
-            desayunos: "Huevos, palta, panificaciones",
-            raciones_marcha: "Empanadas, sándwiches con fiambres al vacío, huevo, fruta",
-            cenas: "Platos regionales en Fiambalá; opciones ligeras y altamente nutritivas en campamentos de altura"
-        },
-        diferenciadores: [
-            "Enfoque educativo: autonomía en la montaña",
-            "Grupos reducidos",
-            "Ritmo ajustado y conexión con la montaña",
-            "Compromiso con el medio ambiente"
-        ],
-        consideraciones_especiales: [
-            "Expedición en zona remota con condiciones de aislamiento propias de la alta montaña",
-            "Durante varios días no habrá acceso a señal de celular ni asistencia médica cercana",
-            "Región limítrofe con Chile - documentación vigente obligatoria",
-            "Formularios específicos para paso internacional (provistos por Altiplano)",
-            "Ascenso a 6.000 metros con largas jornadas, frío intenso y clima cambiante"
-        ],
-        id_itinerario: 7,
-        fotos: ["/san-francisco/1.jpg", "/san-francisco/2.jpg", "/san-francisco/3.jpg"],
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
         activo: true
@@ -719,7 +698,7 @@ export const serviciosMock: Servicio[] = [
         nombre: "Volcán Llullaillaco",
         id_lugar: 8, // Puna de Atacama, Salta
         id_actividad: 2, // Ascenso de alta montaña
-        id_dificultad: 5, // Exigente
+        id_dificultad: 3, // Exigente
         duracion_dias: 14,
         duracion_noches: 13,
         altura_maxima: 6739,
@@ -748,6 +727,29 @@ export const serviciosMock: Servicio[] = [
             raciones_marcha: "Empanadas, sándwiches con fiambres, huevo, fruta",
             cenas: "Platos regionales en San Antonio de los Cobres; opciones ligeras y altamente nutritivas en campamentos de altura"
         },
+
+        servicios_incluidos: [
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-2 (1 guía cada 2 pasajeros)",
+            "Pensión completa",
+            "Alojamiento 4 noches en hostería y 10 noches en carpas de alta montaña",
+            "Transporte local en Salta",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF y satelital",
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+        ],
+
+        servicios_no_incluidos: [
+            "Porteos",
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas personales",
+            "Snacks de marcha",
+            "Transporte desde ciudad de origen a Salta"
+        ],
+
         diferenciadores: [
             "Enfoque educativo: autonomía en la montaña",
             "Grupos reducidos",
@@ -762,9 +764,10 @@ export const serviciosMock: Servicio[] = [
             "Ascenso a casi 7.000 metros con largas jornadas y clima extremo"
         ],
         fotos: ["/llullaillaco/1.jpg", "/llullaillaco/2.jpg", "/llullaillaco/3.jpg"],
+        id_itinerario: 12,
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01",
-        activo: true
+        activo: true,
     }
 ];
 
@@ -845,7 +848,7 @@ export const expedicionesMock: Expedicion[] = [
         fecha_salida: "2025-11-04",
         fecha_fin: "2025-11-09",
         cupos_disponibles: 4,
-        cupos_ocupados: 0,
+        cupos_ocupados: 3,
         estado: 'Activa',
         precios: [
             { precio: 938, moneda: 'USD' }
@@ -877,8 +880,8 @@ export const expedicionesMock: Expedicion[] = [
     {
         id_expedicion: 5,
         id_servicio: 5,
-        fecha_salida: "2025-11-05",
-        fecha_fin: "2025-11-10",
+        fecha_salida: "2026-03-17",
+        fecha_fin: "2026-03-22",
         cupos_disponibles: 4,
         cupos_ocupados: 0,
         estado: 'Activa',
@@ -911,8 +914,8 @@ export const expedicionesMock: Expedicion[] = [
     {
         id_expedicion: 6,
         id_servicio: 7,
-        fecha_salida: "2025-11-11",
-        fecha_fin: "2025-11-21",
+        fecha_salida: "2026-04-02",
+        fecha_fin: "2026-04-12",
         cupos_disponibles: 4,
         cupos_ocupados: 0,
         estado: 'Activa',
@@ -968,11 +971,11 @@ export const expedicionesMock: Expedicion[] = [
     },
     {
         id_expedicion: 8,
-        id_servicio: 8, // Cerro Franke
-        fecha_salida: "TBD", // To Be Determined
-        fecha_fin: "TBD",
+        id_servicio: 8,
+        fecha_salida: "2026-01-08",
+        fecha_fin: "2026-01-11",
         cupos_disponibles: 4,
-        cupos_ocupados: 0,
+        cupos_ocupados: 3,
         estado: 'Activa',
         precios: [
             { precio: 750, moneda: 'USD' }
@@ -1008,10 +1011,10 @@ export const expedicionesMock: Expedicion[] = [
     {
         id_expedicion: 9,
         id_servicio: 9, // Volcán San Francisco
-        fecha_salida: "TBD",
-        fecha_fin: "TBD",
-        cupos_disponibles: 4,
-        cupos_ocupados: 0,
+        fecha_salida: "2026-03-02",
+        fecha_fin: "2026-03-08",
+        cupos_disponibles: 6,
+        cupos_ocupados: 3,
         estado: 'Activa',
         precios: [
             { precio: 1850, moneda: 'USD' }
@@ -1043,8 +1046,8 @@ export const expedicionesMock: Expedicion[] = [
     {
         id_expedicion: 10,
         id_servicio: 11, // Volcán Llullaillaco
-        fecha_salida: "TBD",
-        fecha_fin: "TBD",
+        fecha_salida: "2026-03-17",
+        fecha_fin: "2026-03-29",
         cupos_disponibles: 4,
         cupos_ocupados: 0,
         estado: 'Activa',
@@ -1073,7 +1076,7 @@ export const expedicionesMock: Expedicion[] = [
         itinerario: [],
         fecha_creacion: "2025-01-01",
         fecha_actualizacion: "2025-01-01"
-    }
+    },
 ];
 
 export const itinerarioPenitentes: ItinerarioDia[] = [
@@ -1314,6 +1317,7 @@ export const itinerarioAconcagua: ItinerarioDia[] = [
         altitud: 4350,
         alojamiento: "carpas",
         comidas: ["cena", "pernocte"],
+        intensidad: "muy exigente",
         actividades_especiales: ["Campamento base más grande de Sudamérica"]
     },
     {
@@ -1333,6 +1337,7 @@ export const itinerarioAconcagua: ItinerarioDia[] = [
         altitud: 5550,
         alojamiento: "carpas en Plaza de Mulas",
         comidas: ["noche en carpas"],
+        intensidad: "muy exigente",
         actividades_especiales: ["Porteo", "Nido de Cóndores"]
     },
     {
@@ -1611,7 +1616,7 @@ export const itinerarioQuewar: ItinerarioDia[] = [
 
 export const itinerarioFranke: ItinerarioDia[] = [
     {
-        id_itinerario: 6,
+        id_itinerario: 9,
         dia: 1,
         titulo: "Encuentro en Mendoza y traslado a Vallecitos",
         descripcion: "Encuentro en ciudad de Mendoza a las 9:00 hs. Revisión de equipo y traslado a Vallecitos. Inicio del trekking a Veguitas superior (CB-3400 msnm), porteando el equipo personal y comunitario. Armado de campamento y pernocte en tiendas de montaña.",
@@ -1626,7 +1631,7 @@ export const itinerarioFranke: ItinerarioDia[] = [
         actividades_especiales: ["Revisión de equipo", "Armado de campamento"]
     },
     {
-        id_itinerario: 6,
+        id_itinerario: 9,
         dia: 2,
         titulo: "Trekking de aclimatación a campamentos de altura",
         descripcion: "Trekking de aclimatación a campamentos de altura (3800/4000 msnm). Jornada dedicada a la adaptación progresiva a la altitud y reconocimiento del terreno. Pernocte en tiendas de montaña.",
@@ -1637,7 +1642,7 @@ export const itinerarioFranke: ItinerarioDia[] = [
         actividades_especiales: ["Aclimatación", "Reconocimiento de terreno"]
     },
     {
-        id_itinerario: 6,
+        id_itinerario: 9,
         dia: 3,
         titulo: "Ascenso al Cerro Franke",
         descripcion: "Ascenso al cerro Franke por su ruta normal en el filo sureste y descenso por un gran acarreo que finaliza a metros del campamento Piedra Grande. Jornada muy exigente de alta montaña. Pernocte en tiendas de montaña.",
@@ -1651,7 +1656,7 @@ export const itinerarioFranke: ItinerarioDia[] = [
         actividades_especiales: ["Cumbre", "Filo sureste", "Gran acarreo"]
     },
     {
-        id_itinerario: 6,
+        id_itinerario: 9,
         dia: 4,
         titulo: "Regreso a Mendoza",
         descripcion: "Desarme de campamento y regreso a Mendoza. Fin de la expedición a las 15:00 hs aproximadamente. Tiempo para almuerzo opcional en Potrerillos antes del regreso.",
@@ -1663,7 +1668,7 @@ export const itinerarioFranke: ItinerarioDia[] = [
 
 export const itinerarioSanFrancisco: ItinerarioDia[] = [
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 1,
         titulo: "Encuentro en Fiambalá y traslado a Pastos Largos",
         descripcion: "Encuentro a las 9:00 hs en Fiambalá (1.550 msnm). Bienvenida, briefing, permisos aduaneros y traslado en vehículos a Pastos Largos (3.300 msnm). Noche en tiendas de montaña.",
@@ -1674,7 +1679,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Bienvenida", "Briefing", "Permisos aduaneros"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 2,
         titulo: "Ascenso al Cerro Coquena",
         descripcion: "Ascenso al cerro Coquena (4.035 msnm). Pernocte en Pastos Largos (3.300 msnm). Jornada moderada de aclimatación.",
@@ -1687,7 +1692,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Aclimatación", "Cumbre Coquena"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 3,
         titulo: "Traslado y ascenso al Cerro Falso Morocho",
         descripcion: "Traslado en vehículo hacia La Gruta (4.000 m), paso aduanero. Ascenso al cerro Falso Morocho (4.500 msnm). Descanso en agua termal. Noche en tiendas de alta montaña.",
@@ -1700,7 +1705,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Paso aduanero", "Cumbre Falso Morocho", "Aguas termales"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 4,
         titulo: "Ascenso al Volcán Bertrand",
         descripcion: "Aproximación en vehículo a 4.400 msnm. Ascenso a Volcán Bertrand (5.250 msnm) y regreso al campamento. Jornada intensa de aclimatación.",
@@ -1713,7 +1718,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Cumbre Bertrand", "Aclimatación alta montaña"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 5,
         titulo: "Descanso activo y traslado al campamento base",
         descripcion: "Descanso activo. Traslado al campamento base del Volcán San Francisco a 5.100 msnm. Preparación para el día de cumbre. Noche en tiendas de montaña. Trekking con mochila de 15-17 kg.",
@@ -1727,7 +1732,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Descanso activo", "Preparación para cumbre"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 6,
         titulo: "Ascenso al Volcán San Francisco",
         descripcion: "Ascenso al Volcán San Francisco (6.016 msnm). Regreso al campamento base. Noche en tiendas de alta montaña. Jornada muy exigente de seismil.",
@@ -1740,7 +1745,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
         actividades_especiales: ["Cumbre San Francisco", "Seismil"]
     },
     {
-        id_itinerario: 7,
+        id_itinerario: 11,
         dia: 7,
         titulo: "Regreso a Fiambalá",
         descripcion: "Desarmado de campamento y regreso a Fiambalá. Almuerzo de despedida, visita a termas y fin del programa.",
@@ -1752,7 +1757,7 @@ export const itinerarioSanFrancisco: ItinerarioDia[] = [
 
 export const itinerarioLlullaillaco: ItinerarioDia[] = [
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 1,
         titulo: "Encuentro en Salta",
         descripcion: "Encuentro en Salta (9:00 h) Bienvenida, briefing y revisión de equipo. Traslado a San Antonio de los Cobres (3.775 m). Cena y pernocte en hostería.",
@@ -1763,7 +1768,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Bienvenida", "Briefing", "Revisión de equipo"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 2,
         titulo: "Ascenso de aclimatación al Cerro Pompeya",
         descripcion: "Ascenso de aclimatación al Cerro Pompeya (4.050 m). Regreso, cena y pernocte en hostería en San Antonio de los Cobres.",
@@ -1773,7 +1778,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Aclimatación", "Cerro Pompeya"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 3,
         titulo: "Traslado al campamento base del Volcán Tuzgle",
         descripcion: "Traslado en vehículo hasta el campamento base del Volcán Tuzgle (4.500 m). Armado de campamento y pernocte en tiendas de montaña.",
@@ -1782,7 +1787,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Armado de campamento"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 4,
         titulo: "Día de aclimatación en Tuzgle",
         descripcion: "Día de aclimatación y descanso en campamento base, o posibilidad de mover al C1 según clima y condiciones del grupo. Pernocte en tiendas de montaña.",
@@ -1791,7 +1796,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Aclimatación", "Descanso"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 5,
         titulo: "Ascenso a la cumbre del Volcán Tuzgle",
         descripcion: "Ascenso a la cumbre del Volcán Tuzgle (5.530 m) y regreso a San Antonio de los Cobres. Cena y pernocte en hostería.",
@@ -1802,7 +1807,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Cumbre Tuzgle"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 6,
         titulo: "Jornada de descanso",
         descripcion: "Jornada de descanso en San Antonio de los Cobres.",
@@ -1811,7 +1816,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Descanso", "Recuperación"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 7,
         titulo: "Traslado a Tolar Grande",
         descripcion: "Traslado a Tolar Grande (3.500 m). Cena y pernocte en hostería (según disponibilidad).",
@@ -1820,7 +1825,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         comidas: ["cena", "pernocte"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 8,
         titulo: "Traslado al campamento base del Volcán Llullaillaco",
         descripcion: "Traslado al campamento base del Volcán Llullaillaco (4900 m). Armado de campamento y pernocte en tiendas de montaña.",
@@ -1829,7 +1834,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Armado de campamento base Llullaillaco"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 9,
         titulo: "Porteo de equipo al C1",
         descripcion: "Porteo de equipo al C1 (5.900 m) y regreso al campamento base.",
@@ -1839,7 +1844,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Porteo al C1"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 10,
         titulo: "Día de descanso y recuperación",
         descripcion: "Día de descanso y recuperación en el campamento base.",
@@ -1848,7 +1853,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Descanso", "Recuperación", "Aclimatación"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 11,
         titulo: "Ascenso al C1",
         descripcion: "Ascenso al C1 (5.900 m). Pernocte en tiendas de montaña.",
@@ -1857,7 +1862,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         intensidad: "exigente"
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 12,
         titulo: "Intento de cumbre del Volcán Llullaillaco",
         descripcion: "Intento de cumbre del Volcán Llullaillaco (6.739 m) y regreso al C1.",
@@ -1869,7 +1874,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         actividades_especiales: ["Cumbre Llullaillaco", "Santuario inca más alto del mundo"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 13,
         titulo: "Descenso al campamento base",
         descripcion: "Descenso al campamento base y traslado a San Antonio de los Cobres. Cena de despedida y pernocte en hostería.",
@@ -1878,7 +1883,7 @@ export const itinerarioLlullaillaco: ItinerarioDia[] = [
         comidas: ["cena de despedida", "pernocte"]
     },
     {
-        id_itinerario: 8,
+        id_itinerario: 12,
         dia: 14,
         titulo: "Regreso a Salta",
         descripcion: "Regreso a la ciudad de Salta. Fin de los servicios.",
