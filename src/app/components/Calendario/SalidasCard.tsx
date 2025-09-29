@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin, Users, DollarSign } from 'lucide-react';
 import { SalidaCalendario } from '../../types/calendario';
+import { formatearFechaMasCorta } from '@/app/lib/utils';
 
 interface SalidaCardProps {
     salida: SalidaCalendario;
@@ -9,13 +10,6 @@ interface SalidaCardProps {
 }
 
 const SalidaCard = ({ salida, index }: SalidaCardProps) => {
-    const formatDateShort = (date: Date) => {
-        return date.toLocaleDateString('es-AR', {
-            day: 'numeric',
-            month: 'short'
-        });
-    };
-
     const getDaysUntil = (date: Date) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -31,6 +25,10 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
         if (diffDays === 1) return "Mañana";
         return `En ${diffDays} días`;
     };
+
+    const toString = (date: Date) => date.toISOString().split('T')[0];
+    const fechaInicio = formatearFechaMasCorta(toString(salida.fechaInicio));
+    const fechaFin = formatearFechaMasCorta(toString(salida.fechaFin));
     
     return (
         <div
@@ -69,7 +67,7 @@ const SalidaCard = ({ salida, index }: SalidaCardProps) => {
                         <span>Fechas</span>
                     </div>
                     <span className="font-medium">
-                        {formatDateShort(salida.fechaInicio)} - {formatDateShort(salida.fechaFin)}
+                        {fechaInicio} - {fechaFin}
                     </span>
                 </div>
 

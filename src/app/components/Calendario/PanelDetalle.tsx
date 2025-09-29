@@ -1,5 +1,3 @@
-// src/app/components/Calendario/PanelDetalle.tsx
-
 import React from 'react';
 import { MesData } from '../../types/calendario';
 import DetalleMes from './DetalleMes';
