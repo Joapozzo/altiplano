@@ -20,3 +20,13 @@ export const formatearFechaCorta = (fecha: string) => {
         year: 'numeric'
     });
 };
+
+export const formatearFechaMasCorta = (fecha: string) => {
+    const [year, month, day] = fecha.split('-');
+    const fechaLocal = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    
+    return fechaLocal.toLocaleDateString('es-AR', {
+        day: 'numeric',
+        month: 'short',
+    });
+};

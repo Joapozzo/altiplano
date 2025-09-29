@@ -4,6 +4,7 @@ import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
 import { generateExpedicionLink } from '../hooks/useExpedicion';
 import { obtenerDificultad } from '../lib/salidas.utils';
+import { formatearFechaMasCorta } from '../lib/utils';
 
 interface SalidaCardProps {
   servicio: Servicio;
@@ -24,17 +25,9 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
     return () => clearTimeout(timer);
   }, [index]);
 
-  // Formatear fechas
-  const formatearFecha = (fecha: string) => {
-    if (fecha === 'TBD') return 'Sin fecha';
-    return new Date(fecha).toLocaleDateString('es-AR', {
-      day: 'numeric',
-      month: 'short'
-    });
-  };
 
-  const fechaInicio = formatearFecha(expedicion.fecha_salida || '');
-  const fechaFin = formatearFecha(expedicion.fecha_fin || '');
+  const fechaInicio = formatearFechaMasCorta(expedicion.fecha_salida || '');
+  const fechaFin = formatearFechaMasCorta(expedicion.fecha_fin || '');
   const rangoFechas = `${fechaInicio} - ${fechaFin}`;
 
   // Obtener precio principal (primer precio)
@@ -155,7 +148,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
           <div className="flex items-center text-sm text-gray-600 hover:text-amber-600 transition-colors duration-200">
             <Mountain size={16} className="mr-2 text-amber-600" />
             <span>
-              {servicio.altura_maxima.toLocaleString()}m - Dificultad{" "}
+              {servicio.altura_maxima.toLocaleString()}m - Nivel{" "}
               {dificultad.texto}
             </span>
           </div>
