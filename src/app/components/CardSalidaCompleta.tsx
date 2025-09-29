@@ -4,6 +4,7 @@ import { Servicio } from "../types/servicio";
 import { Calendar, Mountain, Users, Clock, MapPin, ChevronRight } from 'lucide-react';
 import { generateExpedicionLink } from "../hooks/useExpedicion";
 import { obtenerCuposDisponiblesSlash, obtenerDificultad, obtenerEstadoExpedicion } from "../lib/salidas.utils";
+import { formatearFechaCorta } from "../lib/utils";
 
 // Componente de card más completa para esta página
 interface SalidaCardCompletaProps {
@@ -16,21 +17,8 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
 
     const expedicionLink = generateExpedicionLink(expedicion, servicio);
 
-    const goToSalida = (idSalida: number) => {
-        router.push("/salidas/" + idSalida);
-    };
-
-    const formatearFecha = (fecha: string) => {
-        if (fecha === 'TBD') return '';
-        return new Date(fecha).toLocaleDateString('es-AR', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-        });
-    };
-
-    const fechaInicio = formatearFecha(expedicion.fecha_salida || '');
-    const fechaFin = formatearFecha(expedicion.fecha_fin || '');
+    const fechaInicio = formatearFechaCorta(expedicion.fecha_salida || '');
+    const fechaFin = formatearFechaCorta(expedicion.fecha_fin || '');
 
     const precioMinimo = expedicion.precios[0];
     const tieneMultiplesPaquetes = expedicion.precios.length > 1;
@@ -81,7 +69,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
                     </div>
                     <div className="flex items-center">
                         <Mountain size={14} className="mr-1 text-amber-600" />
-                        <span className={`font-medium ${dificultad.color}`}>{dificultad.texto}</span>
+                        <span className={`font-medium ${dificultad.color}`}> Nivel {dificultad.texto}</span>
                     </div>
                     <div className="flex items-center text-gray-600">
                         <MapPin size={14} className="mr-1 text-amber-600" />

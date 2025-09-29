@@ -48,7 +48,7 @@ const HeroServicio = ({ servicio, expedicion }: HeroServicioProps) => {
                             </span>
                             <div className={`flex items-center px-3 py-1 rounded-full ${dificultad.bg} ${dificultad.color}`}>
                                 <Mountain className="mr-1" size={14} />
-                                <span className="text-xs font-semibold">Dificultad {dificultad.texto}</span>
+                                <span className="text-xs font-semibold">Nivel {dificultad.texto}</span>
                             </div>
                         </div>
 

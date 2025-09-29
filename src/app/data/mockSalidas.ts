@@ -282,7 +282,7 @@ export const serviciosMock: Servicio[] = [
         fotos: ["/tuzgle/1.jpg", "/tuzgle/2.jpg", "/tuzgle/3.jpg"],
 
         // Enlace al itinerario
-        id_itinerario: 11,
+        id_itinerario: 7,
 
         // Metadata
         fecha_creacion: "2025-01-01",
@@ -303,9 +303,7 @@ export const serviciosMock: Servicio[] = [
         desc_resumen: "Viví la montaña en estado puro: caminatas, carpa y la cima del Punta Negra.",
         sobre_lugar: "El cerro Punta Negra se encuentra en las inmediaciones del valle de Arenales, una región de belleza escénica impactante, conocida por sus paredones de granito y su ambiente silvestre. Esta zona forma parte del Cordón del Portillo, en el sector alto del Manzano Histórico, a unas 3 horas de Mendoza capital. El acceso se realiza por caminos de montaña, que nos conducen hasta el inicio del sendero. El entorno ofrece vistas a otros clásicos de la zona como el Cerro Keops y el Punta Blanca.",
         clima_recomendado: "La temporada ideal para ascender al Cerro Punta Negra es de octubre a abril, cuando las condiciones de nieve y temperaturas permiten el acceso seguro y la permanencia en altura. Durante el día, las temperaturas suelen variar entre 5°C y 20°C, mientras que por la noche pueden descender hasta 0°C o menos en el campamento. El clima puede ser variable y es frecuente la presencia de viento fuerte por la tarde.",
-
         experiencia_requerida: "Expedición de dificultad media, ideal para personas con buena condición física y experiencia en trekking. No es necesario contar con conocimientos técnicos, pero sí estar preparadas/os para caminar con mochila, dormir en carpa y realizar una jornada de ascenso prolongada en altura.",
-
         modalidad: "grupo reducido",
         cupos_maximos: 6,
         ratio_guia_pasajero: "1-3",
@@ -316,21 +314,42 @@ export const serviciosMock: Servicio[] = [
         temperatura_dia_max: 20,
         temperatura_noche_min: 0,
         punto_encuentro: "Tunuyán 11hs, provincia de Mendoza",
-
         briefing_info: "Cada día realizaremos encuentros para revisar el itinerario, evaluar la aclimatación y compartir recomendaciones para enfrentar la altura con seguridad. Hablaremos sobre el ritmo, la hidratación, la gestión de la energía en altura, y los síntomas comunes de hipoxia para poder responder a tiempo. También revisaremos el equipo personal antes del ascenso final.",
-
         consideraciones_especiales: [
             "Expedición en zona remota con condiciones de aislamiento",
             "Sin acceso a señal de celular ni asistencia médica cercana",
             "Región limítrofe con Chile - documentación vigente obligatoria"
         ],
-
         alimentacion_detalle: {
             desayunos: "Huevos, palta, panificaciones",
             raciones_marcha: "Empanadas, sándwiches con fiambres al vacío, huevo, fruta",
-            cenas: "Platos regionales en Fiambala; opciones ligeras y altamente nutritivas en campamentos de altura"
+            cenas: "Platos regionales; opciones ligeras y altamente nutritivas en campamentos de altura"
         },
 
+        // Servicios incluidos - Paquete FULL
+        servicios_incluidos: [
+            "Guías profesionales de montaña",
+            "Grupos reducidos ratio 1-3 (1 guía cada 3 pasajeros)",
+            "Transfer desde Tunuyán a Scaravelli (ida y vuelta)",
+            "Pensión completa en montaña",
+            "Alojamiento 2 noches en carpas de alta montaña",
+            "Registro audiovisual del ascenso",
+            "Seguro contra accidentes personales",
+            "Botiquín grupal de primeros auxilios",
+            "Comunicación VHF y satelital para emergencias",
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+        ],
+
+        // Servicios no incluidos
+        servicios_no_incluidos: [
+            "Indumentaria personal",
+            "Equipo de montaña personal",
+            "Bebidas",
+            "Snacks de marcha",
+            "Transporte hasta Tunuyán"
+        ],
+
+        // Servicios adicionales disponibles
         servicios_adicionales_disponibles: [
             "Almuerzo de despedida en bodega"
         ],
