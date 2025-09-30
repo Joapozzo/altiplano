@@ -32,7 +32,7 @@ const PanelDetalle = ({
                     id="detail-panel"
                     data-animate
                 >
-                    <div className={`${getAnimationClass("detail-panel")} flex-1 flex flex-col overflow-hidden`}>
+                    <div className={`${getAnimationClass("detail-panel")} flex-1 flex flex-col`}>
                         {selectedMes ? (
                             <DetalleMes
                                 selectedMes={selectedMes}

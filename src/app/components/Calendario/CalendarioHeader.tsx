@@ -1,5 +1,3 @@
-// src/app/components/Calendario/CalendarioHeader.tsx
-
 import React from 'react';
 
 interface CalendarioHeaderProps {
