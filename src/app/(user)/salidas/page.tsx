@@ -104,7 +104,7 @@ const TodasLasSalidas = () => {
                             <BackButton />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 max-w-2xl">
-                            Descrubre toas experiencias que tenemos preparadas
+                            Descrubre todas experiencias que tenemos preparadas
                         </h1>
                         <p className="text-xl text-amber-100 max-w-2xl">
                             Descubre todas las aventuras que tenemos preparadas para ti en

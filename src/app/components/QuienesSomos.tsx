@@ -87,8 +87,8 @@ const ImagenEquipo = ({ isVisible }) => {
                 style={{ transitionDelay: '300ms' }}
             >
                 <Image
-                    src="/imgs/champaqui.jpg"
-                    alt="Equipo CumbreAndina"
+                    src="/imgs/final.jpg"
+                    alt="Foto del aconcagua"
                     fill
                     className="object-cover"
                 />

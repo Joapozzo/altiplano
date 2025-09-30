@@ -3,7 +3,7 @@ import { Clock, Mountain, Users, ChevronRight } from 'lucide-react';
 import { Servicio } from '../types/servicio';
 import { Expedicion } from '../types/expedicion';
 import { generateExpedicionLink } from '../hooks/useExpedicion';
-import { obtenerDificultad } from '../lib/salidas.utils';
+import { obtenerCuposDisponibles, obtenerDificultad } from '../lib/salidas.utils';
 import { formatearFechaMasCorta } from '../lib/utils';
 
 interface SalidaCardProps {
@@ -29,7 +29,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
   const fechaInicio = formatearFechaMasCorta(expedicion.fecha_salida || '');
   const fechaFin = formatearFechaMasCorta(expedicion.fecha_fin || '');
   const rangoFechas = `${fechaInicio} - ${fechaFin}`;
-
+  const cupos = obtenerCuposDisponibles(expedicion);
   // Obtener precio principal (primer precio)
   // const precioMinimo = expedicion.precios[0];
   // const precioPrincipal = expedicion.precios.length > 1
@@ -156,8 +156,7 @@ const SalidaCard = ({ servicio, expedicion, index }: SalidaCardProps) => {
           <div className="flex items-center text-sm text-gray-600 hover:text-amber-600 transition-colors duration-200">
             <Users size={16} className="mr-2 text-amber-600" />
             <span>
-              Máx. {servicio.cupos_maximos} personas -{" "}
-              {expedicion.cupos_disponibles} disponibles
+                {cupos}
             </span>
           </div>
         </div>

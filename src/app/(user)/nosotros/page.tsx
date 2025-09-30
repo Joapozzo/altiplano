@@ -86,7 +86,7 @@ const GuiasPage = () => {
                                                 }
                 `}>
                                                 <Image
-                                                    src={guia.img || '/imgs/default-avatar.jpg'}
+                                                    src={guia.img}
                                                     alt={`${guia.nombre} ${guia.apellido}`}
                                                     width={48}
                                                     height={48}
@@ -113,19 +113,19 @@ const GuiasPage = () => {
                                 <h4 className="font-bold text-[var(--color-negro)] mb-4 text-center">
                                     Experiencia Conjunta
                                 </h4>
-                                <div className="grid grid-cols-2 gap-4 text-center">
+                                <div className="grid grid-cols-1 gap-4 text-center">
                                     <div className="bg-[var(--color-beige)]/40 p-3 rounded-lg">
                                         <div className="text-2xl font-bold text-[var(--color-naranja)]">
                                             {guias.reduce((sum, guia) => sum + guia.años_experiencia, 0)}
                                         </div>
                                         <div className="text-xs text-gray-600">Años de Experiencia</div>
                                     </div>
-                                    <div className="bg-[var(--color-beige)]/40 p-3 rounded-lg">
+                                    {/* <div className="bg-[var(--color-beige)]/40 p-3 rounded-lg">
                                         <div className="text-2xl font-bold text-[var(--color-naranja)]">
                                             {guias.reduce((sum, guia) => sum + guia.expediciones_guiadas, 0)}+
                                         </div>
                                         <div className="text-xs text-gray-600">Expediciones</div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -261,11 +261,11 @@ const GuiasPage = () => {
                             Nuestros guías están preparados para acompañarte en una experiencia única e inolvidable.
                             Cada expedición es diseñada con el mayor cuidado para tu seguridad y disfrute.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <AnimatedButton variant='primary' size='lg' icon={<Award size={20} />} onClick={() => {
                                 openWhatsApp();
                             }}>
-                                Contactar Equipo
+                                Contactar equipo
                             </AnimatedButton>
                         </div>
                     </div>

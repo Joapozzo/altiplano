@@ -18,7 +18,7 @@ const InfoGeneral = ({ servicio, expedicion }: InfoGeneralProps) => {
     return (
         <div className="bg-white rounded-xl shadow-md p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Información General</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <Clock className="mx-auto mb-2 text-amber-600" size={24} />
                     <div className="font-semibold text-gray-800">{servicio.duracion_dias} días</div>
@@ -34,13 +34,13 @@ const InfoGeneral = ({ servicio, expedicion }: InfoGeneralProps) => {
                     <div className="font-semibold text-gray-800">{cuposDisponibles}/{expedicion.cupos_disponibles}</div>
                     <div className="text-sm text-gray-600">Cupos disponibles</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                {/* <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <Thermometer className="mx-auto mb-2 text-amber-600" size={24} />
                     <div className="font-semibold text-gray-800">
                         {servicio.temperatura_dia_min}° a {servicio.temperatura_dia_max}°
                     </div>
                     <div className="text-sm text-gray-600">Temperatura día</div>
-                </div>
+                </div> */}
             </div>
 
             {/* Información adicional */}

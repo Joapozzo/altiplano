@@ -105,7 +105,8 @@ export const serviciosMock: Servicio[] = [
             "Seguro contra accidentes personales",
             "Botiquín grupal de primeros auxilios",
             "Comunicación VHF",
-            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)",
+            "Transporte local en Mendoza"
         ],
         servicios_no_incluidos: [
             "Indumentaria personal",
@@ -172,7 +173,8 @@ export const serviciosMock: Servicio[] = [
             "Botiquín grupal de primeros auxilios",
             "Comunicación VHF",
             "Comunicación satelital",
-            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)",
+            "Transporte local en Mendoza"
         ],
 
         servicios_adicionales_disponibles: [
@@ -337,7 +339,8 @@ export const serviciosMock: Servicio[] = [
             "Seguro contra accidentes personales",
             "Botiquín grupal de primeros auxilios",
             "Comunicación VHF y satelital para emergencias",
-            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)",
+            "Transporte local en Mendoza"
         ],
 
         // Servicios no incluidos
@@ -425,7 +428,8 @@ export const serviciosMock: Servicio[] = [
             "Botiquín grupal de primeros auxiliios",
             "Comunicación VHF y satelital",
             "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)",
-            "Ticket de ingreso a Parques"
+            "Ticket de ingreso a Parques",
+            "Transporte local en Mendoza"
         ],
 
         servicios_no_incluidos: [
@@ -607,7 +611,8 @@ export const serviciosMock: Servicio[] = [
             "Seguro contra accidentes personales",
             "Botiquín grupal de primeros auxilios",
             "Comunicación VHF",
-            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)"
+            "Listado de elementos para el viaje y asesoramiento individual previo (vía WhatsApp)",
+            "Transporte local en Mendoza"
         ],
         servicios_no_incluidos: [
             "Indumentaria personal",

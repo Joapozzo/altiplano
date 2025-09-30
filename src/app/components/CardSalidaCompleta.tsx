@@ -3,7 +3,7 @@ import { Expedicion } from "../types/expedicion";
 import { Servicio } from "../types/servicio";
 import { Calendar, Mountain, Users, Clock, MapPin, ChevronRight } from 'lucide-react';
 import { generateExpedicionLink } from "../hooks/useExpedicion";
-import { obtenerCuposDisponiblesSlash, obtenerDificultad, obtenerEstadoExpedicion } from "../lib/salidas.utils";
+import { obtenerCuposDisponibles, obtenerCuposDisponiblesSlash, obtenerDificultad, obtenerEstadoExpedicion } from "../lib/salidas.utils";
 import { formatearFechaCorta } from "../lib/utils";
 
 // Componente de card más completa para esta página
@@ -28,7 +28,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
 
     const dificultad = obtenerDificultad(servicio);
     const estadoExpedicion = obtenerEstadoExpedicion(expedicion);
-    const cuposDisponibles = obtenerCuposDisponiblesSlash(expedicion);
+    const cuposDisponibles = obtenerCuposDisponibles(expedicion);
 
     return (
         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -77,7 +77,7 @@ const SalidaCardCompleta = ({ servicio, expedicion }: SalidaCardCompletaProps) =
                     </div>
                     <div className="flex items-center text-gray-600">
                         <Users size={14} className="mr-1 text-amber-600" />
-                        <span>{cuposDisponibles}/{expedicion.cupos_disponibles}</span>
+                        <span>{cuposDisponibles}</span>
                     </div>
                 </div>
 

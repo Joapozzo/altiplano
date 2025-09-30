@@ -37,7 +37,7 @@ export const obtenerCuposDisponibles = (expedicion: Expedicion) => {
     const cuposDisponibles = expedicion.cupos_disponibles - expedicion.cupos_ocupados;
     
     if (cuposDisponibles === 0) return "Sin cupos disponibles";
-    if (cuposDisponibles === 1) return "1 cupo disponible";
+    if (cuposDisponibles === 1) return "Último cupo disponible";
     return `${cuposDisponibles} cupos disponibles`;
 }
 

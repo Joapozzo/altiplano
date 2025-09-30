@@ -122,7 +122,7 @@ const SalidasDestacadas = () => {
             {/* Efecto de brillo */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
 
-            <span className="relative z-10">Ver Todas las Salidas</span>
+            <span className="relative z-10">Ver todas las salidas</span>
           </button>
         </div>
       </div>
