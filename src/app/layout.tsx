@@ -15,20 +15,20 @@ const raleway = Raleway({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://altiplano.com'),
-  
+
   // Títulos optimizados
   title: {
     default: "Altiplano Experience - Expediciones y Trekking en Argentina | Montañismo",
     template: "%s | Altiplano Experience - Trekking Argentina"
   },
-  
+
   // Descripción optimizada para SEO
   description: "🏔️ Expediciones de trekking y alta montaña en Argentina. Aconcagua, Champaquí, Vallecitos. Guías certificados, grupos reducidos. +10 años de experiencia. ¡Viví tu aventura!",
-  
+
   // Keywords estratégicas
   keywords: [
     "trekking argentina",
-    "expediciones montaña argentina", 
+    "expediciones montaña argentina",
     "aconcagua expedicion",
     "champaqui trekking",
     "vallecitos mendoza",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     "montañismo argentina",
     "aventura outdoor"
   ],
-  
+
   // Autor y clasificación
   authors: [{ name: "Altiplano Experience" }],
   creator: "Altiplano Experience",
   publisher: "Altiplano Experience",
   category: "turismo, aventura, trekking, montañismo",
-  
+
   // Configuración de robots
   robots: {
     index: true,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   // Open Graph optimizado
   openGraph: {
     type: 'website',
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Cards
   twitter: {
     card: 'summary_large_image',
@@ -89,29 +89,25 @@ export const metadata: Metadata = {
     creator: '@altiplanoxp',
     site: '@altiplanoxp',
   },
-  
-  // Favicons e iconos
+
   icons: {
     icon: [
-      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
     ],
-    apple: [
-      { url: '/logos/Logo-Reducido-Naranja.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: '/logos/Logo-Reducido-Naranja.png',
+    shortcut: '/favicon.ico',
   },
-  
+
+
   // Configuración adicional
   manifest: '/manifest.json',
-  
+
   // Verificación de sitios
   verification: {
     google: 'tu-codigo-google-search-console',
     // yandex: 'tu-codigo-yandex',
     // bing: 'tu-codigo-bing',
   },
-  
+
   // Configuración de alternates para idiomas (si planeas expandir)
   alternates: {
     canonical: 'https://altiplano.com',
@@ -120,7 +116,7 @@ export const metadata: Metadata = {
       'es': 'https://altiplano.com/es',
     },
   },
-  
+
   // Información adicional
   other: {
     'theme-color': '#f59e0b', // Color amber de tu marca
@@ -139,15 +135,15 @@ export default function RootLayout({
       <head>
         {/* Viewport mejorado */}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        
+
         {/* Theme color para móviles */}
         <meta name="theme-color" content="#f59e0b" />
         <meta name="msapplication-TileColor" content="#f59e0b" />
-        
+
         {/* Preconnect para optimizar fuentes */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* Structured Data para SEO */}
         <script
           type="application/ld+json"
@@ -185,10 +181,10 @@ export default function RootLayout({
       </head>
       <body className={`${raleway.variable} font-sans antialiased`}>
         <NavigationWrapper>
-          <Navbar/>
+          <Navbar />
           {children}
-          <Footer/>
-          <FloatingTipsWidget/>
+          <Footer />
+          <FloatingTipsWidget />
           <WhatsAppButton />
         </NavigationWrapper>
       </body>
