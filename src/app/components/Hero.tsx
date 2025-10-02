@@ -188,7 +188,7 @@ export default function AdventureHeroEnhanced() {
 
                                 {/* Main Title with enhanced gradient and animation */}
                                 <h1
-                                    className="text-5xl md:text-7xl font-bold mb-2 md:mb-4 leading-tight uppercase text-white transform transition-all duration-1000 ease-out"
+                                    className="text-5xl md:text-5xl 2xl:text-6xl font-bold mb-2 md:mb-4 leading-tight uppercase text-white transform transition-all duration-1000 ease-out"
                                     style={{
                                         opacity: isVisible ? 1 : 0,
                                         transform: isVisible

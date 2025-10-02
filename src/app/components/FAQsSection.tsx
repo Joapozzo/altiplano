@@ -97,7 +97,7 @@ const FAQsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="py-16 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
+            className="py-16 relative overflow-hidden"
             id="faqs"
         >
             {/* Background decorations */}
