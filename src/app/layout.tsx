@@ -14,7 +14,7 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://altiplano.com'),
+  metadataBase: new URL('https://www.altiplanoexperience.com'),
 
   // Títulos optimizados
   title: {
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_AR',
-    url: 'https://altiplano.com',
+    url: 'https://www.altiplanoexperience.com/',
     title: 'Altiplano Experience - Expediciones y Trekking en Argentina',
     description: '🏔️ Expediciones de trekking y alta montaña en Argentina. Aconcagua, Champaquí, Vallecitos. Guías certificados, grupos reducidos. ¡Viví tu aventura!',
     siteName: 'Altiplano Experience',
@@ -91,12 +91,8 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
-    ],
-    shortcut: '/favicon.ico',
+    icon: '/favicon.ico',
   },
-
 
   // Configuración adicional
   manifest: '/manifest.json',
@@ -110,10 +106,10 @@ export const metadata: Metadata = {
 
   // Configuración de alternates para idiomas (si planeas expandir)
   alternates: {
-    canonical: 'https://altiplano.com',
+    canonical: 'https://www.altiplanoexperience.com/',
     languages: {
-      'es-AR': 'https://altiplano.com',
-      'es': 'https://altiplano.com/es',
+      'es-AR': 'https://www.altiplanoexperience.com/',
+      'es': 'https://www.altiplanoexperience.com//es',
     },
   },
 
@@ -153,8 +149,8 @@ export default function RootLayout({
               "@type": "TravelAgency",
               "name": "Altiplano Experience",
               "description": "Expediciones de trekking y alta montaña en Argentina",
-              "url": "https://altiplano.com",
-              "logo": "https://altiplano.com/logos/Logo-Reducido-Naranja.png",
+              "url": "https://www.altiplanoexperience.com/",
+              "logo": "https://www.altiplanoexperience.com/logos/Logo-Reducido-Naranja.png",
               "telephone": "+549383749-8552",
               "address": {
                 "@type": "PostalAddress",
