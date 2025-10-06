@@ -96,25 +96,25 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     },
   };
 
-  // Configuración de tamaños
+  // Configuración de tamaños RESPONSIVE
   const sizeVariants = {
     sm: {
-      padding: "py-2 px-4",
-      text: "text-xs",
-      iconSize: "p-1",
-      iconMargin: "ml-1.5 group-hover:ml-2",
+      padding: "py-2 px-4 sm:py-2.5 sm:px-5",
+      text: "text-[10px] sm:text-xs",
+      iconSize: "p-0.5 sm:p-1",
+      iconMargin: "ml-1 sm:ml-1.5 group-hover:ml-1.5 sm:group-hover:ml-2",
     },
     md: {
-      padding: "py-4 px-8",
-      text: "text-sm",
-      iconSize: "p-1.5",
-      iconMargin: "ml-2 group-hover:ml-3",
+      padding: "py-2.5 px-5 sm:py-3 sm:px-6 md:py-4 md:px-8",
+      text: "text-xs sm:text-sm",
+      iconSize: "p-1 sm:p-1.5",
+      iconMargin: "ml-1.5 sm:ml-2 group-hover:ml-2 sm:group-hover:ml-3",
     },
     lg: {
-      padding: "py-5 px-10",
-      text: "text-base",
-      iconSize: "p-2",
-      iconMargin: "ml-3 group-hover:ml-4",
+      padding: "py-3 px-6 sm:py-4 sm:px-8 md:py-5 md:px-10",
+      text: "text-sm sm:text-base",
+      iconSize: "p-1.5 sm:p-2",
+      iconMargin: "ml-2 sm:ml-3 group-hover:ml-2.5 sm:group-hover:ml-4",
     },
   };
 
@@ -134,13 +134,15 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   const sizes = sizeVariants[size];
 
-  // Clases base del botón
+  // Clases base del botón - RESPONSIVE
   const baseClasses = `
     group relative overflow-hidden 
     text-white font-medium rounded-full 
     flex items-center justify-center 
-    shadow-2xl transition-all duration-500 
-    transform hover:scale-105 w-fit
+    shadow-lg sm:shadow-xl md:shadow-2xl 
+    transition-all duration-500 
+    transform hover:scale-105 
+    w-full sm:w-auto
     ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
   `;
 
@@ -150,9 +152,28 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       ? `bg-gradient-to-r ${colors.shadowColor}`
       : `bg-gradient-to-r ${colors.from} ${colors.to} ${colors.hoverFrom} ${colors.hoverTo} ${colors.shadowColor}`;
 
-  // Icono por defecto
+  // Icono por defecto - TAMAÑO RESPONSIVE
+  const getIconSize = () => {
+    switch (size) {
+      case "sm":
+        return { mobile: 10, desktop: 12 };
+      case "lg":
+        return { mobile: 14, desktop: 16 };
+      default:
+        return { mobile: 12, desktop: 14 };
+    }
+  };
+
+  const iconSize = getIconSize();
   const defaultIcon = (
-    <ChevronRight size={size === "sm" ? 12 : size === "lg" ? 16 : 14} />
+    <>
+      <span className="sm:hidden">
+        <ChevronRight size={iconSize.mobile} />
+      </span>
+      <span className="hidden sm:inline">
+        <ChevronRight size={iconSize.desktop} />
+      </span>
+    </>
   );
   const displayIcon = icon || defaultIcon;
 
@@ -193,13 +214,14 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       )}
 
       {/* Contenido del texto */}
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 whitespace-nowrap">{children}</span>
 
       {/* Icono - solo se renderiza si hasIcon es true */}
       {hasIcon && (
         <span
           className={`
             relative z-10 rounded-full transition-all duration-300
+            flex items-center justify-center flex-shrink-0
             ${sizes.iconSize}
             ${sizes.iconMargin}
             ${colors.iconBg}

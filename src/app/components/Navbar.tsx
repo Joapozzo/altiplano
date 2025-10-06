@@ -16,14 +16,8 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { title: "Calendario", href: "/#calendario" },
     { title: "Expediciones", href: "/salidas" },
-    // { title: "Trekking", href: "/#trekking" },
-    // { title: "Montaña", href: "/#montaña" },
     { title: "FAQs", href: "/#faqs" },
     { title: "Conocenos", href: "/#quienes-somos" },
-
-    // { title: "Políticas", href: "#politicas" },
-    // { title: "Arma tu Exp", href: "#arma-exp" },
-    // { title: "Inscripción", href: "#inscripcion" }
   ];
 
   // Detectar scroll para cambiar el estilo del navbar
@@ -52,13 +46,18 @@ const Navbar: React.FC = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+    // Extraer solo el hash del href (ejemplo: /#calendario -> #calendario)
+    const hash = href.includes('#') ? href.split('#')[1] : '';
+    
+    if (!hash) return;
+    
+    const element = document.getElementById(hash);
     if (element) {
       window.scrollTo({
         top: element.getBoundingClientRect().top + window.scrollY - 100,
         behavior: 'smooth'
       });
-      setActiveLink(href);
+      setActiveLink(`#${hash}`);
     }
   };
 
@@ -68,20 +67,30 @@ const Navbar: React.FC = () => {
   };
 
   const handleNavigation = (link: any, e: React.MouseEvent) => {
-    // Si el href es una ruta (empieza con "/"), navegar normalmente
-    if (link.href.startsWith('/')) {
+    // Si el href NO tiene hash, es una ruta normal
+    if (!link.href.includes('#')) {
       router.push(link.href);
       setMobileMenuOpen(false);
       return;
     }
 
-    // Si es un ancla (empieza con "#"), hacer scroll
+    // Si tiene hash, hacer scroll
     e.preventDefault();
-    scrollToSection(link.href);
+    
+    // Si estamos en otra página y queremos ir a home con hash
+    if (window.location.pathname !== '/' && link.href.startsWith('/#')) {
+      router.push('/');
+      setTimeout(() => {
+        scrollToSection(link.href);
+      }, 100);
+    } else {
+      scrollToSection(link.href);
+    }
+    
     setMobileMenuOpen(false);
   };
 
-  const { openWhatsApp } = useWhatsApp()
+  const { openWhatsApp } = useWhatsApp();
 
   return (
     <nav
@@ -90,14 +99,14 @@ const Navbar: React.FC = () => {
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-8 sm:px-8 md:px-15 lg:px-15 py-3">
 
         {/* Logo Container */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 cursor-pointer">
           <Image
             src="/logos/Logo-Completo-Blanco.svg"
             alt="Logo"
             width={120}
             height={40}
             className="object-contain"
-            onClick={() => goToHome()}
+            onClick={goToHome}
           />
         </div>
 
@@ -122,9 +131,7 @@ const Navbar: React.FC = () => {
 
         {/* Botón Contáctanos */}
         <div className="flex-shrink-0 hidden md:block">
-          <AnimatedButton size='sm' className='px-7 py-3' hasIcon={false} onClick={() => {
-            openWhatsApp();
-          }}>
+          <AnimatedButton size='sm' className='px-7 py-3' hasIcon={false} onClick={openWhatsApp}>
             Contáctanos
           </AnimatedButton>
         </div>
@@ -146,32 +153,25 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu Overlay */}
         <div
-          className={`lg:hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
+          className={`lg:hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           onClick={() => setMobileMenuOpen(false)}
         ></div>
 
         {/* Mobile Menu Sidebar */}
         <div
-          className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-[var(--color-naranja)] z-40 transition-transform duration-300 ease-in-out shadow-2xl ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+          className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-[var(--color-naranja)] z-40 transition-transform duration-300 ease-in-out shadow-2xl ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
           <div className="flex flex-col h-full pt-20 px-8">
             <div className="flex flex-col space-y-6">
               {navLinks.map((link, index) => (
                 <div
                   key={link.href}
-                  className={`transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                    }`}
+                  className={`transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <Link
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(link.href);
-                      setMobileMenuOpen(false);
-                    }}
+                    onClick={(e) => handleNavigation(link, e)}
                     className="text-white font-medium text-lg py-3 border-b border-white/20 block transition-all duration-200 hover:text-[var(--color-amarillo)] hover:pl-2"
                   >
                     {link.title}
@@ -180,8 +180,7 @@ const Navbar: React.FC = () => {
               ))}
             </div>
             <div
-              className={`mt-8 transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                }`}
+              className={`mt-8 transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
               style={{ transitionDelay: '600ms' }}
             >
               <button

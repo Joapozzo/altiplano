@@ -17,7 +17,10 @@ export default function AdventureHeroEnhanced() {
 
     const heroRef = useRef(null);
     const textContentRef = useRef(null);
-    const serviceDestacados = useMemo(() => serviciosMock.filter(s => s.destacado), []);
+    const serviceDestacados = useMemo(() => {
+        const destacados = serviciosMock.filter(s => s.destacado);
+        return destacados.length > 0 ? destacados : [serviciosMock[0]];
+    }, []);
     const currentServiceData = serviceDestacados[currentService];
 
     // Intersection Observer para detectar cuando el hero es visible
@@ -49,22 +52,24 @@ export default function AdventureHeroEnhanced() {
     }, []);
 
     useEffect(() => {
-        const handleResize = () => {
-            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-        };
+        if (typeof window !== 'undefined') {
+            const handleResize = () => {
+                setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+            };
 
-        handleResize();
-        window.addEventListener('resize', handleResize);
+            handleResize();
+            window.addEventListener('resize', handleResize);
 
-        const handleMouseMove = (e) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-        };
-        window.addEventListener('mousemove', handleMouseMove);
+            const handleMouseMove = (e) => {
+                setMousePosition({ x: e.clientX, y: e.clientY });
+            };
+            window.addEventListener('mousemove', handleMouseMove);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
+            return () => {
+                window.removeEventListener('resize', handleResize);
+                window.removeEventListener('mousemove', handleMouseMove);
+            };
+        }
     }, []);
 
     // Reset main photo when service changes
@@ -89,7 +94,7 @@ export default function AdventureHeroEnhanced() {
 
         setIsAnimating(true);
         setTimeout(() => {
-            setCurrentService((prev) => (prev === serviciosMock.length - 1 ? 0 : prev + 1));
+            setCurrentService((prev) => (prev === serviceDestacados.length - 1 ? 0 : prev + 1));
             setTimeout(() => {
                 setIsAnimating(false);
             }, 500);
@@ -101,7 +106,7 @@ export default function AdventureHeroEnhanced() {
 
         setIsAnimating(true);
         setTimeout(() => {
-            setCurrentService((prev) => (prev === 0 ? serviciosMock.length - 1 : prev - 1));
+            setCurrentService((prev) => (prev === 0 ? serviceDestacados.length - 1 : prev - 1));
             setTimeout(() => {
                 setIsAnimating(false);
             }, 500);
@@ -188,7 +193,7 @@ export default function AdventureHeroEnhanced() {
 
                                 {/* Main Title with enhanced gradient and animation */}
                                 <h1
-                                    className="text-5xl md:text-5xl 2xl:text-6xl font-bold mb-2 md:mb-4 leading-tight uppercase text-white transform transition-all duration-1000 ease-out"
+                                    className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-bold mb-2 md:mb-4 leading-tight uppercase text-white transform transition-all duration-1000 ease-out"
                                     style={{
                                         opacity: isVisible ? 1 : 0,
                                         transform: isVisible
