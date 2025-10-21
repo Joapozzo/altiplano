@@ -28,7 +28,7 @@ export const guias = [
         id: 2,
         nombre: "Pablo",
         apellido: "Chanuar",
-        img: "/us/pablo.jpg",
+        img: "/us/pablo.JPG",
         titulo: "INSTRUCTOR Y MONTAÑISTA",
         especialidad: "Alta Montaña y Rescate",
         años_experiencia: 12,
