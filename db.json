@@ -1,0 +1,322 @@
+{
+  "tables": [
+    {
+      "id": 1,
+      "name": "lugares",
+      "fields": [
+        {"name": "id_lugar", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "nombre", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "tipo_lugar", "type": "VARCHAR(50)", "notNull": true, "comment": "Volcán, Cerro, Cordillera"},
+        {"name": "provincia", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "pais", "type": "VARCHAR(100)", "notNull": true, "default": "'Argentina'"},
+        {"name": "altitud_base", "type": "INT", "comment": "metros"},
+        {"name": "descripcion", "type": "TEXT"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "actividades",
+      "fields": [
+        {"name": "id_actividad", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "nombre", "type": "VARCHAR(100)", "notNull": true, "comment": "Trekking, Alta Montaña"},
+        {"name": "descripcion", "type": "TEXT"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "dificultades",
+      "fields": [
+        {"name": "id_dificultad", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "nivel", "type": "VARCHAR(50)", "notNull": true, "comment": "Media, Alta, Muy Alta"},
+        {"name": "descripcion", "type": "TEXT"},
+        {"name": "requisitos_minimos", "type": "TEXT"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "servicios",
+      "fields": [
+        {"name": "id_servicio", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "nombre", "type": "VARCHAR(200)", "notNull": true},
+        {"name": "id_lugar", "type": "INT", "notNull": true},
+        {"name": "id_actividad", "type": "INT", "notNull": true},
+        {"name": "id_dificultad", "type": "INT", "notNull": true},
+        {"name": "duracion_dias", "type": "INT", "notNull": true},
+        {"name": "duracion_noches", "type": "INT", "notNull": true},
+        {"name": "altura_maxima", "type": "INT", "notNull": true, "comment": "metros"},
+        {"name": "desnivel", "type": "INT", "comment": "metros"},
+        {"name": "desc_corta", "type": "VARCHAR(500)"},
+        {"name": "desc_completa", "type": "TEXT"},
+        {"name": "sobre_lugar", "type": "TEXT"},
+        {"name": "clima_recomendado", "type": "TEXT"},
+        {"name": "descripcion_recorrido", "type": "TEXT"},
+        {"name": "experiencia_requerida", "type": "TEXT"},
+        {"name": "modalidad", "type": "VARCHAR(50)", "comment": "grupo abierto, grupo reducido"},
+        {"name": "cupos_maximos", "type": "INT", "notNull": true},
+        {"name": "ratio_guia_pasajero", "type": "VARCHAR(20)", "comment": "1-2, 1-3"},
+        {"name": "conocimientos_tecnicos_req", "type": "BOOLEAN", "default": "false"},
+        {"name": "horas_caminata_diarias", "type": "VARCHAR(50)"},
+        {"name": "peso_mochila_sugerido", "type": "VARCHAR(50)"},
+        {"name": "temporada_recomendada", "type": "JSON", "comment": "array de meses"},
+        {"name": "temperatura_dia_min", "type": "INT"},
+        {"name": "temperatura_dia_max", "type": "INT"},
+        {"name": "temperatura_noche_min", "type": "INT"},
+        {"name": "punto_encuentro", "type": "VARCHAR(200)"},
+        {"name": "comodidades", "type": "TEXT"},
+        {"name": "briefing_info", "type": "TEXT"},
+        {"name": "alimentacion_detalle", "type": "JSON"},
+        {"name": "consideraciones_especiales", "type": "JSON"},
+        {"name": "diferenciadores", "type": "JSON"},
+        {"name": "servicios_incluidos", "type": "JSON"},
+        {"name": "servicios_no_incluidos", "type": "JSON"},
+        {"name": "destacado", "type": "BOOLEAN", "default": "false"},
+        {"name": "activo", "type": "BOOLEAN", "default": "true"},
+        {"name": "fecha_creacion", "type": "DATETIME", "notNull": true},
+        {"name": "fecha_actualizacion", "type": "DATETIME"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "fotos_servicio",
+      "fields": [
+        {"name": "id_foto", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_servicio", "type": "INT", "notNull": true},
+        {"name": "url_foto", "type": "VARCHAR(500)", "notNull": true},
+        {"name": "orden", "type": "INT", "default": "0"},
+        {"name": "descripcion", "type": "VARCHAR(200)"}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "itinerario",
+      "fields": [
+        {"name": "id_itinerario", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_servicio", "type": "INT", "notNull": true},
+        {"name": "dia", "type": "INT", "notNull": true},
+        {"name": "titulo", "type": "VARCHAR(200)", "notNull": true},
+        {"name": "descripcion", "type": "TEXT", "notNull": true},
+        {"name": "hora_inicio", "type": "TIME"},
+        {"name": "hora_fin", "type": "TIME"},
+        {"name": "distancia_km", "type": "DECIMAL(5,2)"},
+        {"name": "desnivel_metros", "type": "INT"},
+        {"name": "duracion_horas", "type": "VARCHAR(50)"},
+        {"name": "altitud", "type": "INT", "comment": "metros"},
+        {"name": "alojamiento", "type": "VARCHAR(100)"},
+        {"name": "comidas", "type": "JSON"},
+        {"name": "actividades_especiales", "type": "JSON"},
+        {"name": "intensidad", "type": "VARCHAR(50)", "comment": "moderada, exigente, muy exigente"}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "expediciones",
+      "fields": [
+        {"name": "id_expedicion", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_servicio", "type": "INT", "notNull": true},
+        {"name": "fecha_salida", "type": "DATE", "notNull": true},
+        {"name": "fecha_fin", "type": "DATE", "notNull": true},
+        {"name": "cupos_totales", "type": "INT", "notNull": true},
+        {"name": "cupos_disponibles", "type": "INT", "notNull": true},
+        {"name": "cupos_ocupados", "type": "INT", "default": "0"},
+        {"name": "estado", "type": "VARCHAR(50)", "notNull": true, "default": "'Activa'", "comment": "Activa, Completa, Cancelada, Finalizada"},
+        {"name": "precio_base", "type": "DECIMAL(10,2)"},
+        {"name": "moneda", "type": "VARCHAR(10)", "default": "'ARS'", "comment": "ARS, USD"},
+        {"name": "reserva_porcentaje", "type": "INT"},
+        {"name": "presupuesto_valido_hasta", "type": "DATE"},
+        {"name": "notas_especiales", "type": "TEXT"},
+        {"name": "fecha_creacion", "type": "DATETIME", "notNull": true}
+      ]
+    },
+    {
+      "id": 8,
+      "name": "paquetes",
+      "fields": [
+        {"name": "id_paquete", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_expedicion", "type": "INT", "notNull": true},
+        {"name": "nombre_paquete", "type": "VARCHAR(100)", "notNull": true, "comment": "Full, Básico"},
+        {"name": "precio", "type": "DECIMAL(10,2)", "notNull": true},
+        {"name": "moneda", "type": "VARCHAR(10)", "notNull": true},
+        {"name": "descripcion", "type": "TEXT"},
+        {"name": "incluye", "type": "JSON"},
+        {"name": "no_incluye", "type": "JSON"}
+      ]
+    },
+    {
+      "id": 9,
+      "name": "servicios_adicionales",
+      "fields": [
+        {"name": "id_servicio_adicional", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_expedicion", "type": "INT", "notNull": true},
+        {"name": "nombre", "type": "VARCHAR(200)", "notNull": true},
+        {"name": "descripcion", "type": "TEXT"},
+        {"name": "precio", "type": "DECIMAL(10,2)"},
+        {"name": "moneda", "type": "VARCHAR(10)"},
+        {"name": "disponible", "type": "BOOLEAN", "default": "true"}
+      ]
+    },
+    {
+      "id": 10,
+      "name": "inscripciones",
+      "fields": [
+        {"name": "id_inscripcion", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "id_expedicion", "type": "INT", "notNull": true},
+        {"name": "id_paquete", "type": "INT", "comment": "NULL si no hay paquetes"},
+        {"name": "fecha_inscripcion", "type": "DATETIME", "notNull": true},
+        {"name": "estado", "type": "VARCHAR(50)", "notNull": true, "default": "'Pendiente'", "comment": "Pendiente, Confirmada, Pagada, Cancelada"},
+        {"name": "medio_contacto", "type": "VARCHAR(50)", "comment": "WhatsApp, Web, Email"},
+        {"name": "monto_reserva", "type": "DECIMAL(10,2)"},
+        {"name": "monto_total", "type": "DECIMAL(10,2)"},
+        {"name": "fecha_pago_sena", "type": "DATE"},
+        {"name": "fecha_pago_final", "type": "DATE"},
+        {"name": "notas_admin", "type": "TEXT"},
+        {"name": "nombre", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "apellido", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "dni", "type": "VARCHAR(20)", "notNull": true},
+        {"name": "fecha_nacimiento", "type": "DATE", "notNull": true},
+        {"name": "ocupacion", "type": "VARCHAR(100)"},
+        {"name": "nacionalidad", "type": "VARCHAR(100)"},
+        {"name": "provincia", "type": "VARCHAR(100)"},
+        {"name": "ciudad", "type": "VARCHAR(100)"},
+        {"name": "telefono", "type": "VARCHAR(50)", "notNull": true},
+        {"name": "email", "type": "VARCHAR(200)"},
+        {"name": "como_nos_conocio", "type": "VARCHAR(200)"},
+        {"name": "contacto_emergencia_nombre", "type": "VARCHAR(200)", "notNull": true},
+        {"name": "contacto_emergencia_telefono", "type": "VARCHAR(50)", "notNull": true},
+        {"name": "contacto_emergencia_vinculo", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "cobertura_medica", "type": "VARCHAR(200)"},
+        {"name": "numero_afiliado", "type": "VARCHAR(100)"},
+        {"name": "grupo_sanguineo", "type": "VARCHAR(10)"},
+        {"name": "tension_arterial_alta", "type": "VARCHAR(20)"},
+        {"name": "tension_arterial_baja", "type": "VARCHAR(20)"},
+        {"name": "alergias", "type": "TEXT"},
+        {"name": "diabetes", "type": "BOOLEAN", "default": "false"},
+        {"name": "celiaquia", "type": "BOOLEAN", "default": "false"},
+        {"name": "afecciones_corazon", "type": "BOOLEAN", "default": "false"},
+        {"name": "asma", "type": "BOOLEAN", "default": "false"},
+        {"name": "epilepsia", "type": "BOOLEAN", "default": "false"},
+        {"name": "enfermedades_sangre", "type": "TEXT"},
+        {"name": "convulsiones", "type": "BOOLEAN", "default": "false"},
+        {"name": "problemas_respiratorios", "type": "TEXT"},
+        {"name": "hipertension", "type": "BOOLEAN", "default": "false"},
+        {"name": "problemas_auditivos", "type": "TEXT"},
+        {"name": "hepatitis", "type": "BOOLEAN", "default": "false"},
+        {"name": "fuma", "type": "BOOLEAN", "default": "false"},
+        {"name": "lesiones", "type": "TEXT"},
+        {"name": "operaciones", "type": "TEXT"},
+        {"name": "luxaciones", "type": "TEXT"},
+        {"name": "limitantes_fisicas", "type": "TEXT"},
+        {"name": "medicacion_actual", "type": "TEXT"},
+        {"name": "tratamiento_medico", "type": "TEXT"},
+        {"name": "estado_salud_general", "type": "TEXT"},
+        {"name": "alimentos_no_ingerir", "type": "TEXT"},
+        {"name": "vertigo", "type": "BOOLEAN", "default": "false"},
+        {"name": "ataques_panico", "type": "BOOLEAN", "default": "false"},
+        {"name": "otros_datos_medicos", "type": "TEXT"},
+        {"name": "altura_cm", "type": "INT"},
+        {"name": "peso_kg", "type": "DECIMAL(5,2)"},
+        {"name": "talla_ropa", "type": "VARCHAR(10)"},
+        {"name": "realiza_entrenamiento", "type": "BOOLEAN", "default": "false"},
+        {"name": "tipo_entrenamiento", "type": "VARCHAR(200)"},
+        {"name": "frecuencia_semanal", "type": "VARCHAR(50)"},
+        {"name": "trekking_previo", "type": "BOOLEAN", "default": "false"},
+        {"name": "actividades_cuerdas", "type": "BOOLEAN", "default": "false"}
+      ]
+    },
+    {
+      "id": 11,
+      "name": "admins",
+      "fields": [
+        {"name": "id_admin", "type": "INT", "primary": true, "unique": true, "notNull": true, "increment": true},
+        {"name": "username", "type": "VARCHAR(100)", "unique": true, "notNull": true},
+        {"name": "password_hash", "type": "VARCHAR(255)", "notNull": true},
+        {"name": "nombre", "type": "VARCHAR(100)", "notNull": true},
+        {"name": "email", "type": "VARCHAR(200)", "notNull": true},
+        {"name": "rol", "type": "VARCHAR(50)", "default": "'editor'", "comment": "super_admin, editor"},
+        {"name": "activo", "type": "BOOLEAN", "default": "true"},
+        {"name": "fecha_creacion", "type": "DATETIME", "notNull": true}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "servicios_lugar_fk",
+      "startTableId": 4,
+      "endTableId": 1,
+      "cardinality": "Many to One",
+      "startFieldId": "id_lugar",
+      "endFieldId": "id_lugar"
+    },
+    {
+      "name": "servicios_actividad_fk",
+      "startTableId": 4,
+      "endTableId": 2,
+      "cardinality": "Many to One",
+      "startFieldId": "id_actividad",
+      "endFieldId": "id_actividad"
+    },
+    {
+      "name": "servicios_dificultad_fk",
+      "startTableId": 4,
+      "endTableId": 3,
+      "cardinality": "Many to One",
+      "startFieldId": "id_dificultad",
+      "endFieldId": "id_dificultad"
+    },
+    {
+      "name": "fotos_servicio_fk",
+      "startTableId": 5,
+      "endTableId": 4,
+      "cardinality": "Many to One",
+      "startFieldId": "id_servicio",
+      "endFieldId": "id_servicio"
+    },
+    {
+      "name": "itinerario_servicio_fk",
+      "startTableId": 6,
+      "endTableId": 4,
+      "cardinality": "Many to One",
+      "startFieldId": "id_servicio",
+      "endFieldId": "id_servicio"
+    },
+    {
+      "name": "expediciones_servicio_fk",
+      "startTableId": 7,
+      "endTableId": 4,
+      "cardinality": "Many to One",
+      "startFieldId": "id_servicio",
+      "endFieldId": "id_servicio"
+    },
+    {
+      "name": "paquetes_expedicion_fk",
+      "startTableId": 8,
+      "endTableId": 7,
+      "cardinality": "Many to One",
+      "startFieldId": "id_expedicion",
+      "endFieldId": "id_expedicion"
+    },
+    {
+      "name": "servicios_adicionales_expedicion_fk",
+      "startTableId": 9,
+      "endTableId": 7,
+      "cardinality": "Many to One",
+      "startFieldId": "id_expedicion",
+      "endFieldId": "id_expedicion"
+    },
+    {
+      "name": "inscripciones_expedicion_fk",
+      "startTableId": 10,
+      "endTableId": 7,
+      "cardinality": "Many to One",
+      "startFieldId": "id_expedicion",
+      "endFieldId": "id_expedicion"
+    },
+    {
+      "name": "inscripciones_paquete_fk",
+      "startTableId": 10,
+      "endTableId": 8,
+      "cardinality": "Many to One",
+      "startFieldId": "id_paquete",
+      "endFieldId": "id_paquete"
+    }
+  ]
+}
